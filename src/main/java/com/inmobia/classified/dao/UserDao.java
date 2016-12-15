@@ -1,8 +1,8 @@
-package com.inmobia.dao;
+package com.inmobia.classified.dao;
 
 
-import com.inmobia.dto.User;
-import com.inmobia.utility.DatabaseSource;
+import com.inmobia.classified.dto.User;
+import com.inmobia.classified.utility.DatabaseSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

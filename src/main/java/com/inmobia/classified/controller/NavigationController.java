@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.inmobia.controller;
+package com.inmobia.classified.controller;
 
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -17,19 +17,27 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class NavigationController {
-     @RequestMapping(value = "/classified-home.html", method = RequestMethod.GET)
+    
+     @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String returnIndexPage(HttpSession session){
+        session.setAttribute("currentpage","classified-home");
+        return "classified-home";
+    }
+    
+    
+     @RequestMapping(value = "/classified-home", method = RequestMethod.GET)
     public String returnClassifiedHome(HttpSession session){
         session.setAttribute("currentpage","classified-home");
         return "classified-home";
     }
     
-    @RequestMapping(value = "/classified-upload.html", method = RequestMethod.GET)
+    @RequestMapping(value = "/classified-upload", method = RequestMethod.GET)
     public String returnClassifiedUpload(HttpSession session){
                 session.setAttribute("currentpage","classified-upload");
                 return "classified-upload";
     }
     
-    @RequestMapping(value = "/classified-login.html", method = RequestMethod.GET)
+    @RequestMapping(value = "/classified-login", method = RequestMethod.GET)
     public ModelAndView returnClassifiedLogin(){
             
                 return new ModelAndView("login");

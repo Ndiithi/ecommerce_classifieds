@@ -44,7 +44,12 @@
                 </div>
             </div>
 
-
+            <div class="alert alert-danger alert-dismissible fade in" id="success-alert" style="display: none">
+    
+                <strong>  
+                    Kindly review fields marked   <i class="fa fa-asterisk shortDescription" style="color: #FF0000;" aria-hidden="true"></i>
+                </strong>
+            </div>
 
             <div class="row classifiedoption">
                 <div class="col-lg-12" >
@@ -132,45 +137,53 @@
                     <!--House for sale form-->
 
                     <div class="well well-sm">
-                        <div class="row form-group">
-                            <div class="col-sm-6">
-                                <label for="houseforsale">Short Description:</label>
-                                <textarea id="houseforsale" class="form-control" rows="6"></textarea>
-                            </div>
-                            <div class="col-sm-6 row">
+
+                        <form id="houseforsale" action="/">
+
+                            <div class="row form-group">
                                 <div class="col-sm-6">
-                                    <label for="houselocation">Location:</label>
-                                    <input id="houselocation" class="form-control" type="text">
+                                    <label for="houseforsale">Short Description: <i class="fa fa-asterisk shortDescription" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+                                    </label>
+                                    <textarea value="dhdh"  id="houseforsale" class="form-control descript" rows="6" name="shortDescription">
+                                    
+                                    </textarea>
                                 </div>
-                                <div class="col-sm-6">
-                                    <label for="housephone">Phone:</label>
-                                    <input id="housephone" class="form-control" type="text">
-                                </div>
-                                <div class="col-sm-12">
-                                    <label for="expirydate">Expiry Date:</label>
-                                    <input id="expirydate" class="form-control expirydate" type="text">
+                                <div class="col-sm-6 row">
+                                    <div class="col-sm-6">
+                                        <label for="houselocation">Location:</label>
+                                        <input id="houselocation" class="form-control locat" type="text" name="location">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="housephone">Phone:</label>
+                                        <input id="housephone" class="form-control" type="text" name="phone">
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <label for="expirydate">Expiry Date:</label>
+                                        <input id="expirydate" class="form-control expirydate" type="text" name="expiryDate">
+                                    </div>
+
+                                    <div class="col-sm-12">
+                                        <label for="housesaleemail">Email:</label>
+                                        <input id="housesaleemail" class="form-control" type="text" name="email">
+                                    </div>
                                 </div>
 
-                                <div class="col-sm-12">
-                                    <label for="housesaleemail">Email:</label>
-                                    <input id="housesaleemail" class="form-control" type="text">
+
+
+
+                                <div class="checkbox col-sm-12">
+
+                                    <div class="checkbox">
+                                        <label><input id="housesalenego" type="checkbox" value="" name="isNegotiable"><strong>Negotiable</strong></label>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-1">
+                                    <button  type="submit" class="form-control btn-primary">Submit</button>
                                 </div>
                             </div>
 
-
-
-
-                            <div class="checkbox col-sm-12">
-
-                                <div class="checkbox">
-                                    <label><input  type="checkbox" value=""><strong>Negotiable</strong></label>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-1">
-                                <button type="submit" class="form-control btn-primary">Submit</button>
-                            </div>
-                        </div>
+                        </form>
                     </div>
 
                 </div>
@@ -195,42 +208,45 @@
                 <div class="col-sm-12" >
                     <div class="well well-sm">
                         <div class="row form-group">
-                            <div class="col-sm-6">
-                                <label for="jobsdesc">Short Description:</label>
-                                <textarea id="jobsdesc" class="form-control" rows="6"></textarea>
-                            </div>
-                            <div class="col-sm-6 row">
+                            <form method="post" action="">
                                 <div class="col-sm-6">
-                                    <label for="jobslocation">Location:</label>
-                                    <input id="jobslocation" class="form-control" type="text">
+                                    <label for="jobsdesc">Short Description:</label>
+                                    <textarea id="jobsdesc" class="form-control" rows="6"></textarea>
                                 </div>
-                                <div class="col-sm-6">
-                                    <label for="jobphone">Phone:</label>
-                                    <input id="jobphone" class="form-control" type="text">
+                                <div class="col-sm-6 row">
+                                    <div class="col-sm-6">
+                                        <label for="jobslocation">Location:</label>
+                                        <input id="jobslocation" class="form-control" type="text">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="jobphone">Phone:</label>
+                                        <input id="jobphone" class="form-control" type="text">
+                                    </div>
+
+                                    <div class="col-sm-12">
+                                        <label for="jobexpirydate">Expiry Date:</label>
+                                        <input id="jobexpirydate" class="form-control expirydate" type="text">
+                                    </div>
+
+                                    <div class="col-sm-12">
+                                        <label for="jobseemail">Email:</label>
+                                        <input id="jobseemail" class="form-control" type="text">
+                                    </div>
+
                                 </div>
 
-                                <div class="col-sm-12">
-                                    <label for="jobexpirydate">Expiry Date:</label>
-                                    <input id="jobexpirydate" class="form-control expirydate" type="text">
+                                <div class="checkbox col-sm-12">
+
+                                    <div class="checkbox">
+                                        <label><input  type="checkbox" value=""><strong>Negotiable</strong></label>
+                                    </div>
                                 </div>
-
-                                <div class="col-sm-12">
-                                    <label for="jobseemail">Email:</label>
-                                    <input id="jobseemail" class="form-control" type="text">
+                                <div class="col-sm-1">
+                                    <button type="submit" class="form-control btn-primary">Submit</button>
                                 </div>
-
-                            </div>
-
-                            <div class="checkbox col-sm-12">
-
-                                <div class="checkbox">
-                                    <label><input  type="checkbox" value=""><strong>Negotiable</strong></label>
-                                </div>
-                            </div>
-                            <div class="col-sm-1">
-                                <button type="submit" class="form-control btn-primary">Submit</button>
-                            </div>
+                            </form>
                         </div>
+
                     </div>
                 </div>
 
@@ -254,43 +270,45 @@
                 <div class="col-sm-12" >
                     <div class="well well-sm">
                         <div class="row form-group">
-                            <div class="col-sm-6">
-                                <label for="houserentdesc">Short Description:</label>
-                                <textarea id="houserentdesc" class="form-control" rows="6"></textarea>
-                            </div>
-
-                            <div class="col-sm-6 row">
+                            <form method="post" action="">
                                 <div class="col-sm-6">
-                                    <label for="houserentloc">Location:</label>
-                                    <input id="houserentloc" class="form-control" type="text">
-                                </div>
-                                <div class="col-sm-6">
-                                    <label for="houserentphone">Phone:</label>
-                                    <input id="houserentphone" class="form-control" type="text">
+                                    <label for="houserentdesc">Short Description:</label>
+                                    <textarea id="houserentdesc" class="form-control" rows="6"></textarea>
                                 </div>
 
-                                <div class="col-sm-12">
-                                    <label for="houserentexpiry">Expiry Date:</label>
-                                    <input id="houserentexpiry" class="form-control expirydate" type="text">
+                                <div class="col-sm-6 row">
+                                    <div class="col-sm-6">
+                                        <label for="houserentloc">Location:</label>
+                                        <input id="houserentloc" class="form-control" type="text">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="houserentphone">Phone:</label>
+                                        <input id="houserentphone" class="form-control" type="text">
+                                    </div>
+
+                                    <div class="col-sm-12">
+                                        <label for="houserentexpiry">Expiry Date:</label>
+                                        <input id="houserentexpiry" class="form-control expirydate" type="text">
+                                    </div>
+
+                                    <div class="col-sm-12">
+                                        <label for="houserentemail">Email:</label>
+                                        <input id="houserentemail" class="form-control" type="text">
+                                    </div>
+
+
+
+
                                 </div>
-
-                                <div class="col-sm-12">
-                                    <label for="houserentemail">Email:</label>
-                                    <input id="houserentemail" class="form-control" type="text">
+                                <div class="checkbox col-sm-12">
+                                    <div class="checkbox">
+                                        <label><input  type="checkbox" value=""><strong>Negotiable</strong></label>
+                                    </div>
                                 </div>
-
-
-
-
-                            </div>
-                            <div class="checkbox col-sm-12">
-                                <div class="checkbox">
-                                    <label><input  type="checkbox" value=""><strong>Negotiable</strong></label>
+                                <div class="col-sm-1">
+                                    <button type="submit" class="form-control btn-primary">Submit</button>
                                 </div>
-                            </div>
-                            <div class="col-sm-1">
-                                <button type="submit" class="form-control btn-primary">Submit</button>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -316,43 +334,45 @@
                 <div class="col-sm-12" >
                     <div class="well well-sm">
                         <div class="row form-group">
-                            <div class="col-sm-6">
-                                <label for="buyselldesc">Short Description:</label>
-                                <textarea id="buyselldesc" class="form-control" rows="6"></textarea>
-                            </div>
-
-                            <div class="col-sm-6 row">
+                            <form method="post" action="">
                                 <div class="col-sm-6">
-                                    <label for="buysellloc">Location:</label>
-                                    <input id="buysellloc" class="form-control" type="text">
-                                </div>
-                                <div class="col-sm-6">
-                                    <label for="buysellphone">Phone:</label>
-                                    <input id="buysellphone" class="form-control" type="text">
+                                    <label for="buyselldesc">Short Description:</label>
+                                    <textarea id="buyselldesc" class="form-control" rows="6"></textarea>
                                 </div>
 
-                                <div class="col-sm-12">
-                                    <label for="buysellexpiry">Expiry Date:</label>
-                                    <input id="buysellexpiry" class="form-control expirydate" type="text">
+                                <div class="col-sm-6 row">
+                                    <div class="col-sm-6">
+                                        <label for="buysellloc">Location:</label>
+                                        <input id="buysellloc" class="form-control" type="text">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="buysellphone">Phone:</label>
+                                        <input id="buysellphone" class="form-control" type="text">
+                                    </div>
+
+                                    <div class="col-sm-12">
+                                        <label for="buysellexpiry">Expiry Date:</label>
+                                        <input id="buysellexpiry" class="form-control expirydate" type="text">
+                                    </div>
+
+                                    <div class="col-sm-12">
+                                        <label for="buysellmail">Email:</label>
+                                        <input id="buysellmail" class="form-control" type="text">
+                                    </div>
+
                                 </div>
 
-                                <div class="col-sm-12">
-                                    <label for="buysellmail">Email:</label>
-                                    <input id="buysellmail" class="form-control" type="text">
+
+                                <div class="checkbox col-sm-12">
+
+                                    <div class="checkbox">
+                                        <label><input  type="checkbox" value=""><strong>Negotiable</strong></label>
+                                    </div>
                                 </div>
-
-                            </div>
-
-
-                            <div class="checkbox col-sm-12">
-
-                                <div class="checkbox">
-                                    <label><input  type="checkbox" value=""><strong>Negotiable</strong></label>
+                                <div class="col-sm-1">
+                                    <button type="submit" class="form-control btn-primary">Submit</button>
                                 </div>
-                            </div>
-                            <div class="col-sm-1">
-                                <button type="submit" class="form-control btn-primary">Submit</button>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -408,7 +428,9 @@
 
             <!-- Footer -->
             <%@ include file="include/footer.jsp" %>
-            </body>
+            <script src="<c:url value="/resources/js/contentsubmitter.js"/>"></script>
 
-            </html>
+    </body>
+
+</html>
 
