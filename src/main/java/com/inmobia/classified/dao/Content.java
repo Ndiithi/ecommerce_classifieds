@@ -2,6 +2,7 @@ package com.inmobia.classified.dao;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.inmobia.classified.annotation.StringVal;
 import java.util.Date;
 import javax.validation.constraints.Digits;
@@ -16,7 +17,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 public class Content {
     
-   
+    private int contentId; 
     @StringVal(message ="{StringVal.shortDescription}")
     private String shortDescription;
 //    @NotNull(message = "Please include a loccation.")
@@ -85,9 +86,16 @@ public class Content {
         this.isNegotiable = isNegotiable;
     }
 
+    public int getContentId() {
+        return contentId;
+    }
+    
+    @JsonIgnore
+    public void setContentId(int contentId) {
+        this.contentId = contentId;
+    }
+
    
-    
-    
     
     
 }

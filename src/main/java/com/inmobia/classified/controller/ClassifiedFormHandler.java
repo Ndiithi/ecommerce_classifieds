@@ -7,6 +7,9 @@ package com.inmobia.classified.controller;
 
 
 //import com.fasterxml.jackson.core.JsonProcessingException;
+import com.inmobia.classified.ErrorMessage;
+import com.inmobia.classified.IMessage;
+import com.inmobia.classified.Message;
 import com.inmobia.classified.dao.Content;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -66,10 +69,18 @@ public class ClassifiedFormHandler {
             return new ResponseEntity<List>(errorMessages ,HttpStatus.BAD_REQUEST);
         }
         
-        Timestamp date=new Timestamp(content.getExpiryDate().getTime());
-        date.toString();
-        logger.info("success: "+content.getEmail() +" "+content.getLocation()+" "+date.toString());
-        return new ResponseEntity<String>("Submitted successfully" ,HttpStatus.OK);
+        Timestamp date=null;
+        if(content.getExpiryDate()!=null){
+                date=new Timestamp(content.getExpiryDate().getTime());
+                date.toString();
+                logger.info("success: "+content.getEmail() +" "+content.getLocation()+" "+date.toString());
+        }
+        
+        logger.info("worked right");
+        IMessage message=new Message();
+        message.setMessage("Submitted successfully");
+        
+        return new ResponseEntity<IMessage>(message ,HttpStatus.OK);
     }
     
     

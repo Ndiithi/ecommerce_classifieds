@@ -1,4 +1,4 @@
-package com.inmobia.classified.controller;
+package com.inmobia.classified;
 
 import java.io.Serializable;
 
@@ -6,7 +6,7 @@ import java.io.Serializable;
  *
  * @author Duncan
  */
-public class ErrorMessage implements Serializable {
+public class ErrorMessage implements Serializable , IMessage{
     private String message;
     private String id;
 

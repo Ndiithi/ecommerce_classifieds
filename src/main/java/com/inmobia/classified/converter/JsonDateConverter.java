@@ -3,6 +3,9 @@ package com.inmobia.classified.converter;
 /**
  *
  * @author Duncan
+ * 
+ * Configures jackson converter not to throw error during mapping 
+ * if there are missing values
  */
 
 import java.util.List;

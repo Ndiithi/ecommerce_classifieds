@@ -45,7 +45,7 @@
             </div>
 
             <div class="alert alert-danger alert-dismissible fade in" id="success-alert" style="display: none">
-    
+
                 <strong>  
                     Kindly review fields marked   <i class="fa fa-asterisk shortDescription" style="color: #FF0000;" aria-hidden="true"></i>
                 </strong>
@@ -120,7 +120,16 @@
             <div class="row" id="houseforsale" >
 
                 <div class="col-sm-10">
-                    <h1 style="margin-top:  0px;">House for sale</h1>
+                    <h1 style="margin-top:  0px;">House for sale
+                        
+                        <p id="showProgress" style="display: inline; font-size: 15px; color: red">
+                            <strong>submitting</strong>
+                            <i class="fa fa-spinner fa-spin fa-lx fa-fw"></i>
+                        </p>
+
+                    </h1>
+
+
                 </div>
                 <div class="col-sm-2">
                     <p class="text-right">
@@ -142,7 +151,8 @@
 
                             <div class="row form-group">
                                 <div class="col-sm-6">
-                                    <label for="houseforsale">Short Description: <i class="fa fa-asterisk shortDescription" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+                                    <label for="houseforsale">Short Description: 
+                                        <i class="fa fa-asterisk shortDescription" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
                                     </label>
                                     <textarea value="dhdh"  id="houseforsale" class="form-control descript" rows="6" name="shortDescription">
                                     
@@ -150,20 +160,28 @@
                                 </div>
                                 <div class="col-sm-6 row">
                                     <div class="col-sm-6">
-                                        <label for="houselocation">Location:</label>
+                                        <label for="houselocation">Location:
+                                        <i class="fa fa-asterisk location" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+                                        </label>
                                         <input id="houselocation" class="form-control locat" type="text" name="location">
                                     </div>
                                     <div class="col-sm-6">
-                                        <label for="housephone">Phone:</label>
+                                        <label for="housephone">Phone:
+                                        <i class="fa fa-asterisk phone" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+                                        </label>
                                         <input id="housephone" class="form-control" type="text" name="phone">
                                     </div>
                                     <div class="col-sm-12">
-                                        <label for="expirydate">Expiry Date:</label>
+                                        <label for="expirydate">Expiry Date:
+                                        <i class="fa fa-asterisk expirydate" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+                                        </label>
                                         <input id="expirydate" class="form-control expirydate" type="text" name="expiryDate">
                                     </div>
 
                                     <div class="col-sm-12">
-                                        <label for="housesaleemail">Email:</label>
+                                        <label for="housesaleemail">Email:
+                                        <i class="fa fa-asterisk email" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+                                        </label>
                                         <input id="housesaleemail" class="form-control" type="text" name="email">
                                     </div>
                                 </div>
@@ -174,7 +192,8 @@
                                 <div class="checkbox col-sm-12">
 
                                     <div class="checkbox">
-                                        <label><input id="housesalenego" type="checkbox" value="" name="isNegotiable"><strong>Negotiable</strong></label>
+                                        <label><input id="housesalenego" type="checkbox" value="" name="isNegotiable"><strong>Negotiable</strong>
+                                        </label>
                                     </div>
                                 </div>
 
@@ -210,26 +229,36 @@
                         <div class="row form-group">
                             <form method="post" action="">
                                 <div class="col-sm-6">
-                                    <label for="jobsdesc">Short Description:</label>
+                                    <label for="jobsdesc">Short Description:
+                                    <i class="fa fa-asterisk shortDescription" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+                                    </label>
                                     <textarea id="jobsdesc" class="form-control" rows="6"></textarea>
                                 </div>
                                 <div class="col-sm-6 row">
                                     <div class="col-sm-6">
-                                        <label for="jobslocation">Location:</label>
+                                        <label for="jobslocation">Location:
+                                        <i class="fa fa-asterisk location" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+                                        </label>
                                         <input id="jobslocation" class="form-control" type="text">
                                     </div>
                                     <div class="col-sm-6">
-                                        <label for="jobphone">Phone:</label>
+                                        <label for="jobphone">Phone:
+                                        <i class="fa fa-asterisk phone" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+                                        </label>
                                         <input id="jobphone" class="form-control" type="text">
                                     </div>
 
                                     <div class="col-sm-12">
-                                        <label for="jobexpirydate">Expiry Date:</label>
+                                        <label for="jobexpirydate">Expiry Date:
+                                        <i class="fa fa-asterisk expirydate" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+                                        </label>
                                         <input id="jobexpirydate" class="form-control expirydate" type="text">
                                     </div>
 
                                     <div class="col-sm-12">
-                                        <label for="jobseemail">Email:</label>
+                                        <label for="jobseemail">Email:
+                                        <i class="fa fa-asterisk email" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+                                        </label>
                                         <input id="jobseemail" class="form-control" type="text">
                                     </div>
 
@@ -272,27 +301,37 @@
                         <div class="row form-group">
                             <form method="post" action="">
                                 <div class="col-sm-6">
-                                    <label for="houserentdesc">Short Description:</label>
+                                    <label for="houserentdesc">Short Description:
+                                    <i class="fa fa-asterisk shortDescription" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+                                    </label>
                                     <textarea id="houserentdesc" class="form-control" rows="6"></textarea>
                                 </div>
 
                                 <div class="col-sm-6 row">
                                     <div class="col-sm-6">
-                                        <label for="houserentloc">Location:</label>
+                                        <label for="houserentloc">Location:
+                                        <i class="fa fa-asterisk location" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+                                        </label>
                                         <input id="houserentloc" class="form-control" type="text">
                                     </div>
                                     <div class="col-sm-6">
-                                        <label for="houserentphone">Phone:</label>
+                                        <label for="houserentphone">Phone:
+                                        <i class="fa fa-asterisk phone" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+                                        </label>
                                         <input id="houserentphone" class="form-control" type="text">
                                     </div>
 
                                     <div class="col-sm-12">
-                                        <label for="houserentexpiry">Expiry Date:</label>
+                                        <label for="houserentexpiry">Expiry Date:
+                                        <i class="fa fa-asterisk expirydate" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+                                        </label>
                                         <input id="houserentexpiry" class="form-control expirydate" type="text">
                                     </div>
 
                                     <div class="col-sm-12">
-                                        <label for="houserentemail">Email:</label>
+                                        <label for="houserentemail">Email:
+                                        <i class="fa fa-asterisk email" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+                                        </label>
                                         <input id="houserentemail" class="form-control" type="text">
                                     </div>
 
@@ -336,27 +375,37 @@
                         <div class="row form-group">
                             <form method="post" action="">
                                 <div class="col-sm-6">
-                                    <label for="buyselldesc">Short Description:</label>
+                                    <label for="buyselldesc">Short Description:
+                                    <i class="fa fa-asterisk shortDescription" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+                                    </label>
                                     <textarea id="buyselldesc" class="form-control" rows="6"></textarea>
                                 </div>
 
                                 <div class="col-sm-6 row">
                                     <div class="col-sm-6">
-                                        <label for="buysellloc">Location:</label>
+                                        <label for="buysellloc">Location:
+                                        <i class="fa fa-asterisk location" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+                                        </label>
                                         <input id="buysellloc" class="form-control" type="text">
                                     </div>
                                     <div class="col-sm-6">
-                                        <label for="buysellphone">Phone:</label>
+                                        <label for="buysellphone">Phone:
+                                        <i class="fa fa-asterisk phone" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+                                        </label>
                                         <input id="buysellphone" class="form-control" type="text">
                                     </div>
 
                                     <div class="col-sm-12">
-                                        <label for="buysellexpiry">Expiry Date:</label>
+                                        <label for="buysellexpiry">Expiry Date:
+                                        <i class="fa fa-asterisk expirydate" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+                                        </label>
                                         <input id="buysellexpiry" class="form-control expirydate" type="text">
                                     </div>
 
                                     <div class="col-sm-12">
-                                        <label for="buysellmail">Email:</label>
+                                        <label for="buysellmail">Email:
+                                        <i class="fa fa-asterisk email" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+                                        </label>
                                         <input id="buysellmail" class="form-control" type="text">
                                     </div>
 
@@ -429,6 +478,20 @@
             <!-- Footer -->
             <%@ include file="include/footer.jsp" %>
             <script src="<c:url value="/resources/js/contentsubmitter.js"/>"></script>
+
+            <script>
+            //script to show and hide image on ajax requests.
+            $("#showProgress").hide();
+            
+            $(document).ajaxStart(function () {
+                $("#showProgress").show();
+            });
+
+            $(document).ajaxComplete(function () {
+                $("#showProgress").hide();
+            });
+
+            </script>
 
     </body>
 
