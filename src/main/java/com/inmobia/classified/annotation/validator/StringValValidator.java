@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.inmobia.classified.annotation;
+package com.inmobia.classified.annotation.validator;
 
 
 import javax.validation.ConstraintValidator;

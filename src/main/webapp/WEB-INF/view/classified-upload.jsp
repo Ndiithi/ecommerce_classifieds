@@ -13,6 +13,7 @@
         <%@ include file="include/header.jsp" %>
         <script src="<c:url value="/resources/js/jquery-ui.js"/>"></script>
         <link href="<c:url value="/resources/css/jquery-ui.css"/>" rel="stylesheet" type="text/css">
+        <link href="<c:url value="/resources/css/main.css"/>" rel="stylesheet" type="text/css">
         <script>
             $(function () {
                 $(".expirydate").datepicker();
@@ -47,7 +48,7 @@
             <div class="alert alert-danger alert-dismissible fade in" id="success-alert" style="display: none">
 
                 <strong>  
-                    Kindly review fields marked   <i class="fa fa-asterisk shortDescription" style="color: #FF0000;" aria-hidden="true"></i>
+                    Kindly review fields marked   <i class="fa fa-asterisk marker" style="color: #FF0000;" aria-hidden="true"></i>
                 </strong>
             </div>
 
@@ -121,7 +122,7 @@
 
                 <div class="col-sm-10">
                     <h1 style="margin-top:  0px;">House for sale
-                        
+
                         <p id="showProgress" style="display: inline; font-size: 15px; color: red">
                             <strong>submitting</strong>
                             <i class="fa fa-spinner fa-spin fa-lx fa-fw"></i>
@@ -147,42 +148,49 @@
 
                     <div class="well well-sm">
 
-                        <form id="houseforsale" action="/">
+                        <form id="houseforsaleF" action="/"> 
+                            <!--#houseforsaleF div div textarea-->
+                            <!--#houseforsaleF div div label i.-->
+                            <!--#houseforsaleF div div textarea-->
 
                             <div class="row form-group">
                                 <div class="col-sm-6">
                                     <label for="houseforsale">Short Description: 
-                                        <i class="fa fa-asterisk shortDescription" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+
+                                        <i class="fa fa-asterisk shortDescription" style="color: #FF0000;" aria-hidden="true"></i>
                                     </label>
-                                    <textarea value="dhdh"  id="houseforsale" class="form-control descript" rows="6" name="shortDescription">
-                                    
-                                    </textarea>
+
+                                    <textarea value="dhdh"  id="houseforsale" class="form-control descript" rows="6" name="shortDescription"></textarea>
+                                    <span name="shortDescription_validation" class="error"></span>
                                 </div>
                                 <div class="col-sm-6 row">
                                     <div class="col-sm-6">
                                         <label for="houselocation">Location:
-                                        <i class="fa fa-asterisk location" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+                                            <i class="fa fa-asterisk location" style="color: #FF0000;" aria-hidden="true"></i>
                                         </label>
                                         <input id="houselocation" class="form-control locat" type="text" name="location">
+                                        <span name="location_validation" class="error"></span>
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="housephone">Phone:
-                                        <i class="fa fa-asterisk phone" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+                                            <i class="fa fa-asterisk phone" style="color: #FF0000;" aria-hidden="true"></i>
                                         </label>
                                         <input id="housephone" class="form-control" type="text" name="phone">
+                                        <span name="phone_validation" class="error"></span>
                                     </div>
                                     <div class="col-sm-12">
                                         <label for="expirydate">Expiry Date:
-                                        <i class="fa fa-asterisk expirydate" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+                                            <i class="fa fa-asterisk expiryDate" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
                                         </label>
                                         <input id="expirydate" class="form-control expirydate" type="text" name="expiryDate">
                                     </div>
 
                                     <div class="col-sm-12">
                                         <label for="housesaleemail">Email:
-                                        <i class="fa fa-asterisk email" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+                                            <i class="fa fa-asterisk email" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
                                         </label>
                                         <input id="housesaleemail" class="form-control" type="text" name="email">
+                                        <span name="email_validation" class="error"></span>
                                     </div>
                                 </div>
 
@@ -226,40 +234,53 @@
                 </div>
                 <div class="col-sm-12" >
                     <div class="well well-sm">
-                        <div class="row form-group">
-                            <form method="post" action="">
+                        <form id="jobsadF" action="/">
+                            <div class="row form-group">
+
+                                <!--#jobsadF div div label i.-->
+
                                 <div class="col-sm-6">
                                     <label for="jobsdesc">Short Description:
-                                    <i class="fa fa-asterisk shortDescription" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+                                        <i class="fa fa-asterisk shortDescription" style="color: #FF0000;" aria-hidden="true"></i>
                                     </label>
-                                    <textarea id="jobsdesc" class="form-control" rows="6"></textarea>
+                                    <textarea id="jobsdesc" class="form-control" rows="6" name="shortDescription"></textarea>
+                                    <span name="shortDescription_validation" class="error"></span>
+
                                 </div>
                                 <div class="col-sm-6 row">
                                     <div class="col-sm-6">
                                         <label for="jobslocation">Location:
-                                        <i class="fa fa-asterisk location" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+                                            <i class="fa fa-asterisk location" style="color: #FF0000;" aria-hidden="true"></i>
                                         </label>
-                                        <input id="jobslocation" class="form-control" type="text">
+                                        <input id="jobslocation" class="form-control" name="location" type="text">
+                                        <span name="location_validation" class="error"></span>
+
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="jobphone">Phone:
-                                        <i class="fa fa-asterisk phone" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+                                            <i class="fa fa-asterisk phone" style="color: #FF0000;" aria-hidden="true"></i>
                                         </label>
-                                        <input id="jobphone" class="form-control" type="text">
+                                        <input id="jobphone" class="form-control" name="phone" type="text">
+                                        <span name="phone_validation" class="error"></span>
+
                                     </div>
 
                                     <div class="col-sm-12">
                                         <label for="jobexpirydate">Expiry Date:
-                                        <i class="fa fa-asterisk expirydate" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+                                            <i class="fa fa-asterisk expiryDate" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
                                         </label>
-                                        <input id="jobexpirydate" class="form-control expirydate" type="text">
+                                        <input id="jobexpirydate" class="form-control expirydate" name="expiryDate" type="text">
+
+
                                     </div>
 
                                     <div class="col-sm-12">
                                         <label for="jobseemail">Email:
-                                        <i class="fa fa-asterisk email" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+                                            <i class="fa fa-asterisk email" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
                                         </label>
-                                        <input id="jobseemail" class="form-control" type="text">
+                                        <input id="jobseemail" class="form-control" name="email" type="text">
+
+                                        <span name="email_validation" class="error"></span>
                                     </div>
 
                                 </div>
@@ -267,15 +288,15 @@
                                 <div class="checkbox col-sm-12">
 
                                     <div class="checkbox">
-                                        <label><input  type="checkbox" value=""><strong>Negotiable</strong></label>
+                                        <label><input  type="checkbox" value=""  name="isNegotiable"><strong>Negotiable</strong></label>
                                     </div>
                                 </div>
                                 <div class="col-sm-1">
                                     <button type="submit" class="form-control btn-primary">Submit</button>
                                 </div>
-                            </form>
-                        </div>
 
+                            </div>
+                        </form>
                     </div>
                 </div>
 
@@ -298,41 +319,51 @@
                 </div>
                 <div class="col-sm-12" >
                     <div class="well well-sm">
-                        <div class="row form-group">
-                            <form method="post" action="">
+                        <form id="houseforrentF" action="/">
+                            <div class="row form-group">
+
+
+
                                 <div class="col-sm-6">
                                     <label for="houserentdesc">Short Description:
-                                    <i class="fa fa-asterisk shortDescription" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+                                        <i class="fa fa-asterisk shortDescription" style="color: #FF0000;" aria-hidden="true"></i>
                                     </label>
-                                    <textarea id="houserentdesc" class="form-control" rows="6"></textarea>
+                                    <textarea id="houserentdesc" class="form-control" name="shortDescription" rows="6"></textarea>
+                                    <span name="shortDescription_validation" class="error"></span>
+
                                 </div>
 
                                 <div class="col-sm-6 row">
                                     <div class="col-sm-6">
                                         <label for="houserentloc">Location:
-                                        <i class="fa fa-asterisk location" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+                                            <i class="fa fa-asterisk location" style="color: #FF0000;" aria-hidden="true"></i>
                                         </label>
-                                        <input id="houserentloc" class="form-control" type="text">
+                                        <input id="houserentloc" class="form-control" name="location" type="text">
+                                        <span name="location_validation" class="error"></span>
+
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="houserentphone">Phone:
-                                        <i class="fa fa-asterisk phone" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+                                            <i class="fa fa-asterisk phone" style="color: #FF0000;" aria-hidden="true"></i>
                                         </label>
-                                        <input id="houserentphone" class="form-control" type="text">
+                                        <input id="houserentphone" class="form-control" name="phone" type="text">
+                                        <span name="phone_validation" class="error"></span>
+
                                     </div>
 
                                     <div class="col-sm-12">
                                         <label for="houserentexpiry">Expiry Date:
-                                        <i class="fa fa-asterisk expirydate" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+                                            <i class="fa fa-asterisk expiryDate" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
                                         </label>
-                                        <input id="houserentexpiry" class="form-control expirydate" type="text">
+                                        <input id="houserentexpiry" class="form-control expirydate" name="expiryDate" type="text">
                                     </div>
 
                                     <div class="col-sm-12">
                                         <label for="houserentemail">Email:
-                                        <i class="fa fa-asterisk email" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+                                            <i class="fa fa-asterisk email" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
                                         </label>
-                                        <input id="houserentemail" class="form-control" type="text">
+                                        <input id="houserentemail" class="form-control" name="email" type="text">
+                                        <span name="email_validation" class="error"></span>
                                     </div>
 
 
@@ -341,14 +372,15 @@
                                 </div>
                                 <div class="checkbox col-sm-12">
                                     <div class="checkbox">
-                                        <label><input  type="checkbox" value=""><strong>Negotiable</strong></label>
+                                        <label><input  type="checkbox" value=""  name="isNegotiable"><strong>Negotiable</strong></label>
                                     </div>
                                 </div>
                                 <div class="col-sm-1">
                                     <button type="submit" class="form-control btn-primary">Submit</button>
                                 </div>
-                            </form>
-                        </div>
+
+                            </div>
+                        </form>
                     </div>
                 </div>
 
@@ -372,41 +404,52 @@
                 </div>
                 <div class="col-sm-12" >
                     <div class="well well-sm">
-                        <div class="row form-group">
-                            <form method="post" action="">
+                        <form id="buyandsellF" action="/">
+                            <div class="row form-group">
+
+
+
                                 <div class="col-sm-6">
                                     <label for="buyselldesc">Short Description:
-                                    <i class="fa fa-asterisk shortDescription" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+                                        <i class="fa fa-asterisk shortDescription" style="color: #FF0000;" aria-hidden="true"></i>
                                     </label>
-                                    <textarea id="buyselldesc" class="form-control" rows="6"></textarea>
+                                    <textarea id="buyselldesc" class="form-control" rows="6" name="shortDescription"></textarea>
+
+                                    <span name="shortDescription_validation" class="error"></span>
+
                                 </div>
 
                                 <div class="col-sm-6 row">
                                     <div class="col-sm-6">
                                         <label for="buysellloc">Location:
-                                        <i class="fa fa-asterisk location" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+                                            <i class="fa fa-asterisk location" style="color: #FF0000; " aria-hidden="true"></i>
                                         </label>
-                                        <input id="buysellloc" class="form-control" type="text">
+                                        <input id="buysellloc" class="form-control" name="location" type="text">
+                                        <span name="location_validation" class="error"></span>
+
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="buysellphone">Phone:
-                                        <i class="fa fa-asterisk phone" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+                                            <i class="fa fa-asterisk phone" style="color: #FF0000;" aria-hidden="true"></i>
                                         </label>
-                                        <input id="buysellphone" class="form-control" type="text">
+                                        <input id="buysellphone" class="form-control" name="phone" type="text">
+                                        <span name="phone_validation" class="error"></span>
+
                                     </div>
 
                                     <div class="col-sm-12">
                                         <label for="buysellexpiry">Expiry Date:
-                                        <i class="fa fa-asterisk expirydate" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+                                            <i class="fa fa-asterisk expiryDate" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
                                         </label>
-                                        <input id="buysellexpiry" class="form-control expirydate" type="text">
+                                        <input id="buysellexpiry" class="form-control expirydate" name="expiryDate" type="text">
                                     </div>
 
                                     <div class="col-sm-12">
                                         <label for="buysellmail">Email:
-                                        <i class="fa fa-asterisk email" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+                                            <i class="fa fa-asterisk email" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
                                         </label>
-                                        <input id="buysellmail" class="form-control" type="text">
+                                        <input id="buysellmail" class="form-control" name="email" type="text">
+                                        <span name="email_validation" class="error"></span>
                                     </div>
 
                                 </div>
@@ -415,14 +458,15 @@
                                 <div class="checkbox col-sm-12">
 
                                     <div class="checkbox">
-                                        <label><input  type="checkbox" value=""><strong>Negotiable</strong></label>
+                                        <label><input  type="checkbox" value=""  name="isNegotiable"><strong>Negotiable</strong></label>
                                     </div>
                                 </div>
                                 <div class="col-sm-1">
                                     <button type="submit" class="form-control btn-primary">Submit</button>
                                 </div>
-                            </form>
-                        </div>
+
+                            </div>
+                        </form>
                     </div>
                 </div>
 
@@ -479,10 +523,11 @@
             <%@ include file="include/footer.jsp" %>
             <script src="<c:url value="/resources/js/contentsubmitter.js"/>"></script>
 
+
             <script>
             //script to show and hide image on ajax requests.
             $("#showProgress").hide();
-            
+
             $(document).ajaxStart(function () {
                 $("#showProgress").show();
             });

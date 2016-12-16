@@ -3,9 +3,12 @@ package com.inmobia.classified.dao;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.inmobia.classified.annotation.StringVal;
-import java.util.Date;
-import javax.validation.constraints.Digits;
+import com.inmobia.classified.annotation.validator.DateVal;
+import com.inmobia.classified.annotation.validator.EMailVal;
+import com.inmobia.classified.annotation.validator.IntegerVal;
+import com.inmobia.classified.annotation.validator.StringVal;
+
+
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -24,16 +27,14 @@ public class Content {
     @NotEmpty(message ="{NotEmpty.location}")
     private String location;
     
-    @Digits(integer=20,fraction = 0,message = "Please provide valid phone number")
+    @IntegerVal(message ="{IntergerVal.phone}")
     @NotNull(message = "Please include a phone number")
-    private Long phone;
-   
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd/MM/yyy", timezone="GMT")
-    @Future(message = "Please include a future date")
-    private Date expiryDate;
+    private String phone;
     
-//    @Pattern(regexp="^[_A-Za-z0-9-\\\\+]+(\\\\.[_A-Za-z0-9-]+)*@\"\n" +
-//"		 \"[A-Za-z0-9-]+(\\\\.[A-Za-z0-9]+)*(\\\\.[A-Za-z]{2,})$",message = "please include correct email")
+    @DateVal(message ="{DateVal.expiryDate}")
+    private String expiryDate;
+    
+    @EMailVal
     private String email;
  
     private int isNegotiable;
@@ -54,19 +55,19 @@ public class Content {
         this.location = location;
     }
 
-    public Long getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Long phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public Date getExpiryDate() {
+    public String getExpiryDate() {
         return expiryDate;
     }
 
-    public void setExpiryDate(Date expiryDate) {
+    public void setExpiryDate(String expiryDate) {
         this.expiryDate = expiryDate;
     }
 

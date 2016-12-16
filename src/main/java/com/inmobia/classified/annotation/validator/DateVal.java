@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.inmobia.classified.annotation;
+package com.inmobia.classified.annotation.validator;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -18,12 +18,12 @@ import javax.validation.Payload;
  * @author Duncan
  */
 @Documented
-@Constraint(validatedBy = StringValValidator.class)
+@Constraint(validatedBy = DateValValidator.class)
 @Target({ElementType.METHOD, ElementType.FIELD, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface StringVal {
+public @interface DateVal {
 
-    String message() default "Error processing form";
+    String message() default "{Please fill in correct date}";
 
     Class<?>[] groups() default {};
 

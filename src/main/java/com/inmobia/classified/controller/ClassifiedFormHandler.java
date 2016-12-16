@@ -52,6 +52,7 @@ public class ClassifiedFormHandler {
     public ResponseEntity<?> saveContent(@Valid @RequestBody Content content,BindingResult result){
         
         if(result.hasErrors()){
+            System.out.println("The emeaillllll...."+content.getEmail());
             logger.error("Validation failed for submitted content");
              List<ErrorMessage> errorMessages=new ArrayList();
               ErrorMessage errMsg=null;
@@ -70,11 +71,7 @@ public class ClassifiedFormHandler {
         }
         
         Timestamp date=null;
-        if(content.getExpiryDate()!=null){
-                date=new Timestamp(content.getExpiryDate().getTime());
-                date.toString();
-                logger.info("success: "+content.getEmail() +" "+content.getLocation()+" "+date.toString());
-        }
+       
         
         logger.info("worked right");
         IMessage message=new Message();
