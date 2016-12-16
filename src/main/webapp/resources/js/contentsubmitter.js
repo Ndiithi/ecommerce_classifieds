@@ -36,6 +36,7 @@ $("form").submit(function (event) {
 
     var docc = JSON.stringify(formData);
 
+    clearValidationMarkers();
 
     $.ajax({
         type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
@@ -44,10 +45,10 @@ $("form").submit(function (event) {
         data: docc, // our data object
         dataType: 'json', // what type of data do we expect back from the server
         encode: true,
-        success: function (response, request) {
-
-            console.log(response.id);
-
+        success: function () {
+            
+            alert("successs");
+            
         },
         error: function (response, request) {
 
@@ -58,10 +59,20 @@ $("form").submit(function (event) {
                 console.log(obj.id);
             }
             closeAlert();
-            
+
         }
 
     });
+
+
+    function clearValidationMarkers() {
+        $('.shortDescription').css('visibility', 'hidden');
+        $('.location').css('visibility', 'hidden');
+        $('.phone').css('visibility', 'hidden');
+        $('.expiryDate').css('visibility', 'hidden');
+        $('.email').css('visibility', 'hidden');
+        $('.isNegotiable').css('visibility', 'hidden');
+    }
 
     function  closeAlert() {
         $("#success-alert").css('display', 'block');

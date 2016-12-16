@@ -22,7 +22,7 @@
     </bean>  
    
    
-    <bean id="userservice" class="com.inmobia.classified.services.UserService" autowire="byName">  
+    <bean id="userservice" class="com.inmobia.classified.service.UserService" autowire="byName">  
         
     </bean>
     

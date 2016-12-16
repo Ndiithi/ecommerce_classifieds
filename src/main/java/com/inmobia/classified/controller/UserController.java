@@ -7,7 +7,7 @@ package com.inmobia.classified.controller;
 
 import com.inmobia.classified.dao.UserDao;
 import com.inmobia.classified.dto.User;
-import com.inmobia.classified.services.UserService;
+import com.inmobia.classified.service.UserService;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
