@@ -1,33 +1,34 @@
 $("form").submit(function (event) {
     /* stop form from submitting normally */
-    event.preventDefault();    
-   
+    event.preventDefault();
+
     var valid = 1; //if form validated successfully, value remains 1
-    
+
 
     var elementId = event.target.id;
     validateForm(elementId);
 
-    
+
 
     if (valid !== 1)
         return 1;
-    
+
     console.log("The event id: " + event.target.id);
 
     var isNegotiable = 0;
-    
+
 
     var shortDescription = $("#" + elementId + " div div [name='shortDescription']").val();
     var phone = $("#" + elementId + " div div [name='phone']").val();
     var location = $("#" + elementId + " div div [name='location']").val();
     var email = $("#" + elementId + " div div [name='email']").val();
-    var expiryDate=$("#" + elementId + " div div [name='expiryDate']").val();
-    
-    
+    var expiryDate = $("#" + elementId + " div div [name='expiryDate']").val();
+
+
 
     if ($("#" + event.target.id + " div div div label input[name='isNegotiable']").is(":checked"))
-    {   alert("checked");
+    {
+        alert("checked");
         isNegotiable = 1;
     }
 
@@ -45,7 +46,7 @@ $("form").submit(function (event) {
 
     var docc = JSON.stringify(formData);
 
-    clearValidationMarkers();
+
 
     $.ajax({
         type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
@@ -55,7 +56,7 @@ $("form").submit(function (event) {
         dataType: 'json', // what type of data do we expect back from the server
         encode: true,
         success: function () {
-
+            clearValidationMarkers();
             alert("successs");
 
         },
@@ -75,12 +76,12 @@ $("form").submit(function (event) {
 
 
     function clearValidationMarkers() {
-        $('.shortDescription').css('visibility', 'hidden');
-        $('.location').css('visibility', 'hidden');
-        $('.phone').css('visibility', 'hidden');
-        $('.expiryDate').css('visibility', 'hidden');
-        $('.email').css('visibility', 'hidden');
-        $('.isNegotiable').css('visibility', 'hidden');
+
+        $('#' + elementId + ' div div label i.location').css('visibility', 'hidden');
+        $('#' + elementId + ' div div label i.email').css('visibility', 'hidden');
+        $('#' + elementId + ' div div label i.shortDescription').css('visibility', 'hidden');
+        $('#' + elementId + ' div div label i.phone').css('visibility', 'hidden');
+        $('#' + elementId + ' div div label i.expiryDate').css('visibility', 'hidden');
     }
 
     function  closeAlert() {

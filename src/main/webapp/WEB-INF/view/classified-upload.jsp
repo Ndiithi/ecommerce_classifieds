@@ -16,7 +16,9 @@
         <link href="<c:url value="/resources/css/main.css"/>" rel="stylesheet" type="text/css">
         <script>
             $(function () {
-                $(".expirydate").datepicker();
+                $(".expirydate").datepicker({
+                    dateFormat: "dd/mm/yy"
+                });
             });
         </script>
     </head>
@@ -123,7 +125,7 @@
                 <div class="col-sm-10">
                     <h1 style="margin-top:  0px;">House for sale
 
-                        <p id="showProgress" style="display: inline; font-size: 15px; color: red">
+                        <p class="showProgress" style="display: inline; font-size: 15px; color: red">
                             <strong>submitting</strong>
                             <i class="fa fa-spinner fa-spin fa-lx fa-fw"></i>
                         </p>
@@ -219,7 +221,14 @@
 
             <div class="row" id="jobsad" >
                 <div class="col-sm-10">
-                    <h1 style="margin-top:  0px;">Jobs Ad</h1>
+                    <h1 style="margin-top:  0px;">Jobs Ad
+                    
+                        <p class="showProgress" style="display: inline; font-size: 15px; color: red">
+                            <strong>submitting</strong>
+                            <i class="fa fa-spinner fa-spin fa-lx fa-fw"></i>
+                        </p>
+                        
+                    </h1>
                 </div>
                 <div class="col-sm-2">
                     <p class="text-right">
@@ -304,7 +313,14 @@
 
             <div class="row" id="houseforrent" >
                 <div class="col-sm-10">
-                    <h1 style="margin-top:  0px;">House For Rent</h1>
+                    <h1 style="margin-top:  0px;">House For Rent
+                    
+                        <p class="showProgress" style="display: inline; font-size: 15px; color: red">
+                            <strong>submitting</strong>
+                            <i class="fa fa-spinner fa-spin fa-lx fa-fw"></i>
+                        </p>
+                        
+                    </h1>
                 </div>
                 <div class="col-sm-2">
                     <p class="text-right">
@@ -389,7 +405,14 @@
 
             <div class="row" id="buyandsell" >
                 <div class="col-sm-10">
-                    <h1 style="margin-top:  0px;">Buy And Sell</h1>
+                    <h1 style="margin-top:  0px;">Buy And Sell
+                    
+                        <p class="showProgress" style="display: inline; font-size: 15px; color: red">
+                            <strong>submitting</strong>
+                            <i class="fa fa-spinner fa-spin fa-lx fa-fw"></i>
+                        </p>
+                        
+                    </h1>
                 </div>
                 <div class="col-sm-2">
                     <p class="text-right">
@@ -526,14 +549,15 @@
 
             <script>
             //script to show and hide image on ajax requests.
-            $("#showProgress").hide();
+            $(".showProgress").hide();
 
             $(document).ajaxStart(function () {
-                $("#showProgress").show();
+               
+                $(".showProgress").show();
             });
 
             $(document).ajaxComplete(function () {
-                $("#showProgress").hide();
+                $(".showProgress").hide();
             });
 
             </script>

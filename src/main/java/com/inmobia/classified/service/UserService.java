@@ -5,8 +5,7 @@
  */
 package com.inmobia.classified.service;
 
-import com.inmobia.classified.dao.UserDao;
-import com.inmobia.classified.dto.User;
+
 import com.inmobia.classified.utility.DatabaseSource;
 import java.sql.PreparedStatement;
 import org.springframework.context.annotation.Bean;

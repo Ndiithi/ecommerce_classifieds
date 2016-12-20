@@ -8,45 +8,51 @@ package com.inmobia.classified.utility;
 import java.sql.Connection;
 
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author Duncan
  */
 public class DatabaseSource {
-    private Connection dbconnection=null;
-    public DatabaseSource(){
-        createDatabaseConnection();
-    }
-    
-    public Connection getDatabaseConnection(){
-         createDatabaseConnection();
-        return dbconnection;
-        
-    }
-    
-    private void createDatabaseConnection(){
-        try {
-            DataSource ds=(DataSource) InitialContext.doLookup("inmobiaclassifiedsite");
-           dbconnection=ds.getConnection();
-        } catch (NamingException ex) {
-            Logger.getLogger(DatabaseSource.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(DatabaseSource.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+
+    Logger logger = Logger.getLogger(DatabaseSource.class.getName());
+
+    protected DatabaseSource() {
+
     }
 
-    public Connection getDbconnection() {
+    public static Connection getDatabaseConnection() {
+        DatabaseSource dbobj = new DatabaseSource();
+        Connection dbconnection = dbobj.createDatabaseConnection();
+        if (dbconnection == null) {
+            dbobj.logger.error("Failed to create database connection");
+        }
+
         return dbconnection;
+
     }
-    
-    
+
+    private Connection createDatabaseConnection() {
+        Connection dbconnection = null;
+        try {
+            DbProperties.getJndiName();
+            DataSource ds = (DataSource) InitialContext.doLookup(DbProperties.getJndiName());
+            dbconnection = ds.getConnection();
+            return dbconnection;
+        } catch (NamingException ex) {
+            logger.error(ex.getMessage());
+            return dbconnection;
+
+        } catch (SQLException ex) {
+            logger.error(ex.getMessage());
+            return dbconnection;
+        }
+
+    }
+
 }

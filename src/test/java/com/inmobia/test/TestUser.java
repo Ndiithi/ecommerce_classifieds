@@ -5,8 +5,7 @@
  */
 package com.inmobia.test;
 
-import com.inmobia.classified.dao.UserDao;
-import com.inmobia.classified.dto.User;
+
 import java.util.Iterator;
 
 /**

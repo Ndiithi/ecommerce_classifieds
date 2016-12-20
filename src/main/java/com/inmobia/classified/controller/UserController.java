@@ -5,8 +5,7 @@
  */
 package com.inmobia.classified.controller;
 
-import com.inmobia.classified.dao.UserDao;
-import com.inmobia.classified.dto.User;
+
 import com.inmobia.classified.service.UserService;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,13 +30,6 @@ public class UserController {
     
     
 
-    @RequestMapping( value = "/data.html", produces="application/json" )
-    public User getUser(){
-        User user=new User();
-        user.setEmail("my email");
-        return  user;
-      
-}
     
     
     

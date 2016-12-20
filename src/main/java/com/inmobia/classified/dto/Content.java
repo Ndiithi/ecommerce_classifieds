@@ -1,8 +1,9 @@
-package com.inmobia.classified.dao;
+package com.inmobia.classified.dto;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.inmobia.classified.ISanitizable;
 import com.inmobia.classified.annotation.validator.DateVal;
 import com.inmobia.classified.annotation.validator.EMailVal;
 import com.inmobia.classified.annotation.validator.IntegerVal;
@@ -18,12 +19,12 @@ import org.hibernate.validator.constraints.NotEmpty;
  *
  * @author Duncan
  */
-public class Content {
+public class Content implements ISanitizable{
     
     private int contentId; 
     @StringVal(message ="{StringVal.shortDescription}")
     private String shortDescription;
-//    @NotNull(message = "Please include a loccation.")
+    
     @NotEmpty(message ="{NotEmpty.location}")
     private String location;
     
