@@ -31,7 +31,7 @@
                                 <a href="classified-upload">upload classified</a>
                             </li>
                             <li>
-                                <a href="#">manage classified</a>
+                                <a href="classified-manage">manage classified</a>
                             </li>
                            
                             

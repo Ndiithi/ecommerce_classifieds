@@ -10,7 +10,7 @@
 
     <head>
         <%@ include file="include/header.jsp" %>
-
+        <title>Classifieds Home</title>
     </head>
 
     <body>

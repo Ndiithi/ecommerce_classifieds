@@ -39,6 +39,7 @@ public class ClassifiedFormHandler {
 
     @Autowired
     WebDataSanitizer webSanitizer;
+    ContentDao contentDao;
     final static Logger logger = Logger.getLogger(ClassifiedFormHandler.class.getName());
 
     @ResponseBody
@@ -66,7 +67,7 @@ public class ClassifiedFormHandler {
 
         Content sanitize = (Content) webSanitizer.sanitize(content);
 
-        ContentDao contentDao = new ContentDao();
+        
         try {
             contentDao.saveContent(sanitize);
         } catch (SQLException ex) {

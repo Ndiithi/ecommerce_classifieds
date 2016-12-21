@@ -31,6 +31,12 @@ public class NavigationController {
         return "classified-home";
     }
     
+    @RequestMapping(value = "/classified-manage", method = RequestMethod.GET)
+    public String returnClassifiedManage(HttpSession session){
+        session.setAttribute("currentpage","classified-home");
+        return "classified-manage";
+    }
+    
     @RequestMapping(value = "/classified-upload", method = RequestMethod.GET)
     public String returnClassifiedUpload(HttpSession session){
                 session.setAttribute("currentpage","classified-upload");

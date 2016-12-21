@@ -11,6 +11,7 @@
     <head>
 
         <%@ include file="include/header.jsp" %>
+        <title>Upload Classifieds</title>
         <script src="<c:url value="/resources/js/jquery-ui.js"/>"></script>
         <link href="<c:url value="/resources/css/jquery-ui.css"/>" rel="stylesheet" type="text/css">
         <link href="<c:url value="/resources/css/main.css"/>" rel="stylesheet" type="text/css">

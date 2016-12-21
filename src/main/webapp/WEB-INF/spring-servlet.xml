@@ -30,6 +30,15 @@
         
     </bean>
     
+    <bean id="msisdndao" class="com.inmobia.classified.dao.MsisdnDao" autowire="byName">  
+        
+    </bean>
+    
+    
+    <bean id="contentdao" class="com.inmobia.classified.dao.ContentDao" autowire="byName">  
+        
+    </bean>
+    
     <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <property name="basenames">
             <list>

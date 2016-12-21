@@ -11,12 +11,12 @@ import org.apache.log4j.Logger;
  *
  * @author Duncan
  */
-public class MsisdnDto {
+public class MsisdnDao {
 
     private String getMsisdnIdSql = "Select msisdn_id from inmobiaclassified.phone_number where msisdn=?";
     private String insertNewMsisdnSql = "insert into inmobiaclassified.phone_number(msisdn) value(?)";
 
-    Logger logger = Logger.getLogger(MsisdnDto.class.getName());
+    Logger logger = Logger.getLogger(MsisdnDao.class.getName());
 
     public int getMsisdnIdByNumber(String msisdn) throws SQLException {
         try {

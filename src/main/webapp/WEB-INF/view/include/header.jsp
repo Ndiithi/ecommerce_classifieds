@@ -10,7 +10,7 @@
 <meta name="description" content="">
 <meta name="Author" content="Duncan">
 
-<title>Inmobia Classified</title>
+
 
 <!-- Bootstrap Core CSS -->
 <!--<link href="/resources/css/bootstrap.min.css" rel="stylesheet">-->

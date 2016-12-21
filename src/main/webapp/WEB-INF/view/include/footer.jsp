@@ -8,8 +8,8 @@
 <%@page import="java.sql.Date"%>
 <footer>
     <div class="row">
-        <div class="col-lg-12">
-            <p>Copyright &copy; www.inmobia.com <%
+        <div class="col-lg-12 text-center">
+            <p>Copyright &copy; <a>www.inmobia.com</a> <%
                 Date date=new Date(System.currentTimeMillis());
                 Calendar cal=Calendar.getInstance();
                 cal.setTime(date);
