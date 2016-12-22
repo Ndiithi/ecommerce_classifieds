@@ -19,9 +19,10 @@ public class MsisdnDao {
     Logger logger = Logger.getLogger(MsisdnDao.class.getName());
 
     public int getMsisdnIdByNumber(String msisdn) throws SQLException {
+            Connection con=null;
         try {
             int msisdnId = 0;
-            Connection con = DatabaseSource.getDatabaseConnection();
+             con= DatabaseSource.getDatabaseConnection();
 
             PreparedStatement ps = con.prepareStatement(getMsisdnIdSql);
             ps.setString(1, msisdn);
@@ -41,6 +42,8 @@ public class MsisdnDao {
         } catch (SQLException ex) {
             logger.error(ex.getMessage());
             throw new SQLException(ex.getMessage());
+        }finally{
+            con.close();
         }
     }
 }

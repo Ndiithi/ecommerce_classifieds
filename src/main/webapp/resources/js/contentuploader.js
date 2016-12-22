@@ -55,7 +55,7 @@ $("form").submit(function (event) {
         data: docc, // our data object
         dataType: 'json', // what type of data do we expect back from the server
         encode: true,
-        success: function () {
+        success: function (data, textStatus,jqXHR ) {
             clearValidationMarkers();
             alert("successs");
 
@@ -96,10 +96,6 @@ $("form").submit(function (event) {
 
 // Validate form before submitting.
     function validateForm(elementId) {
-
-
-
-
         var description = $("#" + elementId + " div div [name='shortDescription']");
         var phone = $("#" + elementId + " div div [name='phone']");
         var location = $("#" + elementId + " div div [name='location']");
@@ -152,9 +148,6 @@ $("form").submit(function (event) {
             $('#' + elementId + ' div div label i.phone').css('visibility', 'hidden');
             phone_validation.text("");
         }
-
-
-
 
     }
 

@@ -545,7 +545,7 @@
 
             <!-- Footer -->
             <%@ include file="include/footer.jsp" %>
-            <script src="<c:url value="/resources/js/contentsubmitter.js"/>"></script>
+            <script src="<c:url value="/resources/js/contentuploader.js"/>"></script>
 
 
             <script>

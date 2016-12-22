@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -71,10 +72,11 @@ public class ContentDao {
     }
 
     public List<Content> getAllContentByMsisdn(String msisdn) {
-        Connection con = DatabaseSource.getDatabaseConnection();
+        Connection con=null;
         List<Content> contentList = null;
 
         try {
+            con = DatabaseSource.getDatabaseConnection();
             PreparedStatement pst = con.prepareStatement(getAllContentByMsisdn);
             int msisdnId = msisdnDto.getMsisdnIdByNumber(msisdn);
             pst.setInt(1, msisdnId);
@@ -101,6 +103,12 @@ public class ContentDao {
 
         } catch (SQLException ex) {
             logger.error(ex.getMessage());
+        }finally{
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                logger.error(ex.getMessage());
+            }
         }
         return contentList;
     }
