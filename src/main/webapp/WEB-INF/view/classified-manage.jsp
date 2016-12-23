@@ -14,7 +14,7 @@
         <script src="<c:url value="/resources/js/jquery-ui.js"/>"></script>
         <link href="<c:url value="/resources/css/jquery-ui.css"/>" rel="stylesheet" type="text/css">
         <link href="<c:url value="/resources/css/main.css"/>" rel="stylesheet" type="text/css">
-         <script>
+        <script>
             $(function () {
                 $(".date").datepicker({
                     dateFormat: "dd/mm/yy"
@@ -40,7 +40,7 @@
 
 
 
-                <div class="form-group has-feedback col-sm-9 col-md-10 col-lg-11 ">
+                <div class="form-group has-feedback col-sm-9 col-md-10 col-lg-11 col-xs-12">
 
                     <div class="input-group margin-bottom-sm">
                         <span class="input-group-addon"><i class="fa fa-search fa-fw"></i></span>
@@ -49,7 +49,7 @@
                     </div>
 
                 </div>
-                <div class="col-sm-3 col-md-2 col-lg-1 ">
+                <div class="col-sm-3 col-md-2 col-lg-1 col-xs-12">
                     <button id="searchContentByPhone" class="btn btn-primary btn-block">search</button>
                 </div>
             </div>
@@ -184,7 +184,7 @@
                                     <input id="locationDesc" class="form-control locat" name="location" type="text" >
                                     <span name="location_validation" class="error"></span>
                                 </div>
-                                
+
                                 <div class="col-sm-6">
                                     <label for="expirydateDesc">Expiry Date:
                                         <i class="fa fa-asterisk expiryDate" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
@@ -221,21 +221,44 @@
 
 
                         <div class="modal-footer">
-                             <button id="submitEditedContent" type="button" class="btn btn-primary">Submit</button>
+                            <button id="submitEditedContent" type="button" class="btn btn-primary">Submit</button>
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                         </div>
 
-                        
+
                     </div>
 
                 </div>
             </div>
 
 
+            <div  id="confirmationModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title  text-center">Delete Selected Content?</h4>
+                        </div>
+                      
+                        <div class="modal-footer">
+                            <button id="deleteSelectedContent" type="button" class="btn btn-primary">Yes</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    
+                    </div>
+
+
+
+
+
+                </div>
+
+            </div>
+
 
         </div>
-
-
         <!-- Footer -->
         <%@ include file="include/footer.jsp" %>
         <script src="<c:url value="/resources/js/contentmanager.js"/>"></script>

@@ -33,6 +33,8 @@ public class ContentDao {
             + "content_category=?,short_description=?,location=?,msisdn_id=?,expiry_date=?,email=?,negotiable=? "
             + "where contentid=?";
 
+    private String deleteContentByIdSql = "delete from inmobiaclassified.content where contentid=?";
+
     public boolean saveContent(Content content) throws SQLException {
         try {
             Connection con = DatabaseSource.getDatabaseConnection();
@@ -42,7 +44,7 @@ public class ContentDao {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             int msisdnId = msisdnDto.getMsisdnIdByNumber(content.getPhone());
             pst.setInt(1, 10);
-            pst.setString(2, content.getShortDescription());       
+            pst.setString(2, content.getShortDescription());
             pst.setString(3, content.getLocation());
             pst.setInt(4, msisdnId);
             String expiryDateString = content.getExpiryDate();
@@ -60,10 +62,12 @@ public class ContentDao {
             pst.setDate(5, expiryDateToSave);
             pst.setString(6, content.getEmail());
             pst.setInt(7, content.getIsNegotiable());
-            int execStatus=pst.executeUpdate();
-            if(execStatus==1)
-            return true;
-            else return false;
+            int execStatus = pst.executeUpdate();
+            if (execStatus == 1) {
+                return true;
+            } else {
+                return false;
+            }
 
         } catch (SQLException ex) {
             logger.error(ex.getMessage());
@@ -78,10 +82,12 @@ public class ContentDao {
     public List<Content> getAllContentByMsisdn(String msisdn) {
         Connection con = null;
         List<Content> contentList = null;
-        PreparedStatement pst=null;
+        PreparedStatement pst = null;
         try {
+            logger.debug("Trying to make db connection");
             con = DatabaseSource.getDatabaseConnection();
-             pst= con.prepareStatement(getAllContentByMsisdn);
+            logger.debug("Db connection made");
+            pst = con.prepareStatement(getAllContentByMsisdn);
             int msisdnId = msisdnDto.getMsisdnIdByNumber(msisdn);
             pst.setInt(1, msisdnId);
             ResultSet rs = pst.executeQuery();
@@ -104,7 +110,7 @@ public class ContentDao {
                 contentList.add(content);
 
             }
-
+            logger.debug("getAllContentByMsisdn completed");
         } catch (SQLException ex) {
             logger.error(ex.getMessage());
         } finally {
@@ -119,16 +125,16 @@ public class ContentDao {
     }
 
     public boolean updateContentById(int contentId, Content content) {
-       
+
         Connection con = null;
-        PreparedStatement pst=null;
+        PreparedStatement pst = null;
         try {
             con = DatabaseSource.getDatabaseConnection();
             int msisdnId = msisdnDto.getMsisdnIdByNumber(content.getPhone());
-             pst= con.prepareStatement(updateContentByIdSql);
+            pst = con.prepareStatement(updateContentByIdSql);
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             pst.setInt(1, 10);
-            pst.setString(2, content.getShortDescription());       
+            pst.setString(2, content.getShortDescription());
             pst.setString(3, content.getLocation());
             pst.setInt(4, msisdnId);
             String expiryDateString = content.getExpiryDate();
@@ -146,21 +152,42 @@ public class ContentDao {
             pst.setDate(5, expiryDateToSave);
             pst.setString(6, content.getEmail());
             pst.setInt(7, content.getIsNegotiable());
-             pst.setInt(8, contentId);
-             int execStatus=pst.executeUpdate();
-            if(execStatus==1)
-            return true;
-            else return false;
+            pst.setInt(8, contentId);
+            int execStatus = pst.executeUpdate();
+            if (execStatus == 1) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (SQLException ex) {
             logger.error(ex.getMessage());
             return false;
-        }finally {
+        } finally {
             try {
                 con.close();
                 pst.close();
             } catch (SQLException ex) {
                 logger.error(ex.getMessage());
             }
+        }
+    }
+
+    public boolean deleteContentById(int contentId) {
+        Connection con = null;
+        PreparedStatement pst = null;
+
+        try {
+            con = DatabaseSource.getDatabaseConnection();
+            pst = con.prepareStatement(deleteContentByIdSql);
+            pst.setInt(1, contentId);
+            if (pst.executeUpdate() == 1) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException ex) {
+            logger.error(ex.getMessage());
+            return false;
         }
     }
 }

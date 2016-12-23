@@ -3,12 +3,11 @@ $(document).ready(function () {
     var modelData;
     var msisdn;
     var contentId;
-    
+
     //enable cacheing of fetched resources
     $.ajaxSetup({
         cache: true
     });
-
 
 
     /*form submission for edited content*/
@@ -16,14 +15,14 @@ $(document).ready(function () {
         validateForm();
         if (valid !== 1)
             return 1;
-        
+
         var phone;
         var isNegotiable = 0;
         var shortDescription = $("div [name='shortDescription']").val();
         var location = $("div [name='location']").val();
         var email = $("div [name='email']").val();
         var expiryDate = $("div [name='expiryDate']").val();
-        
+
         if ($("label input[name='isNegotiable']").is(":checked"))
         {
             isNegotiable = 1;
@@ -43,13 +42,13 @@ $(document).ready(function () {
         console.log(docc);
         $.ajax({
             type: 'PUT', // define the type of HTTP verb we want to use (POST for our form)
-            url: 'updateContentById?contentId='+contentId, // the url where we want to POST
+            url: 'updateContentById?contentId=' + contentId, // the url where we want to POST
             contentType: 'application/json; charset=utf-8',
             data: docc, // our data object
             dataType: 'json', // what type of data do we expect back from the server
             encode: true,
             success: function (data, textStatus, jqXHR) {
-                
+
                 console.log("successs");
 
             },
@@ -61,7 +60,7 @@ $(document).ready(function () {
                     $('.' + obj.id).css('visibility', 'visible');
                     console.log("the * id: " + obj.id);
                 }
-              //  closeAlert();
+                //  closeAlert();
 
             }
 
@@ -69,24 +68,53 @@ $(document).ready(function () {
 
 
     });
+    
+
+    /*Delete content*/
+    $("button#deleteSelectedContent").click(function (event) {
+        $.ajax({
+            type: 'DELETE', // define the type of HTTP verb we want to use (POST for our form)
+            url: 'deleteContentById?contentId=' + contentId, // the url where we want to POST
+            dataType: 'json', // what type of data do we expect back from the server
+            encode: true,
+            success: function (data, textStatus, jqXHR) {
+               
+                console.log("successs");
+
+            },
+            error: function (response, request) {
+
+                var parsed_data = JSON.parse(response.responseText);
+                for (var i = 0; i < parsed_data.length; i++) {
+                    var obj = parsed_data[i];
+                   
+                    console.log("the message: " + obj.message);
+                }
+                //  closeAlert();
+
+            }
+
+        });
+    });
 
 
     /*perform fetching of content from server by phone number*/
     $("button#searchContentByPhone").click(function (event) {
-       
-         msisdn= $("input#searchMsisdn").val();
-         if(msisdn.trim().length===0) return 1;
+
+        msisdn = $("input#searchMsisdn").val();
+        if (msisdn.trim().length === 0)
+            return 1;
         $.ajax({
             type: 'GET', // define the type of HTTP verb we want to use (POST for our form)
             url: 'getAllContentByMsisdn?msisdn=' + msisdn + '', // the url where we want to POST
             dataType: 'json', // what type of data do we expect back from the server
             encode: true,
             success: function (data, textStatus, jqXHR) {
-               $('table#contentItems').find("tr:gt(0)").remove();
+                $('table#contentItems').find("tr:gt(0)").remove();
                 populateContentTable(data);
             },
             error: function (response, request) {
-                 $('table#contentItems').find("tr:gt(0)").remove();
+                $('table#contentItems').find("tr:gt(0)").remove();
                 $('table#contentItems').append("<tr style='width: 100%;'><td colspan=6 style='color:red;text-align: center;'>Error Processing request</td></tr>");
                 console.log("error");
             }
@@ -94,13 +122,14 @@ $(document).ready(function () {
         });
     });
 
-    /*add click event to all edit buttons from content table*/
-    function addClickEventToLink() {
+    /*add click event to all edit and delete buttons from content table*/
+    function addClickEventToEditLink() {
+        
         $(".contenteditlink").click(function (event) {
             var classnegotiable = false;
-            var idd = $(event.target).closest("a").prop("id");
+            var idd = $(event.target).closest("a").prop("name");
             var selectedContentModel = modelData[idd];
-            contentId=selectedContentModel.contentId;
+            contentId = selectedContentModel.contentId;
             $("#contentDesc").val(selectedContentModel.shortDescription);
             $("#locationDesc").val(selectedContentModel.location);
             $("#expirydateDesc").val(selectedContentModel.expiryDate);
@@ -110,8 +139,23 @@ $(document).ready(function () {
             $('#negotiableCheckbox').prop('checked', classnegotiable);
             $("div#contentModal").modal();
         });
+
+      
+
     }
 
+      /*Delete selected content*/
+      function addClickEventToDeleteLink(){
+          
+          $(".contentDeleteLink").click(function (event) {
+             var idd = $(event.target).closest("a").prop("name");
+            var selectedContentModel = modelData[idd];
+            contentId = selectedContentModel.contentId;
+            $("div#confirmationModal").modal();
+        });
+
+      }
+        
     /*populates html table with content if any from sever after search*/
     function populateContentTable(data) {
 
@@ -130,16 +174,17 @@ $(document).ready(function () {
                     + '<td>' + content.expiryDate + '</td>'
                     + '<td>' + content.email + '</td>'
                     + '<td>' + classnegotiable + '</td>'
-                    + '<td> <a id=\'' + index + '\'  class="contenteditlink" href=\'#\'><i class=\'fa fa-pencil fa-lg \' style="margin-right: 20px;" aria-hidden=\'true\'></i></a>\n\
-                            <a href=\'#\'><i class=\'fa fa-trash-o fa-lg\' aria-hidden=\'true\'></i></a>\n\
+                    + '<td> <a name=\'' + index + '\'  class="contenteditlink" href=\'#\'><i class=\'fa fa-pencil fa-lg \' style="margin-right: 20px;" aria-hidden=\'true\'></i></a>\n\
+                            <a name=\'' + index + '\'  class="contentDeleteLink" href=\'#\'><i class=\'fa fa-trash-o fa-lg\' aria-hidden=\'true\'></i></a>\n\
                       </td>'
 
                     + '</tr>';
             $('table#contentItems').append(trHTML);
         });
-        addClickEventToLink();
+        addClickEventToEditLink();
+        addClickEventToDeleteLink();
     }
-    
+
     /*validates form input data(content) before submission*/
     function validateForm() {
 

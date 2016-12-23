@@ -5,9 +5,10 @@ package com.inmobia.classified.utility;
  * @author Duncan
  */
 public class DbProperties {
-    //production enviroment;
+    //Dev enviroment;
     private static String jndiName="inmobiaclassifiedsite";
-    
+    //production;
+//     private static String jndiName="java:/inmobiaclassifiedsite";
     //Developement envin
     public static String userName="";
     public static String password="";

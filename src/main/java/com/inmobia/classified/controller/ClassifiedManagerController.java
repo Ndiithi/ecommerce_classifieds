@@ -86,4 +86,20 @@ public class ClassifiedManagerController {
         }
 
     }
+    
+  
+            
+    @ResponseBody
+    @RequestMapping(value = "/deleteContentById", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<IMessage> deleteContentById(@RequestParam int contentId) {
+        boolean successStatus=contentDao.deleteContentById(contentId);
+        IMessage message=new Message();
+        message.setMessage("successfully deleted");
+        if(successStatus) return new ResponseEntity<IMessage>(message,HttpStatus.OK);
+        else {
+            message.setMessage("Failed to delete content");
+            return new ResponseEntity<IMessage>(message,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        
+    }
 }
