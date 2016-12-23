@@ -1,38 +1,32 @@
 $("form").submit(function (event) {
+    
     /* stop form from submitting normally */
     event.preventDefault();
-
+    
+    /*Global variables*/
     var valid = 1; //if form validated successfully, value remains 1
-
-
     var elementId = event.target.id;
+   
+   
     validateForm(elementId);
-
-
 
     if (valid !== 1)
         return 1;
 
-    console.log("The event id: " + event.target.id);
+     
 
+    /*Form submission*/
     var isNegotiable = 0;
-
-
     var shortDescription = $("#" + elementId + " div div [name='shortDescription']").val();
     var phone = $("#" + elementId + " div div [name='phone']").val();
     var location = $("#" + elementId + " div div [name='location']").val();
     var email = $("#" + elementId + " div div [name='email']").val();
     var expiryDate = $("#" + elementId + " div div [name='expiryDate']").val();
 
-
-
     if ($("#" + event.target.id + " div div div label input[name='isNegotiable']").is(":checked"))
     {
-        alert("checked");
         isNegotiable = 1;
     }
-
-    console.log(shortDescription + " " + location + " " + phone + " " + expiryDate + " " + email + " " + isNegotiable);
 
     var formData = {
         "shortDescription": shortDescription,
@@ -45,9 +39,7 @@ $("form").submit(function (event) {
     };
 
     var docc = JSON.stringify(formData);
-
-
-
+  
     $.ajax({
         type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
         url: 'process-content', // the url where we want to POST
@@ -75,6 +67,7 @@ $("form").submit(function (event) {
     });
 
 
+    /*utility functions*/
     function clearValidationMarkers() {
 
         $('#' + elementId + ' div div label i.location').css('visibility', 'hidden');
@@ -90,8 +83,6 @@ $("form").submit(function (event) {
             $("#success-alert").slideUp(500);
         });
     }
-
-
 
 
 // Validate form before submitting.

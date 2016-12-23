@@ -39,6 +39,7 @@ public class ClassifiedFormHandler {
 
     @Autowired
     WebDataSanitizer webSanitizer;
+    @Autowired
     ContentDao contentDao;
     final static Logger logger = Logger.getLogger(ClassifiedFormHandler.class.getName());
 

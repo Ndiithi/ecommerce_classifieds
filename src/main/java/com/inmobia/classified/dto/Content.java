@@ -92,7 +92,7 @@ public class Content implements ISanitizable{
         return contentId;
     }
     
-    @JsonIgnore
+    
     public void setContentId(int contentId) {
         this.contentId = contentId;
     }

@@ -170,18 +170,18 @@
                                 <div class="col-sm-12">
                                     <label for="contentDesc">Short Description: 
 
-                                        <i class="fa fa-asterisk shortDescription" style="color: #FF0000;" aria-hidden="true"></i>
+                                        <i class="fa fa-asterisk shortDescription" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
                                     </label>
 
-                                    <textarea   id="contentDesc" class="form-control descript" rows="6" ></textarea>
+                                    <textarea   id="contentDesc" class="form-control descript" rows="6" name="shortDescription"></textarea>
                                     <span name="shortDescription_validation" class="error"></span>
                                 </div>
 
                                 <div class="col-sm-6">
                                     <label for="locationDesc">Location:
-                                        <i class="fa fa-asterisk location" style="color: #FF0000;" aria-hidden="true"></i>
+                                        <i class="fa fa-asterisk location" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
                                     </label>
-                                    <input id="locationDesc" class="form-control locat" type="text" >
+                                    <input id="locationDesc" class="form-control locat" name="location" type="text" >
                                     <span name="location_validation" class="error"></span>
                                 </div>
                                 
@@ -189,14 +189,14 @@
                                     <label for="expirydateDesc">Expiry Date:
                                         <i class="fa fa-asterisk expiryDate" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
                                     </label>
-                                    <input id="expirydateDesc" class="form-control date" type="text" >
+                                    <input id="expirydateDesc" class="form-control date" name="expiryDate" type="text" >
                                 </div>
 
                                 <div class="col-sm-12">
                                     <label for="emailDesc">Email:
                                         <i class="fa fa-asterisk email" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
                                     </label>
-                                    <input id="emailDesc" class="form-control" type="text" >
+                                    <input id="emailDesc" class="form-control" name="email" type="text" >
                                     <span name="email_validation" class="error"></span>
                                 </div>
 
@@ -207,7 +207,7 @@
                                 <div class="checkbox col-sm-12">
 
                                     <div class="checkbox">
-                                        <label><input id="negotiableCheckbox" type="checkbox"><strong>Negotiable</strong>
+                                        <label><input id="negotiableCheckbox" name="isNegotiable" type="checkbox"><strong>Negotiable</strong>
                                         </label>
                                     </div>
                                 </div>
@@ -221,7 +221,7 @@
 
 
                         <div class="modal-footer">
-                             <button  type="button" class="btn btn-primary">Submit</button>
+                             <button id="submitEditedContent" type="button" class="btn btn-primary">Submit</button>
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                         </div>
 
