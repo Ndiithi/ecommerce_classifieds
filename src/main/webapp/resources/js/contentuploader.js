@@ -49,7 +49,7 @@ $("form").submit(function (event) {
         encode: true,
         success: function (data, textStatus,jqXHR ) {
             clearValidationMarkers();
-            alert("successs");
+            
 
         },
         error: function (response, request) {

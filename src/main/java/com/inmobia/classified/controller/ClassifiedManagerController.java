@@ -39,10 +39,13 @@ public class ClassifiedManagerController {
 
     @ResponseBody
     @RequestMapping(value = "/getAllContentByMsisdn", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Content> getAllContentByMsisdn(@RequestParam String msisdn) {
-        if(contentDao==null) logger.info("nulllllll");
+    public ResponseEntity<?> getAllContentByMsisdn(@RequestParam String msisdn) {
         List<Content> contentList = contentDao.getAllContentByMsisdn(msisdn);
-        return contentList;
+        if (contentList.isEmpty()) {
+            return new ResponseEntity<String>("No Content found for this number", HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<List>(contentList, HttpStatus.OK);
+        }
     }
 
     @ResponseBody
@@ -79,27 +82,26 @@ public class ClassifiedManagerController {
             IMessage msg = new Message();
             msg.setMessage("Update Succesfull");
             return new ResponseEntity<IMessage>(msg, HttpStatus.OK);
-        }else {
+        } else {
             IMessage msg = new Message();
             msg.setMessage("Request Failed");
             return new ResponseEntity<IMessage>(msg, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
     }
-    
-  
-            
+
     @ResponseBody
     @RequestMapping(value = "/deleteContentById", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<IMessage> deleteContentById(@RequestParam int contentId) {
-        boolean successStatus=contentDao.deleteContentById(contentId);
-        IMessage message=new Message();
+        boolean successStatus = contentDao.deleteContentById(contentId);
+        IMessage message = new Message();
         message.setMessage("successfully deleted");
-        if(successStatus) return new ResponseEntity<IMessage>(message,HttpStatus.OK);
-        else {
+        if (successStatus) {
+            return new ResponseEntity<IMessage>(message, HttpStatus.OK);
+        } else {
             message.setMessage("Failed to delete content");
-            return new ResponseEntity<IMessage>(message,HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<IMessage>(message, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        
+
     }
 }

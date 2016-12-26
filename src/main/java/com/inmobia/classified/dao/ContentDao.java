@@ -188,6 +188,13 @@ public class ContentDao {
         } catch (SQLException ex) {
             logger.error(ex.getMessage());
             return false;
+        }finally {
+            try {
+                con.close();
+                pst.close();
+            } catch (SQLException ex) {
+                logger.error(ex.getMessage());
+            }
         }
     }
 }

@@ -13,6 +13,7 @@
         <%@ include file="include/header.jsp" %>
         <script src="<c:url value="/resources/js/jquery-ui.js"/>"></script>
         <link href="<c:url value="/resources/css/jquery-ui.css"/>" rel="stylesheet" type="text/css">
+        <link href="<c:url value="/resources/css/simplePagination.css"/>" rel="stylesheet" type="text/css">
         <link href="<c:url value="/resources/css/main.css"/>" rel="stylesheet" type="text/css">
         <script>
             $(function () {
@@ -38,7 +39,12 @@
                     </ol>
                 </div>
 
+                <div class="alert  alert-dismissible fade in col-sm-12 text-center" id="success-alert" style="display: none">
 
+                    <strong>  
+                        <p class="messageFeedback"></p>
+                    </strong>
+                </div>
 
                 <div class="form-group has-feedback col-sm-9 col-md-10 col-lg-11 col-xs-12">
 
@@ -51,6 +57,13 @@
                 </div>
                 <div class="col-sm-3 col-md-2 col-lg-1 col-xs-12">
                     <button id="searchContentByPhone" class="btn btn-primary btn-block">search</button>
+                </div>
+                <div class="col-sm-12 text-center" style="display: inline; font-size: 15px; color: red">
+                    <p class="generalMessage"></p>
+                    <p class="showProgress">
+                        <strong>Processing</strong>
+                        <i class="fa fa-spinner fa-spin fa-lx fa-fw"></i>
+                    </p>
                 </div>
             </div>
 
@@ -146,10 +159,12 @@
                     </thead>
 
                     <tbody>
-
+        
                     </tbody>
 
                 </table>
+                
+                <div  id="page-nav" style="margin-left: auto;margin-right: auto;width: 30%" class="compact-theme"></div>
             </div>
 
 
@@ -167,6 +182,12 @@
 
 
                             <div class="row form-group">
+                                <div class="col-sm-12 text-center" style="display: inline; font-size: 15px; color: red">
+                                    <p class="showEditProgress">
+                                        <strong>Processing</strong>
+                                        <i class="fa fa-spinner fa-spin fa-lx fa-fw"></i>
+                                    </p>
+                                </div>
                                 <div class="col-sm-12">
                                     <label for="contentDesc">Short Description: 
 
@@ -240,13 +261,21 @@
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                             <h4 class="modal-title  text-center">Delete Selected Content?</h4>
+
+                            <div class="col-sm-12 text-center" style="display: inline; font-size: 15px; color: red">
+                                <p class="showDeleteProgress">
+                                    <strong>Processing</strong>
+                                    <i class="fa fa-spinner fa-spin fa-lx fa-fw"></i>
+                                </p>
+                            </div>
+
                         </div>
-                      
+
                         <div class="modal-footer">
                             <button id="deleteSelectedContent" type="button" class="btn btn-primary">Yes</button>
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                         </div>
-                    
+
                     </div>
 
 
@@ -262,5 +291,15 @@
         <!-- Footer -->
         <%@ include file="include/footer.jsp" %>
         <script src="<c:url value="/resources/js/contentmanager.js"/>"></script>
+        <script>
+            //script to show and hide image on ajax requests.
+            $(".showProgress").hide();
+            $(".generalMessage").hide();
+            $("p.showEditProgress").hide();
+            $("p.showDeleteProgress").hide();
+        </script>
+        <script src="<c:url value="/resources/js/simplePagination.js"/>"></script>
+
+       
     </body>
 </html>

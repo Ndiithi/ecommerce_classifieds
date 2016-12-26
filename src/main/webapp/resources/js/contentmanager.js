@@ -3,7 +3,7 @@ $(document).ready(function () {
     var modelData;
     var msisdn;
     var contentId;
-
+    var idd; //the index of selected content from table;
     //enable cacheing of fetched resources
     $.ajaxSetup({
         cache: true
@@ -29,6 +29,7 @@ $(document).ready(function () {
         }
 
         var formData = {
+            "contentId": contentId,
             "shortDescription": shortDescription,
             "location": location,
             "phone": msisdn,
@@ -40,6 +41,8 @@ $(document).ready(function () {
 
         var docc = JSON.stringify(formData);
         console.log(docc);
+        console.log(modelData);
+        $("p.showEditProgress").show();
         $.ajax({
             type: 'PUT', // define the type of HTTP verb we want to use (POST for our form)
             url: 'updateContentById?contentId=' + contentId, // the url where we want to POST
@@ -48,8 +51,13 @@ $(document).ready(function () {
             dataType: 'json', // what type of data do we expect back from the server
             encode: true,
             success: function (data, textStatus, jqXHR) {
+                $("div#contentModal").modal('hide');
+                $("div .alert").addClass("alert-success");
+                $("p.messageFeedback").text("Updated successfully");
+                closeAlert();
+                modelData.splice(idd, 1, formData);  // {idd} the element to update/replace from model
+                populateContentTable(modelData);
 
-                console.log("successs");
 
             },
             error: function (response, request) {
@@ -60,50 +68,84 @@ $(document).ready(function () {
                     $('.' + obj.id).css('visibility', 'visible');
                     console.log("the * id: " + obj.id);
                 }
-                //  closeAlert();
+//                  $("div .alert").addClass("alert-danger");
+//                  $("p.messageFeedback").text("Request failed, please try agin");
+                closeAlert();
 
             }
 
         });
-
+        $("p.showEditProgress").hide();
 
     });
-    
+
 
     /*Delete content*/
     $("button#deleteSelectedContent").click(function (event) {
+        $("p.showDeleteProgress").show();
         $.ajax({
             type: 'DELETE', // define the type of HTTP verb we want to use (POST for our form)
             url: 'deleteContentById?contentId=' + contentId, // the url where we want to POST
             dataType: 'json', // what type of data do we expect back from the server
             encode: true,
             success: function (data, textStatus, jqXHR) {
-               
-                console.log("successs");
-
+                $("div#confirmationModal").modal('hide');
+                $("div .alert").addClass("alert-success");
+                $("p.messageFeedback").text("Deleted successfully");
+                closeAlert();
+                modelData.splice(idd, 1);  // {idd} the element to remove from model
+                populateContentTable(modelData);
             },
             error: function (response, request) {
 
                 var parsed_data = JSON.parse(response.responseText);
                 for (var i = 0; i < parsed_data.length; i++) {
                     var obj = parsed_data[i];
-                   
+
                     console.log("the message: " + obj.message);
                 }
-                //  closeAlert();
+
+                closeAlert();
 
             }
 
         });
+        $("p.showDeleteProgress").hide();
     });
+
+
+
+
+//<script>
+//            //script to show and hide image on ajax requests.
+//            $(".showProgress").hide();
+//
+//            $(document).ajaxStart(function () {
+//               
+//                $(".showProgress").show();
+//            });
+//
+//            $(document).ajaxComplete(function () {
+//                $(".showProgress").hide();
+//            });
+//
+//            </script>
 
 
     /*perform fetching of content from server by phone number*/
     $("button#searchContentByPhone").click(function (event) {
 
         msisdn = $("input#searchMsisdn").val();
-        if (msisdn.trim().length === 0)
+        if (msisdn.trim().length === 0) {
+            $("p.generalMessage").text("Kindly enter your phone number");
+            $("p.generalMessage").show();
             return 1;
+        } else {
+            $("p.generalMessage").text("");
+            $("p.generalMessage").hide();
+        }
+        $("p.showProgress").show();  //show progress icon
+
         $.ajax({
             type: 'GET', // define the type of HTTP verb we want to use (POST for our form)
             url: 'getAllContentByMsisdn?msisdn=' + msisdn + '', // the url where we want to POST
@@ -111,25 +153,35 @@ $(document).ready(function () {
             encode: true,
             success: function (data, textStatus, jqXHR) {
                 $('table#contentItems').find("tr:gt(0)").remove();
+                console.log("this is data returned: " + data);
+//                if(data.trim().length !== 0)
+//                    $('table#contentItems').append("<tr style='width: 100%;'><td colspan=7 style='color:red;text-align: center;'>No content found fo this number</td></tr>");
+//                else
+                console.log("the status gotten: " + textStatus);
                 populateContentTable(data);
             },
-            error: function (response, request) {
+            error: function (data, textStatus, jqXHR) {
+                
                 $('table#contentItems').find("tr:gt(0)").remove();
-                $('table#contentItems').append("<tr style='width: 100%;'><td colspan=6 style='color:red;text-align: center;'>Error Processing request</td></tr>");
-                console.log("error");
+                $('table#contentItems').append("<tr style='width: 100%;'><td colspan=7 style='color:red;text-align: center;'>" + data.responseText + "</td></tr>");
+                
             }
 
         });
+        $("p.showProgress").hide();
+
     });
 
     /*add click event to all edit and delete buttons from content table*/
     function addClickEventToEditLink() {
-        
+
         $(".contenteditlink").click(function (event) {
             var classnegotiable = false;
-            var idd = $(event.target).closest("a").prop("name");
+            idd = $(event.target).closest("a").prop("name");
+            console.log("the id of selected model: " + idd);
             var selectedContentModel = modelData[idd];
             contentId = selectedContentModel.contentId;
+            console.log("the content id: " + contentId);
             $("#contentDesc").val(selectedContentModel.shortDescription);
             $("#locationDesc").val(selectedContentModel.location);
             $("#expirydateDesc").val(selectedContentModel.expiryDate);
@@ -140,27 +192,28 @@ $(document).ready(function () {
             $("div#contentModal").modal();
         });
 
-      
+
 
     }
 
-      /*Delete selected content*/
-      function addClickEventToDeleteLink(){
-          
-          $(".contentDeleteLink").click(function (event) {
-             var idd = $(event.target).closest("a").prop("name");
+    /*Delete selected content*/
+    function addClickEventToDeleteLink() {
+
+        $(".contentDeleteLink").click(function (event) {
+            idd = $(event.target).closest("a").prop("name");
             var selectedContentModel = modelData[idd];
             contentId = selectedContentModel.contentId;
             $("div#confirmationModal").modal();
         });
 
-      }
-        
+    }
+
     /*populates html table with content if any from sever after search*/
     function populateContentTable(data) {
-
+        $('table#contentItems').find("tr:gt(0)").remove();
+       
         $.each(data, function (index, objValue) {
-
+           
             modelData = data;
             var content = objValue;
             var classnegotiable = "no";
@@ -168,7 +221,7 @@ $(document).ready(function () {
             if (content.isNegotiable === 1)
                 classnegotiable = "yes";
             var trHTML;
-            trHTML += '<tr><td>' + " " + '</td>'
+            trHTML += '<tr class="paginate"><td>' + " " + '</td>'
                     + '<td>' + content.shortDescription + '</td>'
                     + '<td>' + content.location + '</td>'
                     + '<td>' + content.expiryDate + '</td>'
@@ -183,6 +236,15 @@ $(document).ready(function () {
         });
         addClickEventToEditLink();
         addClickEventToDeleteLink();
+        performPagination(modelData);
+    }
+
+    //closes the alert bar
+    function  closeAlert() {
+        $("#success-alert").css('display', 'block');
+        $("#success-alert").fadeTo(3000, 500).slideUp(500, function () {
+            $("#success-alert").slideUp(500);
+        });
     }
 
     /*validates form input data(content) before submission*/
@@ -234,6 +296,41 @@ $(document).ready(function () {
 
     }
 
+    //perform paginationaion for fetched data
+    function performPagination(numberOfRows) {
+        jQuery(function ($) {
+            // Grab whatever we need to paginate
+            var pageParts = $(".paginate");
 
+            // How many parts do we have?
+            var numPages = numberOfRows.length;
+            
+            // How many parts do we want per page?
+            var perPage = 10;
+
+            // When the document loads we're on page 1
+            // So to start with... hide everything else
+            pageParts.slice(perPage).hide();
+            // Apply simplePagination to our placeholder
+            $("#page-nav").pagination({
+                items: numPages,
+                itemsOnPage: perPage,
+                cssStyle: "compact-theme",
+                // We implement the actual pagination
+                //   in this next function. It runs on
+                //   the event that a user changes page
+                onPageClick: function (pageNum) {
+                    // Which page parts do we show?
+                    var start = perPage * (pageNum - 1);
+                    var end = start + perPage;
+
+                    // First hide all page parts
+                    // Then show those just for our page
+                    pageParts.hide()
+                            .slice(start, end).show();
+                }
+            });
+        });
+    }
 
 });
