@@ -168,7 +168,7 @@
             </div>
 
 
-
+            <!--Edit content modal-->
             <div  id="contentModal" class="modal fade" role="dialog">
                 <div class="modal-dialog">
 
@@ -211,6 +211,7 @@
                                         <i class="fa fa-asterisk expiryDate" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
                                     </label>
                                     <input id="expirydateDesc" class="form-control date" name="expiryDate" type="text" >
+                                     <span name="expiryDate_validation" class="error"></span>
                                 </div>
 
                                 <div class="col-sm-12">
@@ -252,7 +253,7 @@
                 </div>
             </div>
 
-
+            <!--Confirmation modal-->
             <div  id="confirmationModal" class="modal fade" role="dialog">
                 <div class="modal-dialog">
 

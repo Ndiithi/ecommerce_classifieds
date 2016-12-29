@@ -48,13 +48,20 @@
                 </div>
             </div>
 
-            <div class="alert alert-danger alert-dismissible fade in" id="success-alert" style="display: none">
+            <div class="alert alert-danger alert-dismissible fade in" id="fail-alert" style="display: none">
 
                 <strong>  
-                    Kindly review fields marked   <i class="fa fa-asterisk marker" style="color: #FF0000;" aria-hidden="true"></i>
+                    <p style="display:inline">Kindly review fields marked   <i class="fa fa-asterisk marker" style="color: #FF0000;" aria-hidden="true"></i></p>
                 </strong>
             </div>
+            
+            <div class="alert alert-success alert-dismissible fade in" id="success-alert" style="display: none">
 
+                <strong>  
+                    <p style="display:inline">Content Submitted Successfully   <i class="fa fa-check fa-lg" aria-hidden="true"></i></p>
+                </strong>
+            </div>
+            
             <div class="row classifiedoption">
                 <div class="col-lg-12" >
                     <h2 class="page-header">Classifieds</h2>
@@ -186,6 +193,7 @@
                                             <i class="fa fa-asterisk expiryDate" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
                                         </label>
                                         <input id="expirydate" class="form-control expirydate" type="text" name="expiryDate">
+                                        <span name="expiryDate_validation" class="error"></span>
                                     </div>
 
                                     <div class="col-sm-12">
@@ -281,7 +289,7 @@
                                         </label>
                                         <input id="jobexpirydate" class="form-control expirydate" name="expiryDate" type="text">
 
-
+                                        <span name="expiryDate_validation" class="error"></span>
                                     </div>
 
                                     <div class="col-sm-12">
@@ -373,6 +381,7 @@
                                             <i class="fa fa-asterisk expiryDate" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
                                         </label>
                                         <input id="houserentexpiry" class="form-control expirydate" name="expiryDate" type="text">
+                                        <span name="expiryDate_validation" class="error"></span>
                                     </div>
 
                                     <div class="col-sm-12">
@@ -466,6 +475,7 @@
                                             <i class="fa fa-asterisk expiryDate" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
                                         </label>
                                         <input id="buysellexpiry" class="form-control expirydate" name="expiryDate" type="text">
+                                        <span name="expiryDate_validation" class="error"></span>
                                     </div>
 
                                     <div class="col-sm-12">

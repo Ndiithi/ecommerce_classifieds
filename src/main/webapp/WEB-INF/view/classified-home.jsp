@@ -33,26 +33,26 @@
             <!-- Wrapper for slides -->
             <div class="carousel-inner">
                 <div class="item active">
-                    <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide One');"></div>
+                    <div class="fill" style="background-image:url('<c:url value="/resources/img/classified-carousel/classified-house.jpeg"/>');"></div>
                     <div class="carousel-caption">
                         <h2>Make your house available for a large clientele</h2>
                     </div>
                 </div>
                 <div class="item">
-                    <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Two');"></div>
+                    <div class="fill" style="background-image:url('<c:url value="/resources/img/classified-carousel/classified-job.jpg"/>');"></div>
                     <div class="carousel-caption">
                         <h2>Need a new position filled, put it on Inmobia classified</h2>
                     </div>
                 </div>
                 <div class="item">
-                    <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');"></div>
+                    <div class="fill" style="background-image:url('<c:url value="/resources/img/classified-carousel/classified-rent.jpg"/>');"></div>
                     <div class="carousel-caption">
                         <h2>Got a vacant rental house? This is the place to be</h2>
                     </div>
                 </div>
 
                 <div class="item">
-                    <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Four');"></div>
+                    <div class="fill" style="background-image:url('<c:url value="/resources/img/classified-carousel/classified-buy-sell.jpeg"/>');"></div>
                     <div class="carousel-caption">
                         <h2>Buy and Sell anything on Inmobia classified</h2>
                     </div>
@@ -80,37 +80,37 @@
                 </div>
                 <div class="col-md-3">
                     <div class="panel panel-default">
-                        <div class="panel-heading">
+                        <div style="background-color: #269abc;" class="panel-heading">  
                             <h4><i class="fa fa-fw fa-building"></i> House For Sale</h4>
                         </div>
                         <div class="panel-body">
                             <p>With inmobia classified, you can post that house that you need sold out as soon as possible, and we will do the rest. 
                                 You are guaranteed that your ad will reach a large base of clientele who will start ringing you soon. </p>
-                            <a href="#" class="btn btn-default">Learn More</a>
+                            <a href="classified-upload" class="btn btn-default">Learn More</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="panel panel-default">
-                        <div class="panel-heading">
+                        <div  class="panel-heading">
                             <h4><i class="fa fa-fw fa-briefcase"></i>Job advert</h4>
                         </div>
-                        <div class="panel-body">
+                        <div  class="panel-body">
                             <p>With inmobia classified, you can post that new position in your company that needs filling out, and we will do the rest. 
                                 You are guaranteed that your ad will reach a large base of clientele who will start ringing you soon. </p>
-                            <a href="#" class="btn btn-default">Learn More</a>
+                            <a href="classified-upload" class="btn btn-default">Learn More</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="panel panel-default">
-                        <div class="panel-heading">
+                        <div style="background-color: #39ac39" class="panel-heading">
                             <h4><i class="fa fa-fw fa-home"></i> House for rent</h4>
                         </div>
                         <div class="panel-body">
                             <p>With inmobia classified, you can post that vacant house that you need filled out, and we will do the rest. 
                                 You are guaranteed that your ad will reach a large base of clientele who will start ringing you soon. </p>
-                            <a href="#" class="btn btn-default">Learn More</a>
+                            <a href="classified-upload" class="btn btn-default">Learn More</a>
                         </div>
                     </div>
                 </div>
@@ -123,7 +123,7 @@
                         <div class="panel-body">
                             <p>With inmobia classified, You can sell anything, just post it for free and we will do the rest. 
                                 You are guaranteed that your ad will reach a large base of clientele who will start ringing you soon. </p>
-                            <a href="#" class="btn btn-default">Learn More</a>
+                            <a href="classified-upload" class="btn btn-default">Learn More</a>
                         </div>
                     </div>
                 </div>

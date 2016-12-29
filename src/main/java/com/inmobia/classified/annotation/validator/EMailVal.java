@@ -23,7 +23,7 @@ import javax.validation.Payload;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface EMailVal {
 
-    String message() default "{Email format is wrong}";
+    String message() default "Email format is wrong";
 
     Class<?>[] groups() default {};
 

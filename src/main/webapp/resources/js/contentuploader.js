@@ -1,19 +1,19 @@
 $("form").submit(function (event) {
-    
+
     /* stop form from submitting normally */
     event.preventDefault();
-    
+
     /*Global variables*/
     var valid = 1; //if form validated successfully, value remains 1
     var elementId = event.target.id;
-   
-   
+
+    clearValidationMarkers();
     validateForm(elementId);
 
     if (valid !== 1)
         return 1;
 
-     
+
 
     /*Form submission*/
     var isNegotiable = 0;
@@ -39,7 +39,7 @@ $("form").submit(function (event) {
     };
 
     var docc = JSON.stringify(formData);
-  
+
     $.ajax({
         type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
         url: 'process-content', // the url where we want to POST
@@ -47,9 +47,9 @@ $("form").submit(function (event) {
         data: docc, // our data object
         dataType: 'json', // what type of data do we expect back from the server
         encode: true,
-        success: function (data, textStatus,jqXHR ) {
+        success: function (data, textStatus, jqXHR) {
             clearValidationMarkers();
-            
+            closeSuccesAlert();
 
         },
         error: function (response, request) {
@@ -57,10 +57,42 @@ $("form").submit(function (event) {
             var parsed_data = JSON.parse(response.responseText);
             for (var i = 0; i < parsed_data.length; i++) {
                 var obj = parsed_data[i];
-                $('.' + obj.id).css('visibility', 'visible');
                 console.log("the * id: " + obj.id);
+
+                if ($('.' + obj.id).length) {
+                  
+                    if (obj.id === "shortDescription"){
+                        $('#' + elementId + ' div div label i.shortDescription').css('visibility', 'visible');
+                         $("#" + elementId + " div div [name='shortDescription_validation']").text(obj.message);
+                    }
+                       
+                    if (obj.id === "location"){
+                         $('#' + elementId + ' div div label i.location').css('visibility', 'visible');
+                          $("#" + elementId + " div div [name='location_validation']").text(obj.message);
+                    }
+                       
+                    if (obj.id === "phone"){
+                         $('#' + elementId + ' div div label i.phone').css('visibility', 'visible');
+                         $("#" + elementId + " div div [name='phone_validation']").text(obj.message);
+                    }
+                        
+                    if (obj.id === "expiryDate"){
+                         $('#' + elementId + ' div div label i.expiryDate').css('visibility', 'visible');
+                         $("#" + elementId + " div div [name='expiryDate_validation']").text(obj.message);
+                    }
+                        
+                    if (obj.id === "email"){
+                         $('#' + elementId + ' div div label i.email').css('visibility', 'visible');
+                         $("#" + elementId + " div div [name='email_validation']").text(obj.message);
+                         
+                    }
+                        
+                }
+
+
+
             }
-            closeAlert();
+            closeFailAlert();
 
         }
 
@@ -75,15 +107,27 @@ $("form").submit(function (event) {
         $('#' + elementId + ' div div label i.shortDescription').css('visibility', 'hidden');
         $('#' + elementId + ' div div label i.phone').css('visibility', 'hidden');
         $('#' + elementId + ' div div label i.expiryDate').css('visibility', 'hidden');
+
+        $("#" + elementId + " div div [name='expiryDate_validation']").text("");
+        $("#" + elementId + " div div [name='shortDescription_validation']").text("");
+        $("#" + elementId + " div div [name='email_validation']").text("");
+        $("#" + elementId + " div div [name='location_validation']").text("");
+        $("#" + elementId + " div div [name='location_validation']").text("");
     }
 
-    function  closeAlert() {
+    function  closeFailAlert() {
+        $("#fail-alert").css('display', 'block');
+        $("#fail-alert").fadeTo(3000, 500).slideUp(500, function () {
+            $("#fail-alert").slideUp(500);
+        });
+    }
+
+     function  closeSuccesAlert() {
         $("#success-alert").css('display', 'block');
         $("#success-alert").fadeTo(3000, 500).slideUp(500, function () {
             $("#success-alert").slideUp(500);
         });
     }
-
 
 // Validate form before submitting.
     function validateForm(elementId) {

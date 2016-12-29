@@ -12,6 +12,7 @@ $(document).ready(function () {
 
     /*form submission for edited content*/
     $("button#submitEditedContent").click(function (event) {
+        clearValidationMarkers();
         validateForm();
         if (valid !== 1)
             return 1;
@@ -58,6 +59,8 @@ $(document).ready(function () {
                 modelData.splice(idd, 1, formData);  // {idd} the element to update/replace from model
                 populateContentTable(modelData);
 
+                clearValidationMarkers();
+
 
             },
             error: function (response, request) {
@@ -65,12 +68,25 @@ $(document).ready(function () {
                 var parsed_data = JSON.parse(response.responseText);
                 for (var i = 0; i < parsed_data.length; i++) {
                     var obj = parsed_data[i];
-                    $('.' + obj.id).css('visibility', 'visible');
+
                     console.log("the * id: " + obj.id);
+
+                    if ($('.' + obj.id).length) {
+                        $('.' + obj.id).css('visibility', 'visible');
+                        if (obj.id === "shortDescription")
+                            $("div div [name='shortDescription_validation']").text(obj.message);
+                        if (obj.id === "location")
+                            $("div div [name='location_validation']").text(obj.message);
+                        if (obj.id === "phone")
+                            $(" div div [name='phone_validation']").text(obj.message);
+                        if (obj.id === "expiryDate")
+                            $("div div [name='expiryDate_validation']").text(obj.message);
+                        if (obj.id === "email")
+                            $("div div [name='email_validation']").text(obj.message);
+                    }
+
+
                 }
-//                  $("div .alert").addClass("alert-danger");
-//                  $("p.messageFeedback").text("Request failed, please try agin");
-                closeAlert();
 
             }
 
@@ -80,7 +96,7 @@ $(document).ready(function () {
     });
 
 
-    /*Delete content*/
+    /*Delete selected content*/
     $("button#deleteSelectedContent").click(function (event) {
         $("p.showDeleteProgress").show();
         $.ajax({
@@ -145,7 +161,7 @@ $(document).ready(function () {
             $("p.generalMessage").hide();
         }
         $("p.showProgress").show();  //show progress icon
-
+        alert("continue");
         $.ajax({
             type: 'GET', // define the type of HTTP verb we want to use (POST for our form)
             url: 'getAllContentByMsisdn?msisdn=' + msisdn + '', // the url where we want to POST
@@ -161,10 +177,10 @@ $(document).ready(function () {
                 populateContentTable(data);
             },
             error: function (data, textStatus, jqXHR) {
-                
+
                 $('table#contentItems').find("tr:gt(0)").remove();
                 $('table#contentItems').append("<tr style='width: 100%;'><td colspan=7 style='color:red;text-align: center;'>" + data.responseText + "</td></tr>");
-                
+
             }
 
         });
@@ -176,6 +192,7 @@ $(document).ready(function () {
     function addClickEventToEditLink() {
 
         $(".contenteditlink").click(function (event) {
+            clearValidationMarkers();
             var classnegotiable = false;
             idd = $(event.target).closest("a").prop("name");
             console.log("the id of selected model: " + idd);
@@ -196,10 +213,11 @@ $(document).ready(function () {
 
     }
 
-    /*Delete selected content*/
+    /* add Delete event to delete btn */
     function addClickEventToDeleteLink() {
 
         $(".contentDeleteLink").click(function (event) {
+            clearValidationMarkers();
             idd = $(event.target).closest("a").prop("name");
             var selectedContentModel = modelData[idd];
             contentId = selectedContentModel.contentId;
@@ -211,9 +229,9 @@ $(document).ready(function () {
     /*populates html table with content if any from sever after search*/
     function populateContentTable(data) {
         $('table#contentItems').find("tr:gt(0)").remove();
-       
+
         $.each(data, function (index, objValue) {
-           
+
             modelData = data;
             var content = objValue;
             var classnegotiable = "no";
@@ -257,7 +275,9 @@ $(document).ready(function () {
         var shortDescription_validation = $("div [name='shortDescription_validation']");
         var location_validation = $("div div [name='location_validation']");
         var email_validation = $("div div [name='email_validation']");
+        
         var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
 
 
         if (location.val().trim().length === 0) {
@@ -304,7 +324,7 @@ $(document).ready(function () {
 
             // How many parts do we have?
             var numPages = numberOfRows.length;
-            
+
             // How many parts do we want per page?
             var perPage = 10;
 
@@ -332,5 +352,23 @@ $(document).ready(function () {
             });
         });
     }
+
+
+    /*utility functions*/
+    function clearValidationMarkers() {
+
+        $('div div label i.location').css('visibility', 'hidden');
+        $('div div label i.email').css('visibility', 'hidden');
+        $('div div label i.shortDescription').css('visibility', 'hidden');
+        $('div div label i.phone').css('visibility', 'hidden');
+        $('div div label i.expiryDate').css('visibility', 'hidden');
+
+        $("div div [name='expiryDate_validation']").text("");
+        $("div div [name='shortDescription_validation']").text("");
+        $("div div [name='email_validation']").text("");
+        $("div div [name='location_validation']").text("");
+        $("div div [name='location_validation']").text("");
+    }
+
 
 });

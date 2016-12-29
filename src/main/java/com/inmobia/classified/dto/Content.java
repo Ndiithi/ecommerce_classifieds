@@ -13,6 +13,7 @@ import com.inmobia.classified.annotation.validator.StringVal;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
@@ -23,6 +24,7 @@ public class Content implements ISanitizable{
     
     private int contentId; 
     @StringVal(message ="{StringVal.shortDescription}")
+    @Length(min=14, max = 300,message = "The Description length should be between 14 and 300")
     private String shortDescription;
     
     @NotEmpty(message ="{NotEmpty.location}")
