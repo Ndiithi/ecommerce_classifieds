@@ -4,6 +4,8 @@ $(document).ready(function () {
     var msisdn;
     var contentId;
     var idd; //the index of selected content from table;
+    var contentCategory = ['house_for_sale', 'jobs_ad', 'house_for_rent', 'buy_and_sell'];
+    
     //enable cacheing of fetched resources
     $.ajaxSetup({
         cache: true
@@ -12,11 +14,19 @@ $(document).ready(function () {
 
     /*form submission for edited content*/
     $("button#submitEditedContent").click(function (event) {
+        valid=1;
+        console.log("submit event started");
         clearValidationMarkers();
+        console.log("submit event started 2");
         validateForm();
+        console.log("submit event started 3");
+        console.log("Valid status: "+ valid);
         if (valid !== 1)
             return 1;
-
+        
+        
+        var modelObj=modelData[idd];
+        var content_category=modelObj.content_category;
         var phone;
         var isNegotiable = 0;
         var shortDescription = $("div [name='shortDescription']").val();
@@ -30,6 +40,7 @@ $(document).ready(function () {
         }
 
         var formData = {
+            "content_category":content_category,
             "contentId": contentId,
             "shortDescription": shortDescription,
             "location": location,
@@ -39,7 +50,7 @@ $(document).ready(function () {
             "isNegotiable": isNegotiable
 
         };
-
+        console.log("submit event started 4 abut to stringfy");
         var docc = JSON.stringify(formData);
         console.log(docc);
         console.log(modelData);
@@ -52,6 +63,7 @@ $(document).ready(function () {
             dataType: 'json', // what type of data do we expect back from the server
             encode: true,
             success: function (data, textStatus, jqXHR) {
+                 console.log("submit Successfully");
                 $("div#contentModal").modal('hide');
                 $("div .alert").addClass("alert-success");
                 $("p.messageFeedback").text("Updated successfully");
@@ -64,7 +76,7 @@ $(document).ready(function () {
 
             },
             error: function (response, request) {
-
+                console.log("submit failed");
                 var parsed_data = JSON.parse(response.responseText);
                 for (var i = 0; i < parsed_data.length; i++) {
                     var obj = parsed_data[i];
@@ -161,7 +173,7 @@ $(document).ready(function () {
             $("p.generalMessage").hide();
         }
         $("p.showProgress").show();  //show progress icon
-        alert("continue");
+        
         $.ajax({
             type: 'GET', // define the type of HTTP verb we want to use (POST for our form)
             url: 'getAllContentByMsisdn?msisdn=' + msisdn + '', // the url where we want to POST
@@ -239,8 +251,9 @@ $(document).ready(function () {
             if (content.isNegotiable === 1)
                 classnegotiable = "yes";
             var trHTML;
-            trHTML += '<tr class="paginate"><td>' + " " + '</td>'
-                    + '<td>' + content.shortDescription + '</td>'
+            var shrtDescription=content.shortDescription.substring(0,40);
+            trHTML += '<tr class="paginate"><td>' + content.content_category + '</td>'
+                    + '<td>' + shrtDescription + '</td>'
                     + '<td>' + content.location + '</td>'
                     + '<td>' + content.expiryDate + '</td>'
                     + '<td>' + content.email + '</td>'
@@ -275,7 +288,7 @@ $(document).ready(function () {
         var shortDescription_validation = $("div [name='shortDescription_validation']");
         var location_validation = $("div div [name='location_validation']");
         var email_validation = $("div div [name='email_validation']");
-        
+
         var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
 
@@ -309,8 +322,18 @@ $(document).ready(function () {
             shortDescription_validation.text("Description field Required");
             $('label i.shortDescription').css('visibility', 'visible');
         } else {
-            $('label i.shortDescription').css('visibility', 'hidden');
-            shortDescription_validation.text("");
+
+            if (description.val().trim().length < 14 || description.val().trim().length > 300) {
+                valid = 0;
+                shortDescription_validation.text("The Description length should be between 14 and 300");
+            } else {
+                
+                $('label i.shortDescription').css('visibility', 'hidden');
+                shortDescription_validation.text("");
+
+            }
+
+
         }
 
 

@@ -80,7 +80,8 @@
                 </div>
                 <div class="col-md-3">
                     <div class="panel panel-default">
-                        <div style="background-color: #269abc;" class="panel-heading">  
+                        <div style="background-color: #39ac39;" class="panel-heading">  
+                            <!--#269abc;-->
                             <h4><i class="fa fa-fw fa-building"></i> House For Sale</h4>
                         </div>
                         <div class="panel-body">
@@ -92,7 +93,7 @@
                 </div>
                 <div class="col-md-3">
                     <div class="panel panel-default">
-                        <div  class="panel-heading">
+                        <div style="background-color: #269abc;"  class="panel-heading">
                             <h4><i class="fa fa-fw fa-briefcase"></i>Job advert</h4>
                         </div>
                         <div  class="panel-body">
@@ -104,7 +105,7 @@
                 </div>
                 <div class="col-md-3">
                     <div class="panel panel-default">
-                        <div style="background-color: #39ac39" class="panel-heading">
+                        <div style="background-color: #39ac39;" class="panel-heading">
                             <h4><i class="fa fa-fw fa-home"></i> House for rent</h4>
                         </div>
                         <div class="panel-body">
@@ -116,8 +117,8 @@
                 </div>
 
                 <div class="col-md-3">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
+                    <div  class="panel panel-default">
+                        <div style="background-color: #269abc;" class="panel-heading">
                             <h4><i class="fa fa-fw fa-money"></i> Buy and Sell</h4>
                         </div>
                         <div class="panel-body">
@@ -137,32 +138,32 @@
                 </div>
                 <div class="col-md-4 col-sm-6">
                     <a href="portfolio-item.html">
-                        <img class="img-responsive img-portfolio img-hover"  src="<c:url value="/resources/img/700x450.png"/>" alt="">
+                        <img class="img-responsive img-portfolio img-hover"  src="<c:url value="/resources/img/ai.png"/>" alt="">
                     </a>
                 </div>
                 <div class="col-md-4 col-sm-6">
                     <a href="portfolio-item.html">
-                        <img class="img-responsive img-portfolio img-hover" src="<c:url value="/resources/img/700x450.png"/>" alt="">
+                        <img class="img-responsive img-portfolio img-hover" src="<c:url value="/resources/img/ai.png"/>" alt="">
                     </a>
                 </div>
                 <div class="col-md-4 col-sm-6">
                     <a href="portfolio-item.html">
-                        <img class="img-responsive img-portfolio img-hover" src="<c:url value="/resources/img/700x450.png"/>" alt="">
+                        <img class="img-responsive img-portfolio img-hover" src="<c:url value="/resources/img/ai.png"/>" alt="">
                     </a>
                 </div>
                 <div class="col-md-4 col-sm-6">
                     <a href="portfolio-item.html">
-                        <img class="img-responsive img-portfolio img-hover" src="<c:url value="/resources/img/700x450.png"/>" alt="">
+                        <img class="img-responsive img-portfolio img-hover" src="<c:url value="/resources/img/ai.png"/>" alt="">
                     </a>
                 </div>
                 <div class="col-md-4 col-sm-6">
                     <a href="portfolio-item.html">
-                        <img class="img-responsive img-portfolio img-hover" src="<c:url value="/resources/img/700x450.png"/>" alt="">
+                        <img class="img-responsive img-portfolio img-hover" src="<c:url value="/resources/img/ai.png"/>" alt="">
                     </a>
                 </div>
                 <div class="col-md-4 col-sm-6">
                     <a href="portfolio-item.html">
-                        <img class="img-responsive img-portfolio img-hover" src="<c:url value="/resources/img/700x450.png"/>" alt="">
+                        <img class="img-responsive img-portfolio img-hover" src="<c:url value="/resources/img/ai.png"/>" alt="">
                     </a>
                 </div>
             </div>

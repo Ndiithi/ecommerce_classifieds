@@ -23,13 +23,12 @@ public class DateValValidator implements ConstraintValidator<DateVal, String> {
     public void initialize(DateVal constraintAnnotation) {
         
     }
-    
+    //checks id date is null or not
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
         SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
         
         if(value==null || value.trim().length()==0){ 
-            System.out.println("validate date worked poa false");
             return true;
         }
         

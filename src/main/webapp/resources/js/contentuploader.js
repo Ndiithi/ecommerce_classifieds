@@ -6,6 +6,7 @@ $("form").submit(function (event) {
     /*Global variables*/
     var valid = 1; //if form validated successfully, value remains 1
     var elementId = event.target.id;
+    var contentCategory = ['house_for_sale', 'jobs_ad', 'house_for_rent', 'buy_and_sell'];
 
     clearValidationMarkers();
     validateForm(elementId);
@@ -29,6 +30,7 @@ $("form").submit(function (event) {
     }
 
     var formData = {
+        "content_category":resolveContentCategory(elementId),
         "shortDescription": shortDescription,
         "location": location,
         "phone": phone,
@@ -60,33 +62,33 @@ $("form").submit(function (event) {
                 console.log("the * id: " + obj.id);
 
                 if ($('.' + obj.id).length) {
-                  
-                    if (obj.id === "shortDescription"){
+
+                    if (obj.id === "shortDescription") {
                         $('#' + elementId + ' div div label i.shortDescription').css('visibility', 'visible');
-                         $("#" + elementId + " div div [name='shortDescription_validation']").text(obj.message);
+                        $("#" + elementId + " div div [name='shortDescription_validation']").text(obj.message);
                     }
-                       
-                    if (obj.id === "location"){
-                         $('#' + elementId + ' div div label i.location').css('visibility', 'visible');
-                          $("#" + elementId + " div div [name='location_validation']").text(obj.message);
+
+                    if (obj.id === "location") {
+                        $('#' + elementId + ' div div label i.location').css('visibility', 'visible');
+                        $("#" + elementId + " div div [name='location_validation']").text(obj.message);
                     }
-                       
-                    if (obj.id === "phone"){
-                         $('#' + elementId + ' div div label i.phone').css('visibility', 'visible');
-                         $("#" + elementId + " div div [name='phone_validation']").text(obj.message);
+
+                    if (obj.id === "phone") {
+                        $('#' + elementId + ' div div label i.phone').css('visibility', 'visible');
+                        $("#" + elementId + " div div [name='phone_validation']").text(obj.message);
                     }
-                        
-                    if (obj.id === "expiryDate"){
-                         $('#' + elementId + ' div div label i.expiryDate').css('visibility', 'visible');
-                         $("#" + elementId + " div div [name='expiryDate_validation']").text(obj.message);
+
+                    if (obj.id === "expiryDate") {
+                        $('#' + elementId + ' div div label i.expiryDate').css('visibility', 'visible');
+                        $("#" + elementId + " div div [name='expiryDate_validation']").text(obj.message);
                     }
-                        
-                    if (obj.id === "email"){
-                         $('#' + elementId + ' div div label i.email').css('visibility', 'visible');
-                         $("#" + elementId + " div div [name='email_validation']").text(obj.message);
-                         
+
+                    if (obj.id === "email") {
+                        $('#' + elementId + ' div div label i.email').css('visibility', 'visible');
+                        $("#" + elementId + " div div [name='email_validation']").text(obj.message);
+
                     }
-                        
+
                 }
 
 
@@ -122,11 +124,25 @@ $("form").submit(function (event) {
         });
     }
 
-     function  closeSuccesAlert() {
+    function  closeSuccesAlert() {
         $("#success-alert").css('display', 'block');
         $("#success-alert").fadeTo(3000, 500).slideUp(500, function () {
             $("#success-alert").slideUp(500);
         });
+    }
+
+    function resolveContentCategory(categoryId) {
+        var categoryName;
+
+        if (categoryId==="houseforsaleF")
+            categoryName = contentCategory[0];
+        if (categoryId==="jobsadF")
+            categoryName = contentCategory[1];
+        if (categoryId==="houseforrentF")
+            categoryName = contentCategory[2];
+        if (categoryId==="buyandsellF")
+            categoryName = contentCategory[3];
+        return categoryName;
     }
 
 // Validate form before submitting.
@@ -170,8 +186,14 @@ $("form").submit(function (event) {
             shortDescription_validation.text("Description field Required");
 
         } else {
-            $('#' + elementId + ' div div label i.shortDescription').css('visibility', 'hidden');
-            shortDescription_validation.text("");
+            if (description.val().trim().length < 14 || description.val().trim().length > 300) {
+                valid = 0;
+                shortDescription_validation.text("The Description length should be between 14 and 300");
+            } else {
+                $('#' + elementId + ' div div label i.shortDescription').css('visibility', 'hidden');
+                shortDescription_validation.text("");
+            }
+
         }
 
         if (phone.val().trim().length === 0) {
@@ -179,9 +201,14 @@ $("form").submit(function (event) {
             phone_validation.text("Phone field Required");
 
         } else {
+            if ($.isNumeric(phone.val())) {
+                $('#' + elementId + ' div div label i.phone').css('visibility', 'hidden');
+                phone_validation.text("");
+            } else {
+                valid = 0;
+                phone_validation.text("Please enter a valid phone number");
+            }
 
-            $('#' + elementId + ' div div label i.phone').css('visibility', 'hidden');
-            phone_validation.text("");
         }
 
     }

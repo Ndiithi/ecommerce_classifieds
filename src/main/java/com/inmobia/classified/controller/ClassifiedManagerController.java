@@ -40,6 +40,7 @@ public class ClassifiedManagerController {
     @ResponseBody
     @RequestMapping(value = "/getAllContentByMsisdn", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getAllContentByMsisdn(@RequestParam String msisdn) {
+        msisdn=webSanitizer.sanitize(msisdn);
         List<Content> contentList = contentDao.getAllContentByMsisdn(msisdn);
         if (contentList.isEmpty()) {
             return new ResponseEntity<String>("No Content found for this number", HttpStatus.NOT_FOUND);

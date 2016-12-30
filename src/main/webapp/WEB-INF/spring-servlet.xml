@@ -35,6 +35,10 @@
     </bean>
     
     
+    <bean id="contentcategorydao" class="com.inmobia.classified.dao.ContentCategoryDao" autowire="byName">  
+        
+    </bean>
+    
     <bean id="contentdao" class="com.inmobia.classified.dao.ContentDao" autowire="byName">  
         
     </bean>

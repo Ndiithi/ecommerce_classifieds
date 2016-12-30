@@ -6,11 +6,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.inmobia.classified.ISanitizable;
 import com.inmobia.classified.annotation.validator.DateVal;
 import com.inmobia.classified.annotation.validator.EMailVal;
+import com.inmobia.classified.annotation.validator.FutureDate;
 import com.inmobia.classified.annotation.validator.IntegerVal;
 import com.inmobia.classified.annotation.validator.StringVal;
 
 
-import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Length;
@@ -27,6 +27,9 @@ public class Content implements ISanitizable{
     @Length(min=14, max = 300,message = "The Description length should be between 14 and 300")
     private String shortDescription;
     
+    @NotNull(message = "Content Category Cannot be null")
+    private String content_category;
+    
     @NotEmpty(message ="{NotEmpty.location}")
     private String location;
     
@@ -35,6 +38,7 @@ public class Content implements ISanitizable{
     private String phone;
     
     @DateVal(message ="{DateVal.expiryDate}")
+    @FutureDate
     private String expiryDate;
     
     @EMailVal
@@ -97,6 +101,14 @@ public class Content implements ISanitizable{
     
     public void setContentId(int contentId) {
         this.contentId = contentId;
+    }
+
+    public String getContent_category() {
+        return content_category;
+    }
+
+    public void setContent_category(String content_category) {
+        this.content_category = content_category;
     }
 
    

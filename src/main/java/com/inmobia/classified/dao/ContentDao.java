@@ -23,16 +23,23 @@ public class ContentDao {
 
     @Autowired
     MsisdnDao msisdnDto;
+    @Autowired 
+    ContentCategoryDao contentCategoryDao;
+    
     Logger logger = Logger.getLogger(ContentDao.class.getName());
     private String saveContentSql = "insert into "
-            + "inmobiaclassified.content(content_category,short_description,location,msisdn_id,expiry_date,email,negotiable) "
+            + "inmobiaclassified.content(content_category_id,short_description,location,msisdn_id,expiry_date,email,negotiable) "
             + "values(?,?,?,?,?,?,?)";
 
     private String getAllContentByMsisdn = "Select * from inmobiaclassified.content where msisdn_id=?";
-    private String updateContentByIdSql = "Update inmobiaclassified.content set "
-            + "content_category=?,short_description=?,location=?,msisdn_id=?,expiry_date=?,email=?,negotiable=? "
-            + "where contentid=?";
+//    private String updateContentByIdSql = "Update inmobiaclassified.content set "
+//            + "content_category=?,short_description=?,location=?,msisdn_id=?,expiry_date=?,email=?,negotiable=? "
+//            + "where contentid=?";
 
+    private String updateContentByIdSql = "Update inmobiaclassified.content set "
+            + "short_description=?,location=?,msisdn_id=?,expiry_date=?,email=?,negotiable=? "
+            + "where contentid=?";
+    
     private String deleteContentByIdSql = "delete from inmobiaclassified.content where contentid=?";
 
     public boolean saveContent(Content content) throws SQLException {
@@ -43,7 +50,8 @@ public class ContentDao {
 
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             int msisdnId = msisdnDto.getMsisdnIdByNumber(content.getPhone());
-            pst.setInt(1, 10);
+            int contentCategory = contentCategoryDao.getContentCategoryByName(content.getContent_category());
+            pst.setInt(1, contentCategory);
             pst.setString(2, content.getShortDescription());
             pst.setString(3, content.getLocation());
             pst.setInt(4, msisdnId);
@@ -62,6 +70,7 @@ public class ContentDao {
             pst.setDate(5, expiryDateToSave);
             pst.setString(6, content.getEmail());
             pst.setInt(7, content.getIsNegotiable());
+            
             int execStatus = pst.executeUpdate();
             if (execStatus == 1) {
                 return true;
@@ -95,6 +104,10 @@ public class ContentDao {
             Content content;
             while (rs.next()) {
                 content = new Content();
+                String categoryName;
+                
+                categoryName=contentCategoryDao.getContentCategoryNameByID(rs.getInt("content_category_id"));
+                content.setContent_category(categoryName);
                 content.setContentId(rs.getInt("contentid"));
                 content.setEmail(rs.getString("email"));
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -133,10 +146,10 @@ public class ContentDao {
             int msisdnId = msisdnDto.getMsisdnIdByNumber(content.getPhone());
             pst = con.prepareStatement(updateContentByIdSql);
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            pst.setInt(1, 10);
-            pst.setString(2, content.getShortDescription());
-            pst.setString(3, content.getLocation());
-            pst.setInt(4, msisdnId);
+            
+            pst.setString(1, content.getShortDescription());
+            pst.setString(2, content.getLocation());
+            pst.setInt(3, msisdnId);
             String expiryDateString = content.getExpiryDate();
             Date expiryDate = null;
             java.sql.Date expiryDateToSave = null;
@@ -149,10 +162,10 @@ public class ContentDao {
                     logger.error(ex.getMessage());
                 }
             }
-            pst.setDate(5, expiryDateToSave);
-            pst.setString(6, content.getEmail());
-            pst.setInt(7, content.getIsNegotiable());
-            pst.setInt(8, contentId);
+            pst.setDate(4, expiryDateToSave);
+            pst.setString(5, content.getEmail());
+            pst.setInt(6, content.getIsNegotiable());
+            pst.setInt(7, contentId);
             int execStatus = pst.executeUpdate();
             if (execStatus == 1) {
                 return true;

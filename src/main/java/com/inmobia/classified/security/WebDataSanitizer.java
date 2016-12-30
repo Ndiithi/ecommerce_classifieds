@@ -27,7 +27,8 @@ public class WebDataSanitizer {
     Logger logger = Logger.getLogger(WebDataSanitizer.class.getName());
 
     public String sanitize(String string) {
-        return string;
+        String safe = Jsoup.clean(string, Whitelist.none());
+        return safe;
     }
 
     public ISanitizable sanitize(ISanitizable object) {
