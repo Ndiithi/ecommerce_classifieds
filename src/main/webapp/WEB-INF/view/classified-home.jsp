@@ -10,7 +10,10 @@
 
     <head>
         <%@ include file="include/header.jsp" %>
+        <link href="<c:url value="/resources/css/main.css"/>" rel="stylesheet" type="text/css">
         <title>Classifieds Home</title>
+        
+       
     </head>
 
     <body>
@@ -70,7 +73,7 @@
 
         <!-- Page Content -->
         <div class="container">
-            
+
             <!-- Marketing Icons Section -->
             <div class="row">
                 <div class="col-lg-12">
@@ -168,8 +171,8 @@
                 </div>
             </div>
         </div>
-            <!-- Footer -->
-            <%@ include file="include/footer.jsp" %>
+        <!-- Footer -->
+        <%@ include file="include/footer.jsp" %>
 
     </body>
 

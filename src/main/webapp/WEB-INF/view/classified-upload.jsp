@@ -19,9 +19,9 @@
             $(function () {
                 $(".expirydate").datepicker({
                     dateFormat: "dd/mm/yy",
-                     changeYear: true,
-                     yearRange: "nn:+2"
-                    
+                    changeYear: true,
+                    yearRange: "nn:+2"
+
                 });
             });
         </script>
@@ -57,14 +57,14 @@
                     <p style="display:inline">Kindly review fields marked   <i class="fa fa-asterisk marker" style="color: #FF0000;" aria-hidden="true"></i></p>
                 </strong>
             </div>
-            
+
             <div class="alert alert-success alert-dismissible fade in" id="success-alert" style="display: none">
 
                 <strong>  
                     <p style="display:inline">Content Submitted Successfully   <i class="fa fa-check fa-lg" aria-hidden="true"></i></p>
                 </strong>
             </div>
-            
+
             <div class="row classifiedoption">
                 <div class="col-lg-12" >
                     <h2 class="page-header">Classifieds</h2>
@@ -161,7 +161,7 @@
 
                     <div class="well well-sm">
 
-                        <form id="houseforsaleF" action="/"> 
+                        <form id="houseforsaleF"> 
                             <!--#houseforsaleF div div textarea-->
                             <!--#houseforsaleF div div label i.-->
                             <!--#houseforsaleF div div textarea-->
@@ -234,12 +234,12 @@
             <div class="row" id="jobsad" >
                 <div class="col-sm-10">
                     <h1 style="margin-top:  0px;">Jobs Ad
-                    
+
                         <p class="showProgress" style="display: inline; font-size: 15px; color: red">
                             <strong>submitting</strong>
                             <i class="fa fa-spinner fa-spin fa-lx fa-fw"></i>
                         </p>
-                        
+
                     </h1>
                 </div>
                 <div class="col-sm-2">
@@ -326,12 +326,12 @@
             <div class="row" id="houseforrent" >
                 <div class="col-sm-10">
                     <h1 style="margin-top:  0px;">House For Rent
-                    
+
                         <p class="showProgress" style="display: inline; font-size: 15px; color: red">
                             <strong>submitting</strong>
                             <i class="fa fa-spinner fa-spin fa-lx fa-fw"></i>
                         </p>
-                        
+
                     </h1>
                 </div>
                 <div class="col-sm-2">
@@ -419,12 +419,12 @@
             <div class="row" id="buyandsell" >
                 <div class="col-sm-10">
                     <h1 style="margin-top:  0px;">Buy And Sell
-                    
+
                         <p class="showProgress" style="display: inline; font-size: 15px; color: red">
                             <strong>submitting</strong>
                             <i class="fa fa-spinner fa-spin fa-lx fa-fw"></i>
                         </p>
-                        
+
                     </h1>
                 </div>
                 <div class="col-sm-2">
@@ -555,7 +555,7 @@
 
 
             <hr>
-
+        </div>
             <!-- Footer -->
             <%@ include file="include/footer.jsp" %>
             <script src="<c:url value="/resources/js/contentuploader.js"/>"></script>
@@ -566,7 +566,7 @@
             $(".showProgress").hide();
 
             $(document).ajaxStart(function () {
-               
+
                 $(".showProgress").show();
             });
 

@@ -6,9 +6,9 @@ package com.inmobia.classified.utility;
  */
 public class DbProperties {
     //Dev enviroment;
-//    private static String jndiName="inmobiaclassifiedsite";
+    private static String jndiName="inmobiaclassifiedsite";
     //production;
-     private static String jndiName="java:/inmobiaclassifiedsite";
+//     private static String jndiName="java:/inmobiaclassifiedsite";
     //Developement envin
     public static String userName="";
     public static String password="";

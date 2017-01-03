@@ -290,7 +290,7 @@
 
         </div>
         <!-- Footer -->
-        <%@ include file="include/footer.jsp" %>
+        <%@ include file="include/weblink.jsp" %>
         <script src="<c:url value="/resources/js/contentmanager.js"/>"></script>
         <script>
             //script to show and hide image on ajax requests.

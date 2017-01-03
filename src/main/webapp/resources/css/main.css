@@ -3,8 +3,17 @@
     Author     : Duncan
 */
 
-span.error {
-  background-color:#FFDFDF;
-  color:red;
+html,body{
+    height: 100%
 }
 
+span.error {
+    background-color:#FFDFDF;
+    color:red;
+}
+
+a.foot{
+    text-decoration: none;
+    color: #ffffff;
+
+}
