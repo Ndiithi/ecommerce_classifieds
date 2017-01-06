@@ -1,7 +1,7 @@
 <%-- 
     Document   : services
     Created on : Nov 30, 2016, 3:29:26 PM
-    Author     : Duncan
+    Author     : Duncan Ndiithi
 --%>
 
 <%@page contentType="text/html" pageEncoding="windows-1252"%>
@@ -46,7 +46,7 @@
                     <ol class="breadcrumb">
                         <li><a href="classified-home.html">Home</a>
                         </li>
-                        <li class="active">Services</li>
+                        <li class="active">Classified-upload</li>
                     </ol>
                 </div>
             </div>
@@ -106,6 +106,7 @@
                             <span class="fa-stack fa-1x">
                                 <i class="fa fa-circle fa-stack-2x text-primary"></i>
                                 <i class="fa fa-home fa-stack-1x fa-inverse"></i>
+                                
                             </span>
                         </div>
                         <div class="panel-body">
@@ -121,6 +122,7 @@
                             <span class="fa-stack fa-1x">
                                 <i class="fa fa-circle fa-stack-2x text-primary"></i>
                                 <i class="fa fa-money fa-stack-1x fa-inverse"></i>
+                               
                             </span>
                         </div>
                         <div class="panel-body">
@@ -512,18 +514,18 @@
             <!-- Service Tabs -->
             <div class="row">
                 <div class="col-lg-12">
-                    <h2 class="page-header">Tips on how best to post add</h2>
+                    <h2 class="page-header">Tips on how best to post ad</h2>
                 </div>
                 <div class="col-lg-12">
 
                     <ul id="myTab" class="nav nav-tabs nav-justified">
-                        <li class="active"><a href="#service-one" data-toggle="tab"><i class="fa fa-tree"></i> House for Sale</a>
+                        <li class="active"><a href="#service-one" data-toggle="tab"><i class="fa fa-building   fa-lg"></i> House for Sale</a>
                         </li>
-                        <li class=""><a href="#service-two" data-toggle="tab"><i class="fa fa-car"></i> Jobs</a>
+                        <li class=""><a href="#service-two" data-toggle="tab"><i class="fa fa-briefcase fa-lg"></i>Jobs</a>
                         </li>
-                        <li class=""><a href="#service-three" data-toggle="tab"><i class="fa fa-support"></i> Housing for rent</a>
+                        <li class=""><a href="#service-three" data-toggle="tab"><i class="fa fa-home fa-lg"></i> Housing for rent</a>
                         </li>
-                        <li class=""><a href="#service-four" data-toggle="tab"><i class="fa fa-database"></i> Buy and sell</a>
+                        <li class=""><a href="#service-four" data-toggle="tab"><i class="fa fa-money fa-lg"></i> Buy and sell</a>
                         </li>
                     </ul>
 

@@ -14,14 +14,19 @@
 
 <!-- Bootstrap Core CSS -->
 <!--<link href="/resources/css/bootstrap.min.css" rel="stylesheet">-->
+<link rel="icon" href="<c:url value="/resources/img/favicon.ico"/>" type="image/x-icon"/>
+<link rel="shortcut icon" href="<c:url value="/resources/img/favicon.ico"/>" type="image/x-icon"/>
 <link  href="<c:url value="/resources/css/bootstrap.min.css"/>" rel="stylesheet">
 <!-- Custom CSS  -->
 <link href="<c:url value="/resources/css/modern-business.css"/>" rel="stylesheet">
-
+<link href="<c:url value="/resources/flag-icon/assets/docs.css"/>" rel="stylesheet">
+    <link href=" <c:url value="/resources/flag-icon/css/flag-icon.css"/>" rel="stylesheet">
 <!-- Custom Fonts -->
 <link href="<c:url value="/resources/font-awesome/css/font-awesome.min.css"/>" rel="stylesheet" type="text/css">
 <!-- jQuery -->
 <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+<script src="<c:url value="/resources/js/GlobalVariable.js"/>"></script>
+<script src="<c:url value="/resources/js/CountryManager.js"/>"></script>
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>

@@ -1,7 +1,7 @@
 <%-- 
     Document   : classified-manage
     Created on : Dec 21, 2016, 10:16:43 AM
-    Author     : Duncan
+    Author     : Duncan Ndiithi
 --%>
 
 <%@page contentType="text/html" pageEncoding="windows-1252"%>
@@ -18,7 +18,9 @@
         <script>
             $(function () {
                 $(".date").datepicker({
-                    dateFormat: "dd/mm/yy"
+                    dateFormat: "dd/mm/yy",
+                    changeYear: true,
+                    yearRange: "nn:+2"
                 });
             });
         </script>
@@ -159,11 +161,11 @@
                     </thead>
 
                     <tbody>
-        
+
                     </tbody>
 
                 </table>
-                
+
                 <div  id="page-nav" style="margin-left: auto;margin-right: auto;width: 30%" class="compact-theme"></div>
             </div>
 
@@ -211,7 +213,7 @@
                                         <i class="fa fa-asterisk expiryDate" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
                                     </label>
                                     <input id="expirydateDesc" class="form-control date" name="expiryDate" type="text" >
-                                     <span name="expiryDate_validation" class="error"></span>
+                                    <span name="expiryDate_validation" class="error"></span>
                                 </div>
 
                                 <div class="col-sm-12">
@@ -301,6 +303,6 @@
         </script>
         <script src="<c:url value="/resources/js/simplePagination.js"/>"></script>
 
-       
+
     </body>
 </html>

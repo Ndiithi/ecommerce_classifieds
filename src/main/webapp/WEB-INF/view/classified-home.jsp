@@ -1,7 +1,7 @@
 <%-- 
     Document   : Home
     Created on : Nov 30, 2016, 3:25:00 PM
-    Author     : Duncan
+    Author     : Duncan Ndiithi
 --%>
 
 <%@page contentType="text/html" pageEncoding="windows-1252"%>
@@ -11,9 +11,10 @@
     <head>
         <%@ include file="include/header.jsp" %>
         <link href="<c:url value="/resources/css/main.css"/>" rel="stylesheet" type="text/css">
+        <link href='//fonts.googleapis.com/css?family=Architects Daughter' rel='stylesheet'>
         <title>Classifieds Home</title>
-        
-       
+
+
     </head>
 
     <body>
@@ -77,97 +78,185 @@
             <!-- Marketing Icons Section -->
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">
+                    <h1 class="page-header text-center">
                         Welcome to Inmobia Classified
                     </h1>
                 </div>
-                <div class="col-md-3">
-                    <div class="panel panel-default">
-                        <div style="background-color: #39ac39;" class="panel-heading">  
-                            <!--#269abc;-->
-                            <h4><i class="fa fa-fw fa-building"></i> House For Sale</h4>
-                        </div>
-                        <div class="panel-body">
-                            <p>With inmobia classified, you can post that house that you need sold out as soon as possible, and we will do the rest. 
-                                You are guaranteed that your ad will reach a large base of clientele who will start ringing you soon. </p>
-                            <a href="classified-upload" class="btn btn-default">Learn More</a>
-                        </div>
+            </div>
+        </div>
+        <div style="width: 100%; background-color: #e0e0d1; padding-top: 20px;">
+            <div class="container">
+                <div class="row" style="padding-bottom: 20px;">
+                    <div class="col-sm-12 text-center">
+                        <h2 style="padding-bottom: 75px; font-size: 18px;">
+                            Post your add and we guarantee it will reach 
+                            a wide range of people that  subscribe to receive that precise item within minutes.
+                        </h2>
                     </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="panel panel-default">
-                        <div style="background-color: #269abc;"  class="panel-heading">
-                            <h4><i class="fa fa-fw fa-briefcase"></i>Job advert</h4>
-                        </div>
-                        <div  class="panel-body">
-                            <p>With inmobia classified, you can post that new position in your company that needs filling out, and we will do the rest. 
-                                You are guaranteed that your ad will reach a large base of clientele who will start ringing you soon. </p>
-                            <a href="classified-upload" class="btn btn-default">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="panel panel-default">
-                        <div style="background-color: #39ac39;" class="panel-heading">
-                            <h4><i class="fa fa-fw fa-home"></i> House for rent</h4>
-                        </div>
-                        <div class="panel-body">
-                            <p>With inmobia classified, you can post that vacant house that you need filled out, and we will do the rest. 
-                                You are guaranteed that your ad will reach a large base of clientele who will start ringing you soon. </p>
-                            <a href="classified-upload" class="btn btn-default">Learn More</a>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col-md-3">
-                    <div  class="panel panel-default">
-                        <div style="background-color: #269abc;" class="panel-heading">
-                            <h4><i class="fa fa-fw fa-money"></i> Buy and Sell</h4>
+
+                    <div class="col-sm-4 frame">
+                        <div class="text-center">
+                            <img style="margin: 0 auto;" src="<c:url value="/resources/img/housebed.jpg"/>" class="img-responsive img-circle" alt="">
+                            <h4 class="frame-header">House For Sale</h4>
+                            <p>With inmobia classified, you can post that house that you need sold out as soon as possible, and we will do the rest. 
+                                You are guaranteed that your ad will reach a large base of clientele, who anticipate exactly that and will start ringing you soon. </p>
+                            <a href="classified-upload" class="btn btn-default">Learn More</a>
                         </div>
-                        <div class="panel-body">
-                            <p>With inmobia classified, You can sell anything, just post it for free and we will do the rest. 
+                    </div>
+
+
+
+                    <div class="col-sm-4 frame">
+                        <div class="text-center">
+                            <img style="margin: 0 auto;" src="<c:url value="/resources/img/job-panel.jpg"/>" class="img-responsive img-circle" alt="">
+                            <h4 class="frame-header">Job advert</h4>
+                            <p>New office position that needs filling urgently? Easy, post that new position in your company here, this is the fastest way to reach 
+                                your target employee. 
+                                You can provide an email or phone number with which your potential employee will reach out to you. </p>
+                            <a href="classified-upload" class="btn btn-default">Learn More</a>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-sm-4 frame">
+                        <div class="text-center">
+                            <img style="margin: 0 auto;" src="<c:url value="/resources/img/rent-panel.jpg"/>" class="img-responsive img-circle" alt="">
+                            <h4 class="frame-header">House for rent</h4>
+                            <p>Have a house that needs new tenants? You're in the right place. Post details of the same, and we will do the rest. 
+                                We have a precise subscriber base that will get the information as soon as we have it on our system.
+                                It's robust as will only reach the people interested with this kind of information. </p>
+                            <a href="classified-upload" class="btn btn-default">Learn More</a>
+                        </div>
+                    </div>
+
+                            <div class="clearfix visible-lg"></div>
+                    <div class="col-sm-4 frame">
+                        <div class="text-center">
+                            <img style="margin: 0 auto;" src="<c:url value="/resources/img/buy-sell-panel.jpg"/>" class="img-responsive img-circle" alt="">
+                            <h4 class="frame-header">Buy and Sell</h4>
+                            <p>You can sell anything on this platform, just post it for free and we will ensure it reaches your target market. 
                                 You are guaranteed that your ad will reach a large base of clientele who will start ringing you soon. </p>
                             <a href="classified-upload" class="btn btn-default">Learn More</a>
                         </div>
                     </div>
+
+
+
                 </div>
             </div>
+        </div>
+        <div class="container">
             <!-- /.row -->
 
             <!-- Portfolio Section -->
             <div class="row">
                 <div class="col-lg-12">
-                    <h2 class="page-header">Sample Ads</h2>
+                    <h2 class="page-header text-center">Sample Ads</h2>
                 </div>
-                <div class="col-md-4 col-sm-6">
-                    <a href="portfolio-item.html">
-                        <img class="img-responsive img-portfolio img-hover"  src="<c:url value="/resources/img/ai.png"/>" alt="">
-                    </a>
+                <div class="col-md-4 col-sm-6 sampleAd">
+                    <div class="sampleAdDiv" >
+                        <img style="height: 80px; background-color: #ccccff" class="img-responsive pull-left img-circle" src="<c:url value="/resources/img/girl-office.png"/>" alt="">
+                        <p class='sampleAdText'>
+                            Description: 2 Ha Land on sale on a prime location in Mar suburb in a beautiful terrain.<br/>
+                            Price: 2M Rand.<br/>
+                            Location: Gale Town.<br/>
+                            Negotiable: Yes.<br/>
+                            Phone: +xx-xxx-xxx-xxx.<br/>
+                            Email: johndoe@kmail.com
+
+                        </p>
+
+                    </div>
                 </div>
-                <div class="col-md-4 col-sm-6">
-                    <a href="portfolio-item.html">
-                        <img class="img-responsive img-portfolio img-hover" src="<c:url value="/resources/img/ai.png"/>" alt="">
-                    </a>
+                <div class="col-md-4 col-sm-6 sampleAd">
+
+                    <div class="sampleAdDiv" >
+                        <img style="height: 80px; background-color: #ccccff" class="img-responsive pull-left img-circle" src="<c:url value="/resources/img/office.png"/>" alt="">
+                        <p class='sampleAdText'>
+                            Description: Spacious three bedroomed house along hills highway in a gated community.<br/>
+                            Rent: 700 USD.<br/>
+                            Location: Mave City.<br/>
+                            Negotiable: Yes.<br/>
+                            Phone: +xx-xxx-xxx-xxx.<br/>
+                            Email: johndoe@kmail.com
+
+                        </p>
+
+                    </div>
+
+
                 </div>
-                <div class="col-md-4 col-sm-6">
-                    <a href="portfolio-item.html">
-                        <img class="img-responsive img-portfolio img-hover" src="<c:url value="/resources/img/ai.png"/>" alt="">
-                    </a>
+                <div class="col-md-4 col-sm-6 sampleAd">
+
+                    <div class="sampleAdDiv" >
+                        <img style="height: 80px; background-color: #ccccff" class="img-responsive pull-left img-circle" src="<c:url value="/resources/img/man-spects.png"/>" alt="">
+                        <p class='sampleAdText'>
+                            Description: Located within bankers town, we have a two bedroomed house convinient for your family.<br/>
+                            Price: 100, 000 USD.<br/>
+                            Location: Towers City.<br/>
+                            Negotiable: Yes.<br/>
+                            Phone: +xx-xxx-xxx-xxx.<br/>
+                            Email: chrismat@kmail.com
+
+                        </p>
+
+                    </div>
+
                 </div>
-                <div class="col-md-4 col-sm-6">
-                    <a href="portfolio-item.html">
-                        <img class="img-responsive img-portfolio img-hover" src="<c:url value="/resources/img/ai.png"/>" alt="">
-                    </a>
+                <div class="col-md-4 col-sm-6 sampleAd">
+
+                    <div class="sampleAdDiv" >
+                        <img style="height: 80px; background-color: #ccccff" class="img-responsive pull-left img-circle" src="<c:url value="/resources/img/girl.svg"/>" alt="">
+                        <p class='sampleAdText'>
+                            Description: Chauffer needed immediately for a high end client. Please get in touch sooner.<br/>
+                            Salary: 1000 USD.<br/>
+                            Location: Nairobi City.<br/>
+                            Negotiable: Yes.<br/>
+                            Phone: +xx-xxx-xxx-xxx.<br/>
+                            Email: johndoe@kmail.com
+
+                        </p>
+
+                    </div>
+
                 </div>
-                <div class="col-md-4 col-sm-6">
-                    <a href="portfolio-item.html">
-                        <img class="img-responsive img-portfolio img-hover" src="<c:url value="/resources/img/ai.png"/>" alt="">
-                    </a>
+                <div class="col-md-4 col-sm-6 sampleAd">
+
+                    <div class="sampleAdDiv" >
+                        <img style="height: 80px; background-color: #ccccff" class="img-responsive pull-left img-circle" src="<c:url value="/resources/img/man-serious.png"/>" alt="">
+                        <p class='sampleAdText'>
+                            Description: 2 months old Renault Megane car on sale, in very good condition.<br/>
+                            Price: £ 17, 200.<br/>
+                            Location: Accra City.<br/>
+                            Negotiable: Yes.<br/>
+                            Phone: +xx-xxx-xxx-xxx.<br/>
+                            Email: johndoe@kmail.com
+
+                        </p>
+
+                    </div>
+
+
+
                 </div>
-                <div class="col-md-4 col-sm-6">
-                    <a href="portfolio-item.html">
-                        <img class="img-responsive img-portfolio img-hover" src="<c:url value="/resources/img/ai.png"/>" alt="">
-                    </a>
+                <div class="col-md-4 col-sm-6 sampleAd">
+
+                    <div class="sampleAdDiv" >
+                        <img style="height: 80px; background-color: #ccccff" class="img-responsive pull-left img-circle" src="<c:url value="/resources/img/uptown.png"/>" alt="">
+                        <p class='sampleAdText'>
+                            Description: Brand new 72" Plasma TV on sale at a convinient price. Contact me asap.<br/>
+                            Price: 7000 Rand.<br/>
+                            Location: Johannesburg Town.<br/>
+                            Negotiable: Yes.<br/>
+                            Phone: +xx-xxx-xxx-xxx.<br/>
+                            Email: johndoe@kmail.com
+
+                        </p>
+
+                    </div>
+
                 </div>
             </div>
         </div>
