@@ -151,8 +151,10 @@
                     <thead>
                         <tr>
                             <th>Category</th>
+                            <th>Sub-category</th>
                             <th>Description</th>
                             <th>Location</th>
+                            <th>Price</th>
                             <th>Expiry Date</th>
                             <th>Email</th>
                             <th>Negotiable</th>
@@ -200,12 +202,50 @@
                                     <span name="shortDescription_validation" class="error"></span>
                                 </div>
 
+
+                                <div class="col-sm-6">
+                                    <label for="subCategoryDesc">Category:
+                                        <i class="fa fa-asterisk sub-category" style="color: #FF0000;visibility: hidden" aria-hidden="true"></i>
+                                    </label>
+                                    <select id="subCategoryDesc" class="form-control" name="sub-category" class="form-control">
+
+                                    </select>
+
+
+                                    <span name="sub-category_validation" class="error"></span>
+                                </div>
+
                                 <div class="col-sm-6">
                                     <label for="locationDesc">Location:
                                         <i class="fa fa-asterisk location" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
                                     </label>
-                                    <input id="locationDesc" class="form-control locat" name="location" type="text" >
+                                    <select id="locationDesc" class="form-control locat" name="location" class="form-control" >
+
+                                    </select>
+
+                                    
                                     <span name="location_validation" class="error"></span>
+                                </div>
+
+
+                                <div class="col-sm-6">
+                                    <label for="priceDesc">Price:
+                                        <i class="fa fa-asterisk price" style="color: #FF0000; " aria-hidden="true"></i>
+                                    </label>
+                                    <div class="input-group">
+                                        <div class="input-group-btn">
+                                            <button type="button" class="btn btn-default dropdown-toggle currency-symbol" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">USD</button>
+                                            <ul class="dropdown-menu">
+                                                <li onclick="currencyManager('usd')"><a href="#">USD</a></li>
+                                                <li onclick="currencyManager('ke')"><a href="#">KSH</a></li>
+                                                <li onclick="currencyManager('zm')"><a href="#">ZMW</a></li>
+
+                                            </ul>
+                                        </div><!-- /btn-group -->
+                                        <input id="priceDesc" name="price" type="text" class="form-control" aria-label="...">
+
+                                    </div>
+                                    <span name="price_validation" class="error"></span>
                                 </div>
 
                                 <div class="col-sm-6">
@@ -295,11 +335,11 @@
         <%@ include file="include/weblink.jsp" %>
         <script src="<c:url value="/resources/js/contentmanager.js"/>"></script>
         <script>
-            //script to show and hide image on ajax requests.
-            $(".showProgress").hide();
-            $(".generalMessage").hide();
-            $("p.showEditProgress").hide();
-            $("p.showDeleteProgress").hide();
+                                                    //script to show and hide image on ajax requests.
+                                                    $(".showProgress").hide();
+                                                    $(".generalMessage").hide();
+                                                    $("p.showEditProgress").hide();
+                                                    $("p.showDeleteProgress").hide();
         </script>
         <script src="<c:url value="/resources/js/simplePagination.js"/>"></script>
 

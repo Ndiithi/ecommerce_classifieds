@@ -3,10 +3,13 @@ package com.inmobia.classified.controller;
 import com.inmobia.classified.ErrorMessage;
 import com.inmobia.classified.IMessage;
 import com.inmobia.classified.Message;
-import static com.inmobia.classified.controller.ClassifiedFormHandler.logger;
+import com.inmobia.classified.dao.ContentCategorySubtypeDao;
 import com.inmobia.classified.dao.ContentDao;
 import com.inmobia.classified.dto.Content;
+import com.inmobia.classified.dto.ContentCategorySubtype;
 import com.inmobia.classified.security.WebDataSanitizer;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
@@ -29,13 +32,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author Duncan
  */
 @Controller
-public class ClassifiedManagerController {
-
+public class ContentManagerController {
+    
     @Autowired
     WebDataSanitizer webSanitizer;
     @Autowired
+    ContentCategorySubtypeDao contentCategorySubtypeDao;
+    @Autowired
     ContentDao contentDao;
-    Logger logger = Logger.getLogger(ClassifiedManagerController.class.getName());
+    Logger logger = Logger.getLogger(ContentManagerController.class.getName());
 
     @ResponseBody
     @RequestMapping(value = "/getAllContentByMsisdn", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -105,4 +110,56 @@ public class ClassifiedManagerController {
         }
 
     }
+    
+     @ResponseBody
+    @RequestMapping(value = "/process-content", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> saveContent(@Valid @RequestBody Content content, BindingResult result) {
+
+        if (result.hasErrors()) {
+
+            logger.error("Validation failed for submitted content");
+            List<ErrorMessage> errorMessages = new ArrayList();
+            ErrorMessage errMsg = null;
+
+            for (FieldError fieldError : result.getFieldErrors()) {
+                logger.error(fieldError.getDefaultMessage());
+                errMsg = new ErrorMessage();
+                errMsg.setId(fieldError.getField());
+                errMsg.setMessage(fieldError.getDefaultMessage());
+
+                errorMessages.add(errMsg);
+
+            }
+
+            return new ResponseEntity<List>(errorMessages, HttpStatus.BAD_REQUEST);
+        }
+
+        Content sanitize = (Content) webSanitizer.sanitize(content);
+        
+        try {
+            contentDao.saveContent(sanitize);
+        } catch (SQLException ex) {
+            logger.error(ex.getMessage());
+        }
+
+        Timestamp date = null;
+
+        logger.info("worked right");
+        IMessage message = new Message();
+        message.setMessage("Submitted successfully");
+
+        return new ResponseEntity<IMessage>(message, HttpStatus.OK);
+    }
+    
+     @ResponseBody
+    @RequestMapping(value = "/getAllContentCategorySubType", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List> getAllContentCategorySubType() {
+        
+            List<ContentCategorySubtype> ContentCategorySubTypeList=contentCategorySubtypeDao.getAllContentCategorySubtype();
+            return new ResponseEntity<List>(ContentCategorySubTypeList, HttpStatus.OK);
+        
+
+    }
+    
+    
 }

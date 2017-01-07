@@ -23,6 +23,8 @@ $("form").submit(function (event) {
     var location = $("#" + elementId + " div div [name='location']").val();
     var email = $("#" + elementId + " div div [name='email']").val();
     var expiryDate = $("#" + elementId + " div div [name='expiryDate']").val();
+    var price = $("#" + elementId + " div div div [name='price']").val();
+        var sub_category = $("#" + elementId + " div div [name='sub-category']").val();
 
     if ($("#" + event.target.id + " div div div label input[name='isNegotiable']").is(":checked"))
     {
@@ -30,7 +32,9 @@ $("form").submit(function (event) {
     }
 
     var formData = {
-        "content_category":resolveContentCategory(elementId),
+        "price":price,
+        "sub_category": sub_category,
+        "content_category": resolveContentCategory(elementId),
         "shortDescription": shortDescription,
         "location": location,
         "phone": phone,
@@ -109,6 +113,9 @@ $("form").submit(function (event) {
         $('#' + elementId + ' div div label i.shortDescription').css('visibility', 'hidden');
         $('#' + elementId + ' div div label i.phone').css('visibility', 'hidden');
         $('#' + elementId + ' div div label i.expiryDate').css('visibility', 'hidden');
+        $('#' + elementId + ' div div label i.sub_category').css('visibility', 'hidden');
+        $('#' + elementId + ' div div label i.price').css('visibility', 'hidden');
+      
 
         $("#" + elementId + " div div [name='expiryDate_validation']").text("");
         $("#" + elementId + " div div [name='shortDescription_validation']").text("");
@@ -134,13 +141,13 @@ $("form").submit(function (event) {
     function resolveContentCategory(categoryId) {
         var categoryName;
 
-        if (categoryId==="houseforsaleF")
+        if (categoryId === "houseforsaleF")
             categoryName = contentCategory[0];
-        if (categoryId==="jobsadF")
+        if (categoryId === "jobsadF")
             categoryName = contentCategory[1];
-        if (categoryId==="houseforrentF")
+        if (categoryId === "houseforrentF")
             categoryName = contentCategory[2];
-        if (categoryId==="buyandsellF")
+        if (categoryId === "buyandsellF")
             categoryName = contentCategory[3];
         return categoryName;
     }
@@ -151,11 +158,15 @@ $("form").submit(function (event) {
         var phone = $("#" + elementId + " div div [name='phone']");
         var location = $("#" + elementId + " div div [name='location']");
         var email = $("#" + elementId + " div div [name='email']");
+        var price = $("#" + elementId + " div div div [name='price']");
+        var sub_category = $("#" + elementId + " div div [name='sub-category']");
 
         var shortDescription_validation = $("#" + elementId + " div div [name='shortDescription_validation']");
         var phone_validation = $("#" + elementId + " div div [name='phone_validation']");
         var location_validation = $("#" + elementId + " div div [name='location_validation']");
         var email_validation = $("#" + elementId + " div div [name='email_validation']");
+        var price_validation = $("#" + elementId + " div div div [name='price_validation']");
+        var sub_category_validation = $("#" + elementId + " div div [name='sub_category_validation']");
         var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
 
@@ -166,6 +177,15 @@ $("form").submit(function (event) {
 
             $('#' + elementId + ' div div label i.location').css('visibility', 'hidden');
             location_validation.text("");
+        }
+
+        if (sub_category.val().trim().length === 0) {
+            valid = 0;
+            sub_category_validation.text("Category field Required");
+        } else {
+
+            $('#' + elementId + ' div div label i.sub_category').css('visibility', 'hidden');
+            sub_category_validation.text("");
         }
 
         if (email.val().trim().length !== 0 && !filter.test(email.val())) {
@@ -201,17 +221,36 @@ $("form").submit(function (event) {
             phone_validation.text("Phone field Required");
 
         } else {
+
             if ($.isNumeric(phone.val())) {
                 $('#' + elementId + ' div div label i.phone').css('visibility', 'hidden');
                 phone_validation.text("");
             } else {
                 valid = 0;
                 phone_validation.text("Please enter a valid phone number");
-            }
 
+            }
+        }
+    
+
+
+    if (price.val().trim().length === 0) {
+        valid = 0;
+        price_validation.text("Price field Required");
+
+    } else {
+        if ($.isNumeric(price.val())) {
+            $('#' + elementId + ' div div label i.phone').css('visibility', 'hidden');
+            price_validation.text("");
+        } else {
+            valid = 0;
+            price_validation.text("Please enter a valid price");
         }
 
     }
+
+
+}
 
 
 });

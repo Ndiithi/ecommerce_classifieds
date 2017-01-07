@@ -106,7 +106,7 @@
                             <span class="fa-stack fa-1x">
                                 <i class="fa fa-circle fa-stack-2x text-primary"></i>
                                 <i class="fa fa-home fa-stack-1x fa-inverse"></i>
-                                
+
                             </span>
                         </div>
                         <div class="panel-body">
@@ -122,7 +122,7 @@
                             <span class="fa-stack fa-1x">
                                 <i class="fa fa-circle fa-stack-2x text-primary"></i>
                                 <i class="fa fa-money fa-stack-1x fa-inverse"></i>
-                               
+
                             </span>
                         </div>
                         <div class="panel-body">
@@ -178,35 +178,82 @@
                                     <textarea value="dhdh"  id="houseforsale" class="form-control descript" rows="6" name="shortDescription"></textarea>
                                     <span name="shortDescription_validation" class="error"></span>
                                 </div>
-                                <div class="col-sm-6 row">
-                                    <div class="col-sm-6">
-                                        <label for="houselocation">Location:
-                                            <i class="fa fa-asterisk location" style="color: #FF0000;" aria-hidden="true"></i>
-                                        </label>
-                                        <input id="houselocation" class="form-control locat" type="text" name="location">
-                                        <span name="location_validation" class="error"></span>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label for="housephone">Phone:
-                                            <i class="fa fa-asterisk phone" style="color: #FF0000;" aria-hidden="true"></i>
-                                        </label>
-                                        <input id="housephone" class="form-control" type="text" name="phone">
-                                        <span name="phone_validation" class="error"></span>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <label for="expirydate">Expiry Date:
-                                            <i class="fa fa-asterisk expiryDate" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
-                                        </label>
-                                        <input id="expirydate" class="form-control expirydate" type="text" name="expiryDate">
-                                        <span name="expiryDate_validation" class="error"></span>
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label for="houselocation">Location:
+                                                <i class="fa fa-asterisk location" style="color: #FF0000;visibility: hidden"  aria-hidden="true"></i>
+                                            </label>
+                                            <select id="houselocation" class="form-control locat" name="location" class="form-control" >
+
+                                            </select>
+
+
+                                            <span name="location_validation" class="error"></span>
+                                        </div>
+
+
+                                        <div class="col-sm-6">
+                                            <label for="houseSaleCategory">Category:
+                                                <i class="fa fa-asterisk sub-category" style="color: #FF0000;visibility: hidden" aria-hidden="true"></i>
+                                            </label>
+                                            <select id="houseSaleCategory" class="form-control" name="sub-category" class="form-control">
+
+                                            </select>
+
+
+                                            <span name="sub-category_validation" class="error"></span>
+                                        </div>
+
                                     </div>
 
-                                    <div class="col-sm-12">
-                                        <label for="housesaleemail">Email:
-                                            <i class="fa fa-asterisk email" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
-                                        </label>
-                                        <input id="housesaleemail" class="form-control" type="text" name="email">
-                                        <span name="email_validation" class="error"></span>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label for="housephone">Phone:
+                                                <i class="fa fa-asterisk phone" style="color: #FF0000; visibility: visible" aria-hidden="true"></i>
+                                            </label>
+                                            <input id="housephone" class="form-control" type="text" name="phone">
+                                            <span name="phone_validation" class="error"></span>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <label for="housesaleprice">Price:
+                                                <i class="fa fa-asterisk price" style="color: #FF0000; " aria-hidden="true"></i>
+                                            </label>
+                                            <div class="input-group">
+                                                <div class="input-group-btn">
+                                                    <button type="button" class="btn btn-default dropdown-toggle currency-symbol" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">USD</button>
+                                                    <ul class="dropdown-menu">
+                                                        <li onclick="currencyManager('usd')"><a href="#">USD</a></li>
+                                                        <li onclick="currencyManager('ke')"><a href="#">KSH</a></li>
+                                                        <li onclick="currencyManager('zm')"><a href="#">ZMW</a></li>
+
+                                                    </ul>
+                                                </div><!-- /btn-group -->
+                                                <input id="housesaleprice" name="price" type="text" class="form-control" aria-label="...">
+
+                                            </div>
+                                            <span name="price_validation" class="error"></span>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label for="expirydate">Expiry Date:
+                                                <i class="fa fa-asterisk expiryDate" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+                                            </label>
+                                            <input id="expirydate" class="form-control expirydate" type="text" name="expiryDate">
+                                            <span name="expiryDate_validation" class="error"></span>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <label for="housesaleemail">Email:
+                                                <i class="fa fa-asterisk email" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
+                                            </label>
+                                            <input id="housesaleemail" class="form-control" type="text" name="email">
+                                            <span name="email_validation" class="error"></span>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -281,7 +328,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="jobphone">Phone:
-                                            <i class="fa fa-asterisk phone" style="color: #FF0000;" aria-hidden="true"></i>
+                                            <i class="fa fa-asterisk phone" style="color: #FF0000; " aria-hidden="true"></i>
                                         </label>
                                         <input id="jobphone" class="form-control" name="phone" type="text">
                                         <span name="phone_validation" class="error"></span>
@@ -558,25 +605,28 @@
 
             <hr>
         </div>
-            <!-- Footer -->
-            <%@ include file="include/footer.jsp" %>
-            <script src="<c:url value="/resources/js/contentuploader.js"/>"></script>
+        <!-- Footer -->
+        <%@ include file="include/footer.jsp" %>
+        <script src="<c:url value="/resources/js/contentuploader.js"/>"></script>
 
 
-            <script>
-            //script to show and hide image on ajax requests.
-            $(".showProgress").hide();
+        <script>
+                                                            //script to show and hide image on ajax requests.
+                                                            $(".showProgress").hide();
+                                                            $(document).ajaxStart(function () {
 
-            $(document).ajaxStart(function () {
+                                                                $(".showProgress").show();
+                                                            });
+                                                            $(document).ajaxComplete(function () {
+                                                                $(".showProgress").hide();
+                                                            });
 
-                $(".showProgress").show();
-            });
 
-            $(document).ajaxComplete(function () {
-                $(".showProgress").hide();
-            });
+                                                            populateContentCategorySubtypeList();
 
-            </script>
+
+
+        </script>
 
     </body>
 

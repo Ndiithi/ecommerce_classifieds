@@ -1,8 +1,7 @@
 package com.inmobia.classified.dto;
 
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import com.inmobia.classified.ISanitizable;
 import com.inmobia.classified.annotation.validator.DateVal;
 import com.inmobia.classified.annotation.validator.EMailVal;
@@ -12,7 +11,7 @@ import com.inmobia.classified.annotation.validator.StringVal;
 
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -27,8 +26,15 @@ public class Content implements ISanitizable{
     @Length(min=14, max = 300,message = "The Description length should be between 14 and 300")
     private String shortDescription;
     
-    @NotNull(message = "Content Category Cannot be null")
+    @NotNull(message = "Content Category Cannot be empty")
     private String content_category;
+    
+    @NotEmpty(message = "Content Sub Category Cannot be empty")
+    private String sub_category;
+    
+    @IntegerVal(message ="Please fill a valid amount")
+    @NotNull(message = "Please include an amount")
+    private String price;
     
     @NotEmpty(message ="{NotEmpty.location}")
     private String location;
@@ -111,7 +117,27 @@ public class Content implements ISanitizable{
         this.content_category = content_category;
     }
 
+    public String getSub_category() {
+        return sub_category;
+    }
+
+    public void setSub_category(String sub_category) {
+        this.sub_category = sub_category;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
    
+
+   
+
+    
     
     
 }

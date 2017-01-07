@@ -22,14 +22,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class ContentDao {
 
     @Autowired
-    MsisdnDao msisdnDto;
+    MsisdnDao msisdnDao;
     @Autowired 
     ContentCategoryDao contentCategoryDao;
+    @Autowired 
+    ContentCategorySubtypeDao contentCategorySubtypeDao;
     
     Logger logger = Logger.getLogger(ContentDao.class.getName());
     private String saveContentSql = "insert into "
-            + "inmobiaclassified.content(content_category_id,short_description,location,msisdn_id,expiry_date,email,negotiable) "
-            + "values(?,?,?,?,?,?,?)";
+            + "inmobiaclassified.content(content_category_id,short_description,location,msisdn_id,expiry_date,email,negotiable,sub_category,price) "
+            + "values(?,?,?,?,?,?,?,?,?)";
 
     private String getAllContentByMsisdn = "Select * from inmobiaclassified.content where msisdn_id=?";
 //    private String updateContentByIdSql = "Update inmobiaclassified.content set "
@@ -37,7 +39,7 @@ public class ContentDao {
 //            + "where contentid=?";
 
     private String updateContentByIdSql = "Update inmobiaclassified.content set "
-            + "short_description=?,location=?,msisdn_id=?,expiry_date=?,email=?,negotiable=? "
+            + "short_description=?,location=?,msisdn_id=?,expiry_date=?,email=?,negotiable=?,sub_category=?,price=? "
             + "where contentid=?";
     
     private String deleteContentByIdSql = "delete from inmobiaclassified.content where contentid=?";
@@ -49,7 +51,7 @@ public class ContentDao {
             PreparedStatement pst = con.prepareStatement(saveContentSql);
 
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            int msisdnId = msisdnDto.getMsisdnIdByNumber(content.getPhone());
+            int msisdnId = msisdnDao.getMsisdnIdByNumber(content.getPhone());
             int contentCategory = contentCategoryDao.getContentCategoryByName(content.getContent_category());
             pst.setInt(1, contentCategory);
             pst.setString(2, content.getShortDescription());
@@ -70,7 +72,9 @@ public class ContentDao {
             pst.setDate(5, expiryDateToSave);
             pst.setString(6, content.getEmail());
             pst.setInt(7, content.getIsNegotiable());
-            
+            int subCatID=contentCategorySubtypeDao.getContentCategorySubtypeByName(content.getSub_category(),contentCategory);
+            pst.setInt(8, subCatID);
+            pst.setString(9, content.getPrice());
             int execStatus = pst.executeUpdate();
             if (execStatus == 1) {
                 return true;
@@ -97,7 +101,7 @@ public class ContentDao {
             con = DatabaseSource.getDatabaseConnection();
             logger.debug("Db connection made");
             pst = con.prepareStatement(getAllContentByMsisdn);
-            int msisdnId = msisdnDto.getMsisdnIdByNumber(msisdn);
+            int msisdnId = msisdnDao.getMsisdnIdByNumber(msisdn);
             pst.setInt(1, msisdnId);
             ResultSet rs = pst.executeQuery();
             contentList = new ArrayList();
@@ -118,6 +122,10 @@ public class ContentDao {
                     content.setExpiryDate("");
                 }
                 content.setIsNegotiable(rs.getInt("negotiable"));
+                int price=rs.getInt("price");
+                content.setPrice(Integer.toString(price));
+                String subCatName=contentCategorySubtypeDao.getContentCategorySubtypeById(rs.getInt("sub_category"));
+                content.setSub_category(subCatName);
                 content.setLocation(rs.getString("location"));
                 content.setShortDescription(rs.getString("short_description"));
                 contentList.add(content);
@@ -143,7 +151,7 @@ public class ContentDao {
         PreparedStatement pst = null;
         try {
             con = DatabaseSource.getDatabaseConnection();
-            int msisdnId = msisdnDto.getMsisdnIdByNumber(content.getPhone());
+            int msisdnId = msisdnDao.getMsisdnIdByNumber(content.getPhone());
             pst = con.prepareStatement(updateContentByIdSql);
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             
@@ -165,11 +173,24 @@ public class ContentDao {
             pst.setDate(4, expiryDateToSave);
             pst.setString(5, content.getEmail());
             pst.setInt(6, content.getIsNegotiable());
-            pst.setInt(7, contentId);
+            
+            
+            logger.info("the con cat: "+contentId);
+            
+            int contentCategory = contentCategoryDao.getContentCategoryByName(content.getContent_category());
+            logger.info("the con cat: "+contentCategory);
+            
+            int subCatID=contentCategorySubtypeDao.getContentCategorySubtypeByName(content.getSub_category(),contentCategory);
+            logger.info("the con cat: "+subCatID);
+            pst.setInt(7, subCatID);
+            pst.setString(8, content.getPrice());
+            pst.setInt(9, contentId);
             int execStatus = pst.executeUpdate();
             if (execStatus == 1) {
+                logger.info("the con cat: works");
                 return true;
             } else {
+                logger.info("the con cat: dint work");
                 return false;
             }
         } catch (SQLException ex) {

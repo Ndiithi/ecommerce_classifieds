@@ -5,7 +5,7 @@ $(document).ready(function () {
     var contentId;
     var idd; //the index of selected content from table;
     var contentCategory = ['house_for_sale', 'jobs_ad', 'house_for_rent', 'buy_and_sell'];
-    
+
     //enable cacheing of fetched resources
     $.ajaxSetup({
         cache: true
@@ -14,33 +14,37 @@ $(document).ready(function () {
 
     /*form submission for edited content*/
     $("button#submitEditedContent").click(function (event) {
-        valid=1;
+        valid = 1;
         console.log("submit event started");
         clearValidationMarkers();
         console.log("submit event started 2");
         validateForm();
         console.log("submit event started 3");
-        console.log("Valid status: "+ valid);
+        console.log("Valid status: " + valid);
         if (valid !== 1)
             return 1;
-        
-        
-        var modelObj=modelData[idd];
-        var content_category=modelObj.content_category;
+
+
+        var modelObj = modelData[idd];
+        var content_category = modelObj.content_category;
         var phone;
         var isNegotiable = 0;
         var shortDescription = $("div [name='shortDescription']").val();
         var location = $("div [name='location']").val();
         var email = $("div [name='email']").val();
         var expiryDate = $("div [name='expiryDate']").val();
-
+        var price = $("div div [name='price']").val();
+        var sub_category = $("div [name='sub-category']").val();
+        
         if ($("label input[name='isNegotiable']").is(":checked"))
         {
             isNegotiable = 1;
         }
 
         var formData = {
-            "content_category":content_category,
+            "price":price,
+            "sub_category":sub_category,
+            "content_category": content_category,
             "contentId": contentId,
             "shortDescription": shortDescription,
             "location": location,
@@ -63,7 +67,7 @@ $(document).ready(function () {
             dataType: 'json', // what type of data do we expect back from the server
             encode: true,
             success: function (data, textStatus, jqXHR) {
-                 console.log("submit Successfully");
+                console.log("submit Successfully");
                 $("div#contentModal").modal('hide');
                 $("div .alert").addClass("alert-success");
                 $("p.messageFeedback").text("Updated successfully");
@@ -173,7 +177,7 @@ $(document).ready(function () {
             $("p.generalMessage").hide();
         }
         $("p.showProgress").show();  //show progress icon
-        
+
         $.ajax({
             type: 'GET', // define the type of HTTP verb we want to use (POST for our form)
             url: 'getAllContentByMsisdn?msisdn=' + msisdn + '', // the url where we want to POST
@@ -210,11 +214,15 @@ $(document).ready(function () {
             console.log("the id of selected model: " + idd);
             var selectedContentModel = modelData[idd];
             contentId = selectedContentModel.contentId;
-            console.log("the content id: " + contentId);
+            
+            populateContentCategorySubtypeList();
+            populateLocationList();
             $("#contentDesc").val(selectedContentModel.shortDescription);
             $("#locationDesc").val(selectedContentModel.location);
             $("#expirydateDesc").val(selectedContentModel.expiryDate);
             $("#emailDesc").val(selectedContentModel.email);
+            $("#priceDesc").val(selectedContentModel.price);
+            $("#subCategoryDesc").val(selectedContentModel.sub_category);
             if (selectedContentModel.isNegotiable === 1)
                 classnegotiable = true;
             $('#negotiableCheckbox').prop('checked', classnegotiable);
@@ -251,10 +259,12 @@ $(document).ready(function () {
             if (content.isNegotiable === 1)
                 classnegotiable = "yes";
             var trHTML;
-            var shrtDescription=content.shortDescription.substring(0,40);
+            var shrtDescription = content.shortDescription.substring(0, 40);
             trHTML += '<tr class="paginate"><td>' + content.content_category + '</td>'
+                    + '<td>' + content.sub_category + '</td>'
                     + '<td>' + shrtDescription + '</td>'
                     + '<td>' + content.location + '</td>'
+                    + '<td>' + content.price + '</td>'
                     + '<td>' + content.expiryDate + '</td>'
                     + '<td>' + content.email + '</td>'
                     + '<td>' + classnegotiable + '</td>'
@@ -327,7 +337,7 @@ $(document).ready(function () {
                 valid = 0;
                 shortDescription_validation.text("The Description length should be between 14 and 300");
             } else {
-                
+
                 $('label i.shortDescription').css('visibility', 'hidden');
                 shortDescription_validation.text("");
 
