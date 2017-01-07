@@ -39,7 +39,20 @@
         
     </bean>
     
+    <bean id="countrydao" class="com.inmobia.classified.dao.CountryDao" autowire="byName">  
+        
+    </bean>
+    
+      
+    <bean id="locationdao" class="com.inmobia.classified.dao.LocationDao" autowire="byName">  
+        
+    </bean>
+    
     <bean id="contentdao" class="com.inmobia.classified.dao.ContentDao" autowire="byName">  
+        
+    </bean>
+    
+    <bean id="contentcategorysubtypedao" class="com.inmobia.classified.dao.ContentCategorySubtypeDao" autowire="byName">  
         
     </bean>
     

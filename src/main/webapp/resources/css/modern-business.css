@@ -29,6 +29,14 @@ header.carousel {
     height: 50%;
 }
 
+@media (min-width: 768px ){
+    header.carousel {
+    height: 60%;
+}
+}
+
+
+
 header.carousel .item,
 header.carousel .item.active,
 header.carousel .carousel-inner {
@@ -40,6 +48,7 @@ header.carousel .fill {
     height: 100%;
     background-position: center;
     background-size: cover;
+    background-repeat: no-repeat;
 }
 
 /* 404 Page Styles */

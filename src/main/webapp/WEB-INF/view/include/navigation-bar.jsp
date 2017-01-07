@@ -15,6 +15,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" style=" padding-top: 2px;"  href="classified-home"><img  src="<c:url value="/resources/img/inmobia-logo.png"/>" alt="Inmobia"></a>
+           
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="position: relative">

@@ -26,7 +26,7 @@
 <!-- jQuery -->
 <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <script src="<c:url value="/resources/js/GlobalVariable.js"/>"></script>
-<script src="<c:url value="/resources/js/CountryManager.js"/>"></script>
+<script src="<c:url value="/resources/js/ContentUtil.js"/>"></script>
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>

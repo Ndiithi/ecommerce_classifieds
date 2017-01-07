@@ -19,16 +19,16 @@ a.foot{
 }
 
 .sampleAd{
-   
+
     padding-left: 0px;
     padding-right: 0px;
-    
-    
+
+
     /*margin: 3px;*/
 }
 
 .sampleAdDiv{
-     background-image: url("../img/backg.jpg");
+    background-image: url("../img/backg.jpg");
     border: 1px solid #66ff33;
     padding: 2px;
     margin: 3px;
@@ -69,13 +69,13 @@ div#wearenight{
     height: 200px;
     background: url("../img/housebed.jpg") no-repeat center center;
     -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 .frame{
- margin-bottom: 15px;   
+    margin-bottom: 15px;   
 }
 
 .frame-header{
@@ -83,5 +83,29 @@ div#wearenight{
 }
 
 .footer-list{
- display: inline;  
+    display: inline;  
+}
+
+@font-face {
+    font-family: "CaslonTwoTwentyFour";
+    src: url("../font/CaslonTwoTwentyFour.ttf") format("truetype");
+}
+h2.banner-tag { 
+    font-family: "CaslonTwoTwentyFour", Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+    font-size: 51px;
+}
+
+@media only screen and (max-width: 992px) {
+    h2.banner-tag { 
+    font-size: 40px;
+}}
+
+@media only screen and (max-width: 768px) {
+    h2.banner-tag { 
+    font-size: 30px;
+}
+
+
+
 }

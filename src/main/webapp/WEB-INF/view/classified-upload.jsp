@@ -17,12 +17,12 @@
         <link href="<c:url value="/resources/css/main.css"/>" rel="stylesheet" type="text/css">
         <script>
             $(function () {
-                $(".expirydate").datepicker({
-                    dateFormat: "dd/mm/yy",
+            $(".expirydate").datepicker({
+            dateFormat: "dd/mm/yy",
                     changeYear: true,
                     yearRange: "nn:+2"
 
-                });
+            });
             });
         </script>
     </head>
@@ -106,7 +106,7 @@
                             <span class="fa-stack fa-1x">
                                 <i class="fa fa-circle fa-stack-2x text-primary"></i>
                                 <i class="fa fa-home fa-stack-1x fa-inverse"></i>
-                                
+
                             </span>
                         </div>
                         <div class="panel-body">
@@ -122,7 +122,7 @@
                             <span class="fa-stack fa-1x">
                                 <i class="fa fa-circle fa-stack-2x text-primary"></i>
                                 <i class="fa fa-money fa-stack-1x fa-inverse"></i>
-                               
+
                             </span>
                         </div>
                         <div class="panel-body">
@@ -183,9 +183,27 @@
                                         <label for="houselocation">Location:
                                             <i class="fa fa-asterisk location" style="color: #FF0000;" aria-hidden="true"></i>
                                         </label>
-                                        <input id="houselocation" class="form-control locat" type="text" name="location">
+                                        <select id="houselocation" class="form-control locat" name="location" class="form-control" >
+
+                                        </select>
+
+
                                         <span name="location_validation" class="error"></span>
                                     </div>
+
+
+                                    <div class="col-sm-6">
+                                        <label for="houseSaleCategory">Category:
+                                            <i class="fa fa-asterisk location" style="color: #FF0000;" aria-hidden="true"></i>
+                                        </label>
+                                        <select id="houseSaleCategory" class="form-control locat" name="sub-category" class="form-control">
+
+                                        </select>
+
+
+                                        <span name="sub-category_validation" class="error"></span>
+                                    </div>
+
                                     <div class="col-sm-6">
                                         <label for="housephone">Phone:
                                             <i class="fa fa-asterisk phone" style="color: #FF0000;" aria-hidden="true"></i>
@@ -193,7 +211,7 @@
                                         <input id="housephone" class="form-control" type="text" name="phone">
                                         <span name="phone_validation" class="error"></span>
                                     </div>
-                                    <div class="col-sm-12">
+                                    <div class="col-sm-6">
                                         <label for="expirydate">Expiry Date:
                                             <i class="fa fa-asterisk expiryDate" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
                                         </label>
@@ -201,7 +219,30 @@
                                         <span name="expiryDate_validation" class="error"></span>
                                     </div>
 
-                                    <div class="col-sm-12">
+                                    <div class="col-sm-6">
+                                        <label for="housesaleemail">Price:
+                                            <i class="fa fa-asterisk email" style="color: #FF0000; " aria-hidden="true"></i>
+                                        </label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-btn">
+                                                <button type="button" class="btn btn-default dropdown-toggle currency-symbol" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">USD</button>
+                                                <ul class="dropdown-menu">
+                                                    <li onclick="currencyManager('usd')"><a href="#">USD</a></li>
+                                                    <li onclick="currencyManager('ke')"><a href="#">KSH</a></li>
+                                                    <li onclick="currencyManager('zm')"><a href="#">ZMW</a></li>
+
+                                                </ul>
+                                            </div><!-- /btn-group -->
+                                            <input style="margin: 1px" type="text" class="form-control" aria-label="...">
+                                        </div>
+
+
+                                        <!--<input id="houseprice" class="form-control" type="text" name="price">-->
+                                        <span name="price_validation" class="error"></span>
+                                    </div>
+
+                                    <div class="col-sm-6">
                                         <label for="housesaleemail">Email:
                                             <i class="fa fa-asterisk email" style="color: #FF0000; visibility: hidden" aria-hidden="true"></i>
                                         </label>
@@ -558,25 +599,28 @@
 
             <hr>
         </div>
-            <!-- Footer -->
-            <%@ include file="include/footer.jsp" %>
-            <script src="<c:url value="/resources/js/contentuploader.js"/>"></script>
+        <!-- Footer -->
+        <%@ include file="include/footer.jsp" %>
+        <script src="<c:url value="/resources/js/contentuploader.js"/>"></script>
 
 
-            <script>
-            //script to show and hide image on ajax requests.
-            $(".showProgress").hide();
+        <script>
+                                                        //script to show and hide image on ajax requests.
+                                                        $(".showProgress").hide();
+                                                        $(document).ajaxStart(function () {
 
-            $(document).ajaxStart(function () {
+                                                        $(".showProgress").show();
+                                                        });
+                                                        $(document).ajaxComplete(function () {
+                                                        $(".showProgress").hide();
+                                                        });
+                                                        
+                                                      
+  populateContentCategorySubtypeList();
+                                                       
+                                                       
 
-                $(".showProgress").show();
-            });
-
-            $(document).ajaxComplete(function () {
-                $(".showProgress").hide();
-            });
-
-            </script>
+        </script>
 
     </body>
 

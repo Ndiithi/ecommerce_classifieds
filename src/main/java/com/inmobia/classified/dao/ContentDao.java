@@ -22,7 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class ContentDao {
 
     @Autowired
-    MsisdnDao msisdnDto;
+    MsisdnDao msisdnDao;
     @Autowired 
     ContentCategoryDao contentCategoryDao;
     
@@ -49,7 +49,7 @@ public class ContentDao {
             PreparedStatement pst = con.prepareStatement(saveContentSql);
 
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            int msisdnId = msisdnDto.getMsisdnIdByNumber(content.getPhone());
+            int msisdnId = msisdnDao.getMsisdnIdByNumber(content.getPhone());
             int contentCategory = contentCategoryDao.getContentCategoryByName(content.getContent_category());
             pst.setInt(1, contentCategory);
             pst.setString(2, content.getShortDescription());
@@ -97,7 +97,7 @@ public class ContentDao {
             con = DatabaseSource.getDatabaseConnection();
             logger.debug("Db connection made");
             pst = con.prepareStatement(getAllContentByMsisdn);
-            int msisdnId = msisdnDto.getMsisdnIdByNumber(msisdn);
+            int msisdnId = msisdnDao.getMsisdnIdByNumber(msisdn);
             pst.setInt(1, msisdnId);
             ResultSet rs = pst.executeQuery();
             contentList = new ArrayList();
@@ -143,7 +143,7 @@ public class ContentDao {
         PreparedStatement pst = null;
         try {
             con = DatabaseSource.getDatabaseConnection();
-            int msisdnId = msisdnDto.getMsisdnIdByNumber(content.getPhone());
+            int msisdnId = msisdnDao.getMsisdnIdByNumber(content.getPhone());
             pst = con.prepareStatement(updateContentByIdSql);
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             

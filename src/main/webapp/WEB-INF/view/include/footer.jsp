@@ -10,13 +10,13 @@
 
 
 
-<div class="row" style="background-color: #e0e0d1; padding-left: 40px;padding-right: 40px;">
-
+<div class="row" style="background-color: #e0e0d1; padding-left: 40px;padding-right: 40px;padding-top: 10px">
+<!--
     <div class="col-sm-12 text-center" style="border-bottom: 1px solid #898888; padding-top: 5px;">
        
         <h3>Classifieds</h3>
     </div>
-    
+    -->
 
     <div class="col-xm-12 col-sm-4 " style="margin-bottom: 0; margin-top: 0;" >
         
@@ -38,7 +38,7 @@
     </div>
 
     <div class="col-xm-12 col-sm-4 text-center">
-        <p style="padding-left: 19px;">Connect</p>
+        <p style="">Connect</p>
         <a href="https://www.facebook.com/pages/Inmobia/117874904906974" targt="_blank"><img src="<c:url value="/resources/img/fb.png"/>" alt="facebook"/></a>
         <a href="https://twitter.com/Inmobia" target="_blank"><img src="<c:url value="/resources/img/tw.png"/>" alt="twitter"/></a>
         <a href="http://ke.linkedin.com/pub/inmobia-mobile-technology/44/2a4/990" target="_blank"><img src="<c:url value="/resources/img/in.png"/>" alt="linkedin"/></a>
@@ -46,7 +46,7 @@
 
 
 
-    <hr/>
+    
 
     <div class="col-xm-12 col-sm-4 ">
         <p>Copyright &copy; <a>www.inmobia.com</a> <%
