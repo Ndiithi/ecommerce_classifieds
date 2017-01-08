@@ -17,12 +17,12 @@
         <link href="<c:url value="/resources/css/main.css"/>" rel="stylesheet" type="text/css">
         <script>
             $(function () {
-                $(".expirydate").datepicker({
-                    dateFormat: "dd/mm/yy",
+            $(".expirydate").datepicker({
+            dateFormat: "dd/mm/yy",
                     changeYear: true,
                     yearRange: "nn:+2"
 
-                });
+            });
             });
         </script>
     </head>
