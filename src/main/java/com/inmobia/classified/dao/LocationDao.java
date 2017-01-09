@@ -30,7 +30,8 @@ public class LocationDao {
      Logger logger = Logger.getLogger(LocationDao.class.getName());
     
      private String getAllLocationSql="select * from inmobiaclassified.location";
-    
+     private String getLocationId="select location_id where location_name=? and country_id=?";
+     
      public List<Location> getAllLocation() {
         Connection con = null;
         List<Location> locationList = null;
@@ -74,5 +75,37 @@ public class LocationDao {
             }
         }
         return locationList;
+    }
+     
+     
+      public int getLocationId(String name, int id) {
+        Connection con = null;
+        int locationId=-1;
+        PreparedStatement pst = null;
+        try {
+            logger.debug("Trying to make db connection");
+            con = DatabaseSource.getDatabaseConnection();
+            logger.debug("Db connection made");
+            pst = con.prepareStatement(getLocationId);      
+            pst.setString(1, name);
+           pst.setInt(2, id);
+            ResultSet rs = pst.executeQuery();
+           
+ 
+            if (rs.next()) {
+               locationId=rs.getInt("location_id");
+            }
+            logger.debug("getLocationId completed");
+        } catch (SQLException ex) {
+            logger.error(ex.getMessage());
+        } finally {
+            try {
+                con.close();
+                pst.close();
+            } catch (SQLException ex) {
+                logger.error(ex.getMessage());
+            }
+        }
+        return locationId;
     }
 }

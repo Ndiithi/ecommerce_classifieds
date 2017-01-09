@@ -34,6 +34,9 @@
         
     </bean>
     
+     <bean id="contentbuilder" class="com.inmobia.classified.service.ContentBuilder" autowire="byName">  
+        
+    </bean>
     
     <bean id="contentcategorydao" class="com.inmobia.classified.dao.ContentCategoryDao" autowire="byName">  
         

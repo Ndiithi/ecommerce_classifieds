@@ -40,8 +40,8 @@ $("form").submit(function (event) {
         "phone": phone,
         "expiryDate": expiryDate,
         "email": email,
-        "isNegotiable": isNegotiable
-
+        "isNegotiable": isNegotiable,
+        "country": userCountry
     };
 
     var docc = JSON.stringify(formData);

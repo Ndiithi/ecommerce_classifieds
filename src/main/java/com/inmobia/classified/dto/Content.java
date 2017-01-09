@@ -47,6 +47,9 @@ public class Content implements ISanitizable{
     @FutureDate
     private String expiryDate;
     
+    @NotEmpty(message = "Country Cannot be empty")
+    String country;
+    
     @EMailVal
     private String email;
  
@@ -133,11 +136,15 @@ public class Content implements ISanitizable{
         this.price = price;
     }
 
-   
+    public String getCountry() {
+        return country;
+    }
 
-   
+    public void setCountry(String country) {
+        this.country = country;
+    }
 
-    
+      
     
     
 }

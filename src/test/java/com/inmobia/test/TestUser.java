@@ -6,6 +6,7 @@
 package com.inmobia.test;
 
 
+import com.inmobia.classified.service.ContentBuilder;
 import java.util.Iterator;
 
 /**
@@ -14,13 +15,7 @@ import java.util.Iterator;
  */
 public class TestUser {
     public static void main(String[] args){
-//        UserDao userDao=new UserDao();
-//       Iterator i= userDao.getAllUsers().iterator();
-//       User user;
-//       while(i.hasNext()){
-//          user= (User) i.next();
-//         System.out.println(user.getEmail()+ user.getPassword()) ;
-          
-//       }
+//        ContentBuilder cb=new ContentBuilder();
+//        cb.fetchContentTypeFields("f",1);
     }
 }
