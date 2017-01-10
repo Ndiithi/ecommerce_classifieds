@@ -30,7 +30,7 @@ public class LocationDao {
      Logger logger = Logger.getLogger(LocationDao.class.getName());
     
      private String getAllLocationSql="select * from inmobiaclassified.location";
-     private String getLocationId="select location_id where location_name=? and country_id=?";
+     private String getLocationId="select location_id from inmobiaclassified.location where location_name=? and country_id=?";
      
      public List<Location> getAllLocation() {
         Connection con = null;

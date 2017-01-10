@@ -60,17 +60,24 @@ public class ContentBuilder {
 //    }
     
     public SmsContent buildContent(Content cnt,String content,String category,int telcoId){
-        
+        logger.info("values passed to builder: "+cnt+" "+content+" "+telcoId);
         ContentType ct=fetchContentType(content,category,telcoId);
-        int contentId=getContentId(ct);
+        logger.info("After fetch content we get id: "+ ct.getId());
+        logger.info("After fetch content we get category id: "+ ct.getCategory());
+        logger.info("After fetch content we get keyword id: "+ ct.getKeyword());
+        logger.info("After fetch content we get service id: "+ ct.getServiceId());
+        
+        int contentId=ct.getId();
         SmsContent contentObj=new SmsContent();
         contentObj.setCategory(category);
         contentObj.setContentId(contentId);
+        logger.debug("and the id again: "+contentId);
         contentObj.setDirty(0);
         contentObj.setLocaleId(2);
         contentObj.setText(buildContentText(cnt));
         contentObj.setTimestamp(fetchContentTimestamp(cnt));
         contentObj.setUserId(225);
+        logger.debug("content built successfully");
         return contentObj;
     }
     
@@ -80,15 +87,12 @@ public class ContentBuilder {
         
         ContentType[] data = restTemplate .
                 getForObject
-        ("https://m.inmobia.com/icpc/main/contentType/{category}/{content}/{telcoId}", ContentType[].class,category,content,telcoId);
+        ("http://m.inmobia.com/icpc/main/contentType/{category}/{content}/{telcoId}", ContentType[].class,category,content,telcoId);
         ContentType ct=data[0];
         return ct;
     }
     
-    public int getContentId(ContentType ct){
-        
-        return ct.getContentTypeId(); 
-    }
+    
     
     private Date fetchContentTimestamp(Content cnt){
         String getContentTimeStampSql="select timestamp from inmobiaclassified.content where contentid=?";

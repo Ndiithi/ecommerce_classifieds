@@ -42,6 +42,14 @@
         
     </bean>
     
+     <bean id="categoryresolver" class="com.inmobia.classified.service.CategoryResolver" autowire="byName">  
+        
+    </bean>
+    
+     <bean id="contentservice" class="com.inmobia.classified.service.ContentService" autowire="byName">  
+        
+    </bean>
+    
     <bean id="countrydao" class="com.inmobia.classified.dao.CountryDao" autowire="byName">  
         
     </bean>

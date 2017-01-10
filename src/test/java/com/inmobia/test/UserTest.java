@@ -13,8 +13,9 @@ import java.util.Iterator;
  *
  * @author Duncan
  */
-public class TestUser {
+public class UserTest {
     public static void main(String[] args){
+        System.out.println("test running effect");
 //        ContentBuilder cb=new ContentBuilder();
 //        cb.fetchContentTypeFields("f",1);
     }

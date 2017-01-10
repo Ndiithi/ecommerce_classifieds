@@ -1,11 +1,13 @@
 package com.inmobia.classified.dao;
 
 import com.inmobia.classified.dto.Content;
+import com.inmobia.classified.service.ContentService;
 import com.inmobia.classified.utility.DatabaseSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,6 +33,8 @@ public class ContentDao {
     ContentCategoryDao contentCategoryDao;
     @Autowired 
     ContentCategorySubtypeDao contentCategorySubtypeDao;
+    @Autowired
+    ContentService contService;
     
     Logger logger = Logger.getLogger(ContentDao.class.getName());
     private String saveContentSql = "insert into "
@@ -52,7 +56,7 @@ public class ContentDao {
         try {
             Connection con = DatabaseSource.getDatabaseConnection();
 
-            PreparedStatement pst = con.prepareStatement(saveContentSql);
+            PreparedStatement pst = con.prepareStatement(saveContentSql,Statement.RETURN_GENERATED_KEYS);
 
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             int msisdnId = msisdnDao.getMsisdnIdByNumber(content.getPhone());
@@ -83,7 +87,11 @@ public class ContentDao {
             pst.setInt(9, subCatID);
             pst.setString(10, content.getPrice());
             int execStatus = pst.executeUpdate();
+            
+            ResultSet rs=pst.getGeneratedKeys();
             if (execStatus == 1) {
+                if(rs.next()) content.setContentId(rs.getInt("contentid"));
+                contService.submitContent(content, "Classifieds-Land for sale", "Lusaka", 203);
                 return true;
             } else {
                 return false;
@@ -183,8 +191,6 @@ public class ContentDao {
             pst.setString(5, content.getEmail());
             pst.setInt(6, content.getIsNegotiable());
             
-            
-            logger.info("the con cat: "+contentId);
             
             int contentCategory = contentCategoryDao.getContentCategoryByName(content.getContent_category());
             logger.info("the con cat: "+contentCategory);
