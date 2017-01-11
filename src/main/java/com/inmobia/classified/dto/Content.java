@@ -2,6 +2,7 @@ package com.inmobia.classified.dto;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.inmobia.classified.ISanitizable;
 import com.inmobia.classified.annotation.validator.DateVal;
 import com.inmobia.classified.annotation.validator.EMailVal;
@@ -54,6 +55,14 @@ public class Content implements ISanitizable{
     private String email;
  
     private int isNegotiable;
+    
+    @JsonIgnore 
+    int remoteContentId;
+    @JsonIgnore
+    int remoteContentDetailId;
+    
+     @JsonIgnore 
+    int submittedToRemote;
     
     public String getShortDescription() {
         return shortDescription;
@@ -144,7 +153,30 @@ public class Content implements ISanitizable{
         this.country = country;
     }
 
-      
+    public int getRemoteContentId() {
+        return remoteContentId;
+    }
+
+    public void setRemoteContentId(int remoteContentId) {
+        this.remoteContentId = remoteContentId;
+    }
+
+    public int getSubmittedToRemote() {
+        return submittedToRemote;
+    }
+
+    public void setSubmittedToRemote(int submittedToRemote) {
+        this.submittedToRemote = submittedToRemote;
+    }
+
+    public int getRemoteContentDetailId() {
+        return remoteContentDetailId;
+    }
+
+    public void setRemoteContentDetailId(int remoteContentDetailId) {
+        this.remoteContentDetailId = remoteContentDetailId;
+    }
+    
     
     
 }

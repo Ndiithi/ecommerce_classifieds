@@ -568,7 +568,7 @@
                     <ul id="myTab" class="nav nav-tabs nav-justified">
                         <li class="active"><a href="#service-one" data-toggle="tab"><i class="fa fa-building   fa-lg"></i> House for Sale</a>
                         </li>
-                        <li class=""><a href="#service-two" data-toggle="tab"><i class="fa fa-briefcase fa-lg"></i>Jobs</a>
+                        <li class=""><a href="#service-two" data-toggle="tab"><i class="fa fa-briefcase fa-lg"></i> Jobs</a>
                         </li>
                         <li class=""><a href="#service-three" data-toggle="tab"><i class="fa fa-home fa-lg"></i> Housing for rent</a>
                         </li>

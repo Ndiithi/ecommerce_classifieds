@@ -1,5 +1,6 @@
 package com.inmobia.classified.service;
 
+import com.inmobia.classified.dao.ContentDao;
 import com.inmobia.classified.dao.CountryDao;
 import com.inmobia.classified.dto.Content;
 import com.inmobia.classified.service.Bean.ContentDetail;
@@ -9,46 +10,55 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 /**
  *
  * @author Duncan Ndiithi
  */
-public class ContentSaver implements Runnable {
-    @Autowired
-    CategoryResolver categoryResolver;
+@EnableAsync
+public class ContentSaver {
+
+    private static Logger logger = Logger.getLogger(ContentSaver.class.getName());
+
     @Autowired
     CountryDao countryDao;
-    
-    private static Logger logger = Logger.getLogger(ContentSaver.class.getName());
+
+    @Autowired
+    ContentDao contentDao;
+
+    @Autowired
+    ContentBuilder contentBuilder;
 
     private Content cnt;
     private SmsContent smsContent;
     private String content;
     private int telcoId;
     private String category;
+    private CategoryResolver categoryResolver;
 
-    public ContentSaver(Content cnt, String content, String category, int telcoId) {
-        //contService.submitContent(content, "Classifieds-Land for sale", "Lusaka", 203);
-        
-        //content looks like 'Classifieds-Land for sale' in remote
-        //category looks like 'Lusaka' or 'Nairobi' in remote
-        
-         this.content=categoryResolver.getContentTypeNameUsedInRemote(
-                cnt.getContent_category(), cnt.getSub_category(), countryDao.getCountryIdBySysmbol(cnt.getCountry()));
-        
-        
+    @Async
+    public void sendContent(Content cnt) {
+
+        logger.debug("Cnt short description: " + cnt.getShortDescription());
+        logger.debug("Cnt country symbol: " + cnt.getCountry());
+        this.telcoId = countryDao.getCountryIdBySysmbol(cnt.getCountry());
+        logger.debug("telco id: " + telcoId);
+        categoryResolver = new CategoryResolver(cnt.getContent_category(), cnt.getSub_category(), this.telcoId);
+        this.content = categoryResolver.getContentNameUsedInRemote();
+        logger.debug("The content: " + content);
         this.cnt = cnt;
-        
-        this.telcoId = telcoId;
-        this.category = category;
+        this.category = categoryResolver.getCategoryNameUsedInRemote();
+        logger.debug("telco category: " + category);
 
-    }
-
-    public void run() {
+        Thread.currentThread().setName("Content submitter thread ContentId: " + cnt.getContentId());
         logger.info("values in thread: " + cnt + " " + content + " " + telcoId);
-        ContentBuilder contentBuilder = new ContentBuilder();
+
         SmsContent smsContent = contentBuilder.buildContent(cnt, content, category, telcoId);
 
         logger.info("SMS content to bumit(text): " + smsContent.getText());
@@ -85,7 +95,7 @@ public class ContentSaver implements Runnable {
             try {
                 cntDetail.setExpiryDate(df.parse(cnt.getExpiryDate()));
             } catch (ParseException ex) {
-                logger.error(ex.getMessage());
+                logger.error("expiry date from remote: " + ex.getMessage());
             }
 
         } catch (Exception e) {
@@ -115,8 +125,12 @@ public class ContentSaver implements Runnable {
 
         }
         //send content detail object
-        cntDetail = restTemplate.postForObject(url, cntDetail, ContentDetail.class);
-
+        cntDetail=restTemplate.postForObject(url, cntDetail, ContentDetail.class);
+        logger.info("Content detail id from remote: "+cntDetail.getId());
+        cnt.setRemoteContentId(smsContent.getId());
+        cnt.setRemoteContentDetailId(cntDetail.getId());
+        cnt.setSubmittedToRemote(1);
+        contentDao.updateContentById(cnt.getContentId(), cnt);
     }
 
 }

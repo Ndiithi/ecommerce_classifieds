@@ -37,7 +37,7 @@ public class ContentServiceTest {
     
     ContentService cs=new ContentService();
     System.out.println("submit data");
-    cs.submitContent(content, "Classifieds-Land for sale", "Lusaka", 203);
+ //   cs.submitContent(content, "Classifieds-Land for sale", "Lusaka", 203);
     System.out.println("con submitted");
     
     

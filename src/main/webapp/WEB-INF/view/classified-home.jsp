@@ -91,7 +91,7 @@
                 <div class="col-sm-12 text-center">
                     <h3 style="padding-bottom: 75px; font-size: 18px; ">
                         Post your add and we guarantee it will reach 
-                        a wide range of people that  subscribe to receive that precise item within minutes.
+                        a wide range of people that  subscribe to  receive that precise item within our system.
                     </h3>
                 </div>
 
