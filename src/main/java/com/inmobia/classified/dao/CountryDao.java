@@ -50,6 +50,7 @@ public class CountryDao {
     }
     
      public int getCountryIdBySysmbol(String symbol) {
+         logger.debug("fetching country id by sysmbol");
         Connection con = null;
         PreparedStatement pst = null;
         int countryId=-1;

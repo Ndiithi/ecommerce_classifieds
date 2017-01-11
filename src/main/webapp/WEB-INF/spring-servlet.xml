@@ -11,7 +11,13 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
     
-    <context:component-scan base-package="com.inmobia.classified.controller" />
+    <context:component-scan base-package="com.inmobia.classified.controller"/>
+     <context:component-scan base-package="com.inmobia.classified.service" />
+    <context:component-scan base-package="com.inmobia.classified.security" />
+    <context:component-scan base-package="com.inmobia.classified.dao" />
+    <context:component-scan base-package="com.inmobia.classified.dto" />
+    <context:component-scan base-package="com.inmobia.classified.service.bean" />
+    
     <context:annotation-config />
     <mvc:annotation-driven />
     <mvc:resources mapping="/resources/**" location="/resources/" />
@@ -42,13 +48,6 @@
         
     </bean>
     
-     <bean id="categoryresolver" class="com.inmobia.classified.service.CategoryResolver" autowire="byName">  
-        
-    </bean>
-    
-     <bean id="contentservice" class="com.inmobia.classified.service.ContentService" autowire="byName">  
-        
-    </bean>
     
     <bean id="countrydao" class="com.inmobia.classified.dao.CountryDao" autowire="byName">  
         

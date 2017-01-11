@@ -1,5 +1,6 @@
 package com.inmobia.classified.service;
 
+import com.inmobia.classified.dao.ContentDao;
 import com.inmobia.classified.dao.CountryDao;
 import com.inmobia.classified.dto.Content;
 import com.inmobia.classified.service.Bean.ContentDetail;
@@ -8,19 +9,23 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 /**
  *
  * @author Duncan Ndiithi
  */
+@Component
+@Scope("prototype")
 public class ContentSaver implements Runnable {
-    @Autowired
-    CategoryResolver categoryResolver;
-    @Autowired
-    CountryDao countryDao;
+
+//    @Autowired
+//    CountryDao countryDao;
     
+    
+
     private static Logger logger = Logger.getLogger(ContentSaver.class.getName());
 
     private Content cnt;
@@ -28,22 +33,26 @@ public class ContentSaver implements Runnable {
     private String content;
     private int telcoId;
     private String category;
+    private CategoryResolver categoryResolver;
+     private CountryDao countryDao;
 
-    public ContentSaver(Content cnt, String content, String category, int telcoId) {
+    public ContentSaver(Content cnt) {
         //contService.submitContent(content, "Classifieds-Land for sale", "Lusaka", 203);
-        
         //content looks like 'Classifieds-Land for sale' in remote
         //category looks like 'Lusaka' or 'Nairobi' in remote
         
-         this.content=categoryResolver.getContentTypeNameUsedInRemote(
-                cnt.getContent_category(), cnt.getSub_category(), countryDao.getCountryIdBySysmbol(cnt.getCountry()));
-        
-        
-        this.cnt = cnt;
-        
-        this.telcoId = telcoId;
-        this.category = category;
-
+        logger.debug("Content submitter constructor");
+        logger.debug("Cnt short description: "+cnt.getShortDescription());
+        logger.debug("Cnt country symbol: "+cnt.getCountry());
+         countryDao=new CountryDao();
+        this.telcoId = countryDao.getCountryIdBySysmbol(cnt.getCountry());
+        logger.debug("telco id: "+telcoId);
+        categoryResolver = new CategoryResolver(cnt.getContent_category(), cnt.getSub_category(), this.telcoId);
+        this.content = categoryResolver.getContentNameUsedInRemote();
+        logger.debug("The content: "+content);
+        this.cnt = cnt;       
+        this.category = categoryResolver.getCategoryNameUsedInRemote();
+        logger.debug("telco category: "+category);
     }
 
     public void run() {
@@ -85,7 +94,7 @@ public class ContentSaver implements Runnable {
             try {
                 cntDetail.setExpiryDate(df.parse(cnt.getExpiryDate()));
             } catch (ParseException ex) {
-                logger.error(ex.getMessage());
+                logger.error("expiry date from remote: "+ex.getMessage());
             }
 
         } catch (Exception e) {
@@ -115,8 +124,12 @@ public class ContentSaver implements Runnable {
 
         }
         //send content detail object
-        cntDetail = restTemplate.postForObject(url, cntDetail, ContentDetail.class);
-
+        restTemplate.postForObject(url, cntDetail, String.class);
+       
+        ContentDao contentDao=new ContentDao();
+        cnt.setRemoteContentId(smsContent.getId());
+        cnt.setSubmittedToRemote(1);
+        contentDao.updateContentById(cnt.getContentId(), cnt);
     }
 
 }

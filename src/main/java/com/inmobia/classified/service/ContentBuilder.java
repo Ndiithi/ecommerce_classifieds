@@ -1,8 +1,7 @@
 package com.inmobia.classified.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+
 import com.inmobia.classified.dto.Content;
-import com.inmobia.classified.dto.Location;
 import com.inmobia.classified.service.Bean.ContentType;
 import com.inmobia.classified.service.Bean.SmsContent;
 import com.inmobia.classified.utility.DatabaseSource;
@@ -10,8 +9,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.logging.Level;
 import org.apache.log4j.Logger;
 import org.springframework.web.client.RestTemplate;
 import java.sql.Timestamp;
@@ -82,13 +79,19 @@ public class ContentBuilder {
     }
     
     private ContentType fetchContentType(String content,String category,int telcoId){
-        
+        logger.info("Data to use to fetch remoter content type (content)"+content+"(category)"+category+"telco(id)"+telcoId);
         RestTemplate restTemplate = new RestTemplate();
         
         ContentType[] data = restTemplate .
                 getForObject
         ("http://m.inmobia.com/icpc/main/contentType/{category}/{content}/{telcoId}", ContentType[].class,category,content,telcoId);
-        ContentType ct=data[0];
+        ContentType ct=null;
+        try{
+             ct=data[0];
+        }catch(ArrayIndexOutOfBoundsException e){
+            logger.error("Could not fetch content type from remote");
+        }
+        
         return ct;
     }
     

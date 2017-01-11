@@ -6,6 +6,7 @@ import com.inmobia.classified.utility.DatabaseSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
@@ -29,13 +30,13 @@ public class ContentDao {
     CountryDao countryDao;
     @Autowired
     LocationDao locatioDao;
-    @Autowired 
+    @Autowired
     ContentCategoryDao contentCategoryDao;
-    @Autowired 
+    @Autowired
     ContentCategorySubtypeDao contentCategorySubtypeDao;
     @Autowired
     ContentService contService;
-    
+
     Logger logger = Logger.getLogger(ContentDao.class.getName());
     private String saveContentSql = "insert into "
             + "inmobiaclassified.content(content_category_id,short_description,location_id,msisdn_id,expiry_date,email,negotiable,country_id,sub_category,price) "
@@ -47,24 +48,25 @@ public class ContentDao {
 //            + "where contentid=?";
 
     private String updateContentByIdSql = "Update inmobiaclassified.content set "
-            + "short_description=?,location_id=?,msisdn_id=?,expiry_date=?,email=?,negotiable=?,sub_category=?,price=? "
+            + "short_description=?,location_id=?,msisdn_id=?,expiry_date=?,email=?,negotiable=?,sub_category=?,price=?,"
+            + "remote_content_id=?, submitted_to_remote=? "
             + "where contentid=?";
-    
+
     private String deleteContentByIdSql = "delete from inmobiaclassified.content where contentid=?";
 
     public boolean saveContent(Content content) throws SQLException {
         try {
             Connection con = DatabaseSource.getDatabaseConnection();
 
-            PreparedStatement pst = con.prepareStatement(saveContentSql,Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement pst = con.prepareStatement(saveContentSql, Statement.RETURN_GENERATED_KEYS);
 
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             int msisdnId = msisdnDao.getMsisdnIdByNumber(content.getPhone());
             int contentCategory = contentCategoryDao.getContentCategoryByName(content.getContent_category());
             pst.setInt(1, contentCategory);
             pst.setString(2, content.getShortDescription());
-            int cocuntryId=countryDao.getCountryIdBySysmbol(content.getCountry());
-            int locationId=locatioDao.getLocationId(content.getLocation(), cocuntryId);
+            int cocuntryId = countryDao.getCountryIdBySysmbol(content.getCountry());
+            int locationId = locatioDao.getLocationId(content.getLocation(), cocuntryId);
             pst.setInt(3, locationId);
             pst.setInt(4, msisdnId);
             String expiryDateString = content.getExpiryDate();
@@ -83,15 +85,20 @@ public class ContentDao {
             pst.setString(6, content.getEmail());
             pst.setInt(7, content.getIsNegotiable());
             pst.setInt(8, cocuntryId);
-            int subCatID=contentCategorySubtypeDao.getContentCategorySubtypeByName(content.getSub_category(),contentCategory);
+            int subCatID = contentCategorySubtypeDao.getContentCategorySubtypeByName(content.getSub_category(), contentCategory);
             pst.setInt(9, subCatID);
             pst.setString(10, content.getPrice());
             int execStatus = pst.executeUpdate();
-            
-            ResultSet rs=pst.getGeneratedKeys();
+
+            ResultSet rs = pst.getGeneratedKeys();
             if (execStatus == 1) {
-                if(rs.next()) content.setContentId(rs.getInt("contentid"));
-                contService.submitContent(content, "Classifieds-Land for sale", "Lusaka", 203);
+
+                
+                if (rs.next()) {
+                     
+                    content.setContentId(rs.getInt("GENERATED_KEY"));
+                }
+                contService.submitContent(content);
                 return true;
             } else {
                 return false;
@@ -124,8 +131,8 @@ public class ContentDao {
             while (rs.next()) {
                 content = new Content();
                 String categoryName;
-                
-                categoryName=contentCategoryDao.getContentCategoryNameByID(rs.getInt("content_category_id"));
+
+                categoryName = contentCategoryDao.getContentCategoryNameByID(rs.getInt("content_category_id"));
                 content.setContent_category(categoryName);
                 content.setContentId(rs.getInt("contentid"));
                 content.setEmail(rs.getString("email"));
@@ -137,9 +144,9 @@ public class ContentDao {
                     content.setExpiryDate("");
                 }
                 content.setIsNegotiable(rs.getInt("negotiable"));
-                int price=rs.getInt("price");
+                int price = rs.getInt("price");
                 content.setPrice(Integer.toString(price));
-                String subCatName=contentCategorySubtypeDao.getContentCategorySubtypeById(rs.getInt("sub_category"));
+                String subCatName = contentCategorySubtypeDao.getContentCategorySubtypeById(rs.getInt("sub_category"));
                 content.setSub_category(subCatName);
                 content.setLocation(rs.getString("location"));
                 content.setShortDescription(rs.getString("short_description"));
@@ -166,14 +173,15 @@ public class ContentDao {
         PreparedStatement pst = null;
         try {
             con = DatabaseSource.getDatabaseConnection();
+            logger.info("contnet msisdn: "+content.getPhone());
             int msisdnId = msisdnDao.getMsisdnIdByNumber(content.getPhone());
             pst = con.prepareStatement(updateContentByIdSql);
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            
+
             pst.setString(1, content.getShortDescription());
-            int locationId=locatioDao.getLocationId(content.getLocation(), countryDao.getCountryIdBySysmbol(content.getCountry()));
+            int locationId = locatioDao.getLocationId(content.getLocation(), countryDao.getCountryIdBySysmbol(content.getCountry()));
             pst.setInt(2, locationId);
-            
+
             pst.setInt(3, msisdnId);
             String expiryDateString = content.getExpiryDate();
             Date expiryDate = null;
@@ -190,16 +198,17 @@ public class ContentDao {
             pst.setDate(4, expiryDateToSave);
             pst.setString(5, content.getEmail());
             pst.setInt(6, content.getIsNegotiable());
-            
-            
+
             int contentCategory = contentCategoryDao.getContentCategoryByName(content.getContent_category());
-            logger.info("the con cat: "+contentCategory);
-            
-            int subCatID=contentCategorySubtypeDao.getContentCategorySubtypeByName(content.getSub_category(),contentCategory);
-            logger.info("the con cat: "+subCatID);
+            logger.info("the con cat: " + contentCategory);
+
+            int subCatID = contentCategorySubtypeDao.getContentCategorySubtypeByName(content.getSub_category(), contentCategory);
+            logger.info("the con cat: " + subCatID);
             pst.setInt(7, subCatID);
             pst.setString(8, content.getPrice());
-            pst.setInt(9, contentId);
+            pst.setInt(9, content.getRemoteContentId());
+            pst.setInt(10, content.getSubmittedToRemote());
+            pst.setInt(11, contentId);
             int execStatus = pst.executeUpdate();
             if (execStatus == 1) {
                 logger.info("the con cat: works");
@@ -212,7 +221,7 @@ public class ContentDao {
             logger.error(ex.getMessage());
             return false;
         } finally {
-            try {
+            try {               
                 con.close();
                 pst.close();
             } catch (SQLException ex) {
@@ -237,7 +246,7 @@ public class ContentDao {
         } catch (SQLException ex) {
             logger.error(ex.getMessage());
             return false;
-        }finally {
+        } finally {
             try {
                 con.close();
                 pst.close();
