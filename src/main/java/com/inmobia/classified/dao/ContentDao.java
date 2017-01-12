@@ -256,7 +256,7 @@ public class ContentDao {
             logger.error(ex.getMessage());
             return false;
         } finally {
-            try {
+            try {               
                 con.close();
                 pst.close();
             } catch (SQLException ex) {
