@@ -28,7 +28,12 @@ logger.debug("Transmitting content for delete...: ");
         RestTemplate restTemplate = new RestTemplate();
 
         
-        restTemplate.delete(url, cnt.getRemoteContentId());
+        try{
+            restTemplate.delete(url, cnt.getRemoteContentId());}
+        catch(Exception e){
+            logger.error("Failed to delete remote content");
+            logger.error(e.getMessage());
+        }
     }
 
 }

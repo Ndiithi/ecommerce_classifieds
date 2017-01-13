@@ -8,6 +8,8 @@ import org.apache.log4j.Logger;
 /**
  *
  * @author Duncan Ndiithi
+ * 
+ * Resolves mapping for the content with those declared from remote server(panama)
  */
 public class CategoryResolver {
     Logger logger=Logger.getLogger(CategoryResolver.class.getName());

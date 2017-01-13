@@ -1,7 +1,6 @@
 package com.inmobia.classified.security;
 
 import com.inmobia.classified.ISanitizable;
-import java.lang.Class;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +49,7 @@ public class WebDataSanitizer {
                     String safe = Jsoup.clean(valueOfField, Whitelist.none());
                     field.set(object, safe);
                 } catch (IllegalArgumentException ex) {
-                    logger.error("specified object is not an instance of the class or interface declaring the underlying field");
+                    logger.error("specified object is not an instance of ISanitizable");
                     logger.error(ex.getMessage());
                    
                 } catch (IllegalAccessException ex) {

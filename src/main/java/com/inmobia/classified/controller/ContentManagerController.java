@@ -83,6 +83,7 @@ public class ContentManagerController {
         Content sanitize = (Content) webSanitizer.sanitize(content);
 
         int contentIdd = Integer.parseInt(contentId);
+        contentDao.setSubmitUpdateToRemote(1);
         boolean execStatus = contentDao.updateContentById(contentIdd, content);
         if (execStatus == true) {
             IMessage msg = new Message();

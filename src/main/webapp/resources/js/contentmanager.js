@@ -51,7 +51,8 @@ $(document).ready(function () {
             "phone": msisdn,
             "expiryDate": expiryDate,
             "email": email,
-            "isNegotiable": isNegotiable
+            "isNegotiable": isNegotiable,
+            "country": userCountry
 
         };
         console.log("submit event started 4 abut to stringfy");

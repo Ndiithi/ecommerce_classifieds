@@ -67,7 +67,7 @@ public class ContentEditor {
 
         RestTemplate restTemplate = new RestTemplate();
         
-        logger.debug("Transmitting content for edit...: ");
+        logger.debug("Transmitting content with remote id:'"+cnt.getRemoteContentId()+"' for edit...: ");
         restTemplate.put(url, smsContent, cnt.getRemoteContentId());
         
 
@@ -122,7 +122,7 @@ public class ContentEditor {
         } catch (Exception e) {
 
         }
-         logger.debug("Transmitting content details for edit...: ");
+         logger.debug("Transmitting content details with remote id:'"+cnt.getRemoteContentDetailId()+"' for edit...: ");
       restTemplate.put(url, cntDetail, cnt.getRemoteContentDetailId());
 
     }
